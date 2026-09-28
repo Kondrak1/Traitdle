@@ -65,7 +65,7 @@ async function loadTcgCards() {
       releaseSet: set.data.code,
       rarity: card.rarity,
       block: String(card.blockIcon),
-      image: `https://images.weserv.nl/?url=en.onepiece-cardgame.com/images/cardlist/card/${card.id}.png`,
+      image: `assets/cards/${card.id}.png`,
       cardClass: card.cardClass
     })));
 

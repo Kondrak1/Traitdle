@@ -386,7 +386,7 @@
 
       return {
         name: String(character.name).trim(),
-        image: character.image || '',
+        image: character.image ? `assets/characters/${character.image.split('/').pop()}` : '',
         aliases: buildAliases({ ...character, affiliation: resolvedAffiliation }),
         gender: inferGender(character),
         age: Number.isFinite(age) ? age : 'Unknown',
@@ -591,7 +591,7 @@
         option.dataset.name = character.name;
         option.setAttribute('role', 'option');
         option.innerHTML = `
-          <img src="https://oparchive.com${character.image || ''}" alt="" loading="lazy">
+          <img src="${character.image || ''}" alt="" loading="lazy">
           <span>${character.name}</span>
         `;
         option.addEventListener('mousedown', event => event.preventDefault());
@@ -686,7 +686,7 @@
         enableCopyButton(copyDailyScore, scoreText);
       }
       successImage.alt = character.name;
-      successImage.src = character.image ? `https://oparchive.com${character.image}` : '';
+      successImage.src = character.image || '';
       successPanel.hidden = false;
       document.querySelector('.game').classList.add('success-state');
       confetti.innerHTML = '';

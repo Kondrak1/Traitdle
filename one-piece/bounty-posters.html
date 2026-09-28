@@ -162,7 +162,7 @@
     }
 
     function characterImage(character) {
-      if (character.image) return `https://oparchive.com${character.image}`;
+      if (character.image) return `assets/characters/${character.image.split('/').pop()}`;
       const initials = character.name.split(/\s+/).map(word => word[0]).join('').slice(0, 3);
       return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 760"><rect width="600" height="760" fill="#c8ad6f"/><text x="300" y="390" fill="#7d241f" font-family="Georgia" font-size="120" text-anchor="middle">${initials}</text></svg>`)}`;
     }

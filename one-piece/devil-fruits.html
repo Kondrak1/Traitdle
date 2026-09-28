@@ -146,12 +146,13 @@
     function resolveUser(rawUser) {
       const user = String(rawUser || '').trim();
       if (!user || /unknown|in circulation/i.test(user)) return null;
+      const toLocalCharacter = character => character ? { ...character, image: character.image ? `assets/characters/${character.image.split('/').pop()}` : '' } : null;
       const exact = characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === normalize(user));
-      if (exact) return exact;
+      if (exact) return toLocalCharacter(exact);
       const withoutBrackets = normalize(user.replace(/\s*\[.*?\]/g, ''));
-      return characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === withoutBrackets)
+      return toLocalCharacter(characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === withoutBrackets)
         || characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name).includes(withoutBrackets))
-        || null;
+      );
     }
 
     function renderFruitSuggestions() {
@@ -265,7 +266,7 @@
         fruitDailyScoreText.textContent = scoreText;
         enableCopyButton(fruitCopyDailyScore, scoreText);
       }
-      fruitSuccessImage.src = fruitTarget.user.image ? `https://oparchive.com${fruitTarget.user.image}` : 'assets/grand-line.jpeg';
+      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
       fruitSuccessImage.alt = fruitTarget.user.name;
       fruitSuccess.hidden = false;
       fruitConfetti.innerHTML = '';
@@ -336,7 +337,7 @@
       fruitSuccessTitle.textContent = 'The answer was revealed';
       fruitSuccessDetails.textContent = `${fruitTarget.user.name} · ${fruitTarget.fruit.name}`;
       fruitDailyScore.hidden = true;
-      fruitSuccessImage.src = fruitTarget.user.image ? `https://oparchive.com${fruitTarget.user.image}` : 'assets/grand-line.jpeg';
+      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
       fruitSuccessImage.alt = fruitTarget.user.name;
       fruitSuccess.hidden = false;
       fruitSuccess.focus({ preventScroll: true });

@@ -84,7 +84,7 @@
     function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
     function todayProgress() { const date = getMstDateKey(); try { const saved = JSON.parse(localStorage.getItem(progressKey) || '{}'); return saved.date === date ? saved : { date, classic: null, move: null, silhouette: null }; } catch { return { date, classic: null, move: null, silhouette: null }; } }
     function saveScore(score) { const progress = todayProgress(); progress[mode] = score; localStorage.setItem(progressKey, JSON.stringify(progress)); return progress; }
-    function imageUrl(pokemon) { return pokemon.image; }
+    function imageUrl(pokemon) { return `assets/${pokemon.id}.png`; }
     function displayName(value) { return String(value).replace(/\b\w/g, letter => letter.toUpperCase()); }
     function status(guess, answer, key) {
       if (key === 'name') return normalize(guess.name) === normalize(answer.name) ? 'correct' : 'absent';

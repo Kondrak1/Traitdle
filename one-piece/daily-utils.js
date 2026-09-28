@@ -4,6 +4,7 @@ const dailyModeLabels = {
   fruit: '🍇 Devil fruit',
   wanted: '💰 Wanted'
 };
+const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
 
 const mountainTimeZone = 'America/Denver';
 const mountainDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
@@ -92,13 +93,17 @@ function dailyProgressComplete(progress) {
   return ['classic', 'fruit', 'wanted'].every(mode => Number.isFinite(progress[mode]));
 }
 
+function appendShareLink(text) {
+  return `${text}\n${traitdleShareUrl}`;
+}
+
 function formatDailyScore(progress) {
-  return [
+  return appendShareLink([
     `I've completed all the modes of #OnePiece Traitdle today:`,
     `${dailyModeLabels.classic}: ${progress.classic ?? '-'}`,
     `${dailyModeLabels.fruit}: ${progress.fruit ?? '-'}`,
     `${dailyModeLabels.wanted}: ${progress.wanted ?? '-'}`
-  ].join('\n');
+  ].join('\n'));
 }
 
 function updateDailyResetTimer(element) {

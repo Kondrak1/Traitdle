@@ -31,6 +31,33 @@ function saveDailyScore(mode, score) {
   return progress;
 }
 
+function readDailyGameState(storageKey, mode) {
+  const date = getMstDateKey();
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    const state = saved.date === date ? saved.modes?.[mode] : null;
+    return {
+      guesses: Array.isArray(state?.guesses) ? state.guesses : [],
+      over: state?.over === true
+    };
+  } catch (error) {
+    return { guesses: [], over: false };
+  }
+}
+
+function saveDailyGameState(storageKey, mode, guesses, over) {
+  const date = getMstDateKey();
+  let saved = { date, modes: {} };
+  try {
+    const existing = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    if (existing.date === date && existing.modes) saved = existing;
+  } catch (error) {
+    // Start a clean record when local storage contains invalid data.
+  }
+  saved.modes[mode] = { guesses: [...guesses], over: Boolean(over) };
+  localStorage.setItem(storageKey, JSON.stringify(saved));
+}
+
 function dailyProgressComplete(progress) {
   return ['classic', 'fruit', 'wanted'].every(mode => Number.isFinite(progress[mode]));
 }
@@ -55,8 +82,16 @@ function updateDailyResetTimer(element) {
 }
 
 function startDailyResetTimer(element) {
+  let dateKey = getMstDateKey();
   updateDailyResetTimer(element);
-  return window.setInterval(() => updateDailyResetTimer(element), 1000);
+  return window.setInterval(() => {
+    const currentDateKey = getMstDateKey();
+    if (currentDateKey !== dateKey) {
+      window.location.reload();
+      return;
+    }
+    updateDailyResetTimer(element);
+  }, 1000);
 }
 
 function enableCopyButton(button, text) {

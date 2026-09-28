@@ -418,7 +418,7 @@
     }
 
     function getDailyIndex() {
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getMstDateKey();
       let hash = 2166136261;
       for (let index = 0; index < today.length; index++) {
         hash ^= today.charCodeAt(index);
@@ -448,8 +448,7 @@
       const source = Array.isArray(characterData) ? characterData : fallbackCharacterDatabase;
       characterDatabase = source.map(mapCharacter).filter(Boolean).filter(hasEnoughTraits);
 
-      target = pickTarget();
-      updateModeButtons();
+      resetGame();
       guessBtn.disabled = false;
       giveUpBtn.disabled = false;
       if (message.textContent === 'Loading custom character roster...') {
@@ -617,15 +616,15 @@
       guessInput.focus();
     }
 
-    function renderGuess(characterName) {
+    function renderGuess(characterName, rowIndex = guesses.length) {
       const guess = findCharacter(characterName);
       if (!guess) {
         message.textContent = 'That character is not in the archive.';
         return;
       }
 
-      ensureRow(guesses.length);
-      const row = board.children[guesses.length];
+      ensureRow(rowIndex);
+      const row = board.children[rowIndex];
 
       categories.forEach((category, index) => {
         const tile = row.children[index];
@@ -641,9 +640,10 @@
     }
 
     function resetGame() {
-      guesses = [];
+      const savedState = gameMode === 'daily' ? readDailyGameState('one-piece-traitdle-daily-guesses', 'classic') : { guesses: [], over: false };
+      guesses = savedState.guesses;
       guessCount.textContent = '0';
-      over = false;
+      over = savedState.over;
       board.innerHTML = '';
       guessInput.value = '';
       suggestions.hidden = true;
@@ -658,6 +658,11 @@
       guessBtn.disabled = false;
       giveUpBtn.disabled = false;
       updateModeButtons();
+      guesses.forEach((characterName, rowIndex) => renderGuess(characterName, rowIndex));
+      guessCount.textContent = String(guesses.length);
+      guessBtn.disabled = over;
+      giveUpBtn.disabled = over;
+      if (over) showSuccess(target);
     }
 
     function giveUp() {
@@ -666,6 +671,7 @@
       message.textContent = `The hidden character was ${target.name}.`;
       guessBtn.disabled = true;
       giveUpBtn.disabled = true;
+      if (gameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'classic', guesses, over);
     }
 
     function showSuccess(character) {
@@ -725,12 +731,14 @@
 
       renderGuess(character.name);
       guesses.push(character.name);
+      if (gameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'classic', guesses, false);
       guessCount.textContent = String(guesses.length);
       updateHintButtons();
       renderSuggestions('');
 
       if (character.name.toLowerCase() === target.name.toLowerCase()) {
         over = true;
+        if (gameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'classic', guesses, over);
         message.textContent = `🏴‍☠️ Correct! The hidden character was ${target.name}.`;
         giveUpBtn.disabled = true;
         showSuccess(target);
@@ -818,6 +826,17 @@
     });
 
     loadCharacterDatabase();
+    giveUpBtn.addEventListener('click', () => {
+      successPanel.querySelector('.success-kicker').textContent = 'ROUND OVER';
+      successTitle.textContent = 'The answer was revealed';
+      successDetails.textContent = target.name;
+      successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
+      dailyScore.hidden = true;
+      successImage.alt = target.name;
+      successImage.src = target.image ? `https://oparchive.com${target.image}` : '';
+      successPanel.hidden = false;
+      successPanel.focus({ preventScroll: true });
+    });
   </script>
 </body>
 </html>

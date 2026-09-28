@@ -219,7 +219,8 @@
       posterTarget = posterGameMode === 'daily'
         ? posterCandidates[getDailyIndex(posterCandidates.length)]
         : posterCandidates[Math.floor(Math.random() * posterCandidates.length)];
-      posterAttempted = new Set();
+      const savedState = posterGameMode === 'daily' ? readDailyGameState('one-piece-traitdle-daily-guesses', 'wanted') : { guesses: [], over: false };
+      posterAttempted = new Set(savedState.guesses);
       posterGuesses.innerHTML = '';
       posterGuess.value = '';
       posterMessage.textContent = '';
@@ -237,6 +238,8 @@
       posterAffiliationHintButton.disabled = false;
       setCharacterImage(posterImage, posterTarget, true);
       posterImage.alt = 'Mystery bounty poster';
+      posterAttempted.forEach(name => { const character = posterCandidates.find(item => normalize(item.name) === name); if (character) renderPosterGuess(character, normalize(character.name) === normalize(posterTarget.name)); });
+      if (savedState.over) { posterSubmit.disabled = true; posterGiveUp.disabled = true; showPosterVictory(); }
       posterGuess.focus();
     }
 
@@ -246,6 +249,7 @@
       if (!character) { posterMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (posterAttempted.has(query)) { posterMessage.textContent = 'You already tried that character.'; return; }
       posterAttempted.add(query);
+      if (posterGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'wanted', [...posterAttempted], false);
       updatePosterHintButtons();
       const correct = normalize(character.name) === normalize(posterTarget.name);
       renderPosterGuess(character, correct);
@@ -257,6 +261,7 @@
         posterMessage.textContent = `Correct. ${character.name} is wanted for ${bountyValue(character).toLocaleString('en-US')} berries.`;
         posterSubmit.disabled = true;
         posterGiveUp.disabled = true;
+        if (posterGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'wanted', [...posterAttempted], true);
         showPosterVictory();
       }
       else posterMessage.textContent = '';
@@ -269,6 +274,7 @@
       posterMessage.textContent = `The wanted character was ${posterTarget.name}.`;
       posterSubmit.disabled = true;
       posterGiveUp.disabled = true;
+      if (posterGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'wanted', [...posterAttempted], true);
     }
 
     function updatePosterHintButtons() {
@@ -280,7 +286,7 @@
       const progress = posterGameMode === 'daily' ? saveDailyScore('wanted', posterAttempted.size) : readDailyProgress();
       posterSuccessTitle.textContent = posterTarget.name;
       posterSuccessDetails.textContent = `${bountyValue(posterTarget).toLocaleString('en-US')} berries · ${posterTarget.affiliation}`;
-      posterDailyScore.hidden = posterGameMode !== 'daily' || !dailyProgressComplete(progress);
+      posterDailyScore.hidden = posterGameMode !== 'daily';
       if (!posterDailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         posterDailyScoreText.textContent = scoreText;
@@ -339,6 +345,23 @@
     posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
     updatePosterMode();
     startPosterRound();
+    posterGiveUp.addEventListener('click', () => {
+      posterSuccess.querySelector('.collection-kicker').textContent = 'ROUND OVER';
+      posterSuccessTitle.textContent = 'The answer was revealed';
+      posterSuccessDetails.textContent = `${posterTarget.name} · ${bountyValue(posterTarget).toLocaleString('en-US')} berries`;
+      if (posterGameMode === 'daily') {
+        const progress = readDailyProgress();
+        progress.wanted = null;
+        const scoreText = formatDailyScore(progress);
+        posterDailyScoreText.textContent = scoreText;
+        posterDailyScore.hidden = false;
+        enableCopyButton(posterCopyDailyScore, scoreText);
+      } else posterDailyScore.hidden = true;
+      setCharacterImage(posterSuccessImage, posterTarget, true);
+      posterSuccessImage.alt = posterTarget.name;
+      posterSuccess.hidden = false;
+      posterSuccess.focus({ preventScroll: true });
+    });
   </script>
 </body>
 </html>

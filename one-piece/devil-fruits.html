@@ -198,7 +198,8 @@
       fruitTarget = fruitGameMode === 'daily'
         ? fruitTargets[getDailyIndex(fruitTargets.length)]
         : fruitTargets[Math.floor(Math.random() * fruitTargets.length)];
-      fruitAttempted = new Set();
+      const savedState = fruitGameMode === 'daily' ? readDailyGameState('one-piece-traitdle-daily-guesses', 'fruit') : { guesses: [], over: false };
+      fruitAttempted = new Set(savedState.guesses);
       fruitGuesses.innerHTML = '';
       fruitGuess.value = '';
       fruitMessage.textContent = '';
@@ -214,6 +215,8 @@
       fruitGiveUp.disabled = false;
       fruitClue.textContent = fruitTarget.fruit.name;
       fruitType.textContent = fruitTarget.fruit.type || 'Devil Fruit';
+      fruitAttempted.forEach(name => { const character = characterData.find(item => isNotableCharacter(item) && normalize(item.name) === name); if (character) renderFruitGuess(character, normalize(character.name) === normalize(fruitTarget.user.name)); });
+      if (savedState.over) { fruitSubmit.disabled = true; fruitGiveUp.disabled = true; showFruitVictory(); }
       fruitGuess.focus();
     }
 
@@ -223,6 +226,7 @@
       if (!character) { fruitMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
       fruitAttempted.add(query);
+      if (fruitGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'fruit', [...fruitAttempted], false);
       updateFruitHintButtons();
       const correct = normalize(character.name) === normalize(fruitTarget.user.name);
       renderFruitGuess(character, correct);
@@ -232,6 +236,7 @@
         fruitMessage.textContent = `Correct. ${character.name} had the ${fruitTarget.fruit.name}.`;
         fruitSubmit.disabled = true;
         fruitGiveUp.disabled = true;
+        if (fruitGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'fruit', [...fruitAttempted], true);
         showFruitVictory();
       }
       else fruitMessage.textContent = '';
@@ -242,6 +247,7 @@
       fruitMessage.textContent = `The fruit user was ${fruitTarget.user.name}.`;
       fruitSubmit.disabled = true;
       fruitGiveUp.disabled = true;
+      if (fruitGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'fruit', [...fruitAttempted], true);
     }
 
     function updateFruitHintButtons() {
@@ -325,6 +331,16 @@
     fruitKeepSailing.addEventListener('click', () => { window.location.href = 'bounty-posters.html'; });
     updateFruitMode();
     loadFruitTargets();
+    fruitGiveUp.addEventListener('click', () => {
+      fruitSuccess.querySelector('.collection-kicker').textContent = 'ROUND OVER';
+      fruitSuccessTitle.textContent = 'The answer was revealed';
+      fruitSuccessDetails.textContent = `${fruitTarget.user.name} · ${fruitTarget.fruit.name}`;
+      fruitDailyScore.hidden = true;
+      fruitSuccessImage.src = fruitTarget.user.image ? `https://oparchive.com${fruitTarget.user.image}` : 'assets/grand-line.jpeg';
+      fruitSuccessImage.alt = fruitTarget.user.name;
+      fruitSuccess.hidden = false;
+      fruitSuccess.focus({ preventScroll: true });
+    });
   </script>
 </body>
 </html>

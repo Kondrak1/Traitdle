@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Avatar Traitdle</title>
+  <link rel="stylesheet" href="../one-piece/file.css">
+  <link rel="stylesheet" href="avatar.css">
+  <script src="avatar-data.js"></script>
+  <script src="../one-piece/daily-utils.js"></script>
+</head>
+<body>
+  <main class="game avatar-game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <div class="masthead-content">
+        <div class="eyebrow">TRAITDLE / AVATAR</div>
+        <h1>FOUR DLE</h1>
+        <p class="subtitle">Read the elements. Find the hero.</p>
+        <div class="mode-switch" role="group" aria-label="Avatar game type">
+          <button id="characterMode" class="mode-button active" data-mode="character" aria-pressed="true">Characters</button>
+          <button id="imageMode" class="mode-button" data-mode="image" aria-pressed="false">Blurry images</button>
+        </div>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="dailyMode" class="mode-button active" aria-pressed="true">Daily</button>
+          <button id="freeplayMode" class="mode-button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="modeNote" class="mode-note">Daily character target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+      </div>
+    </header>
+    <section class="avatar-clue" aria-labelledby="clueTitle">
+      <p id="clueLabel">Character clue</p>
+      <h2 id="clueTitle">Find the character from the traits below</h2>
+      <img id="imageClue" class="avatar-image-clue" alt="Blurred mystery character" hidden>
+    </section>
+    <div class="toolbar">
+      <div class="controls">
+        <div class="guess-count" aria-live="polite">Guesses <b id="guessCount">0</b></div>
+        <div class="autocomplete"><input id="guessInput" placeholder="Type an Avatar character..." aria-label="Guess an Avatar character" autocomplete="off"><div id="suggestions" class="suggestions"></div></div>
+        <button id="guessBtn">Guess</button><button id="giveUp" class="secondary">Give up</button><button id="newGame" class="secondary" hidden>New game</button>
+      </div>
+      <p id="message" class="hint-message" role="status"></p>
+    </div>
+    <section id="successPanel" class="success-panel" hidden tabindex="-1">
+      <div class="success-art-wrap"><img id="successImage" class="avatar-success-image" alt=""></div>
+      <div class="success-copy"><p class="success-kicker">BALANCE RESTORED</p><h2 id="successTitle"></h2><p id="successDetails" class="success-details"></p><p id="successGuessCount"></p><button id="successContinue">Next Avatar mode</button></div>
+    </section>
+    <div id="board" aria-label="Avatar character trait board"></div>
+  </main>
+  <script>
+    const categories = [{ key: 'name', label: 'Character' }, { key: 'gender', label: 'Gender' }, { key: 'age', label: 'Age' }, { key: 'bending', label: 'Bending style' }, { key: 'faction', label: 'Faction' }, { key: 'birthplace', label: 'Birthplace' }, { key: 'arc', label: 'Arc introduced' }];
+    const modes = ['character', 'image']; let mode = 'character', playMode = 'daily', target, guesses = [], over = false;
+    const board = document.querySelector('#board'), input = document.querySelector('#guessInput'), suggestions = document.querySelector('#suggestions'), message = document.querySelector('#message'), imageClue = document.querySelector('#imageClue'), clueTitle = document.querySelector('#clueTitle'), modeNote = document.querySelector('#modeNote'), guessCount = document.querySelector('#guessCount'), guessButton = document.querySelector('#guessBtn'), giveUp = document.querySelector('#giveUp'), newGame = document.querySelector('#newGame'), successPanel = document.querySelector('#successPanel'), successImage = document.querySelector('#successImage'), successTitle = document.querySelector('#successTitle'), successDetails = document.querySelector('#successDetails'), successGuessCount = document.querySelector('#successGuessCount');
+    function normalize(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+    function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
+    const arcOrder = { 'Book One: Water': 1, 'Book Two: Earth': 2, 'Book Three: Fire': 3 };
+    const avatarImageUrls = {
+      'Aang': 'https://static.wikia.nocookie.net/avatar/images/a/ae/Aang_at_Jasmine_Dragon.png/revision/latest?cb=20250504214141',
+      'Katara': 'https://static.wikia.nocookie.net/avatar/images/7/7a/Katara_smiles_at_coronation.png/revision/latest?cb=20150104171449',
+      'Sokka': 'https://static.wikia.nocookie.net/avatar/images/c/cc/Sokka.png/revision/latest?cb=20140905085428',
+      'Toph Beifong': 'https://static.wikia.nocookie.net/avatar/images/4/46/Toph_Beifong.png/revision/latest?cb=20131230122047',
+      'Zuko': 'https://static.wikia.nocookie.net/avatar/images/4/4b/Zuko.png/revision/latest?cb=20180630112142',
+      'Azula': 'https://static.wikia.nocookie.net/avatar/images/1/12/Azula.png/revision/latest?cb=20140905084941',
+      'Iroh': 'https://static.wikia.nocookie.net/avatar/images/c/c1/Iroh_smiling.png/revision/latest?cb=20130626131914',
+      'Fire Lord Ozai': 'https://static.wikia.nocookie.net/avatar/images/4/4a/Ozai.png/revision/latest?cb=20130612170743',
+      'Suki': 'https://static.wikia.nocookie.net/avatar/images/1/14/Suki.png/revision/latest?cb=20130819094354',
+      'Ty Lee': 'https://static.wikia.nocookie.net/avatar/images/6/6d/Ty_Lee.png/revision/latest?cb=20140905083814',
+      'Mai': 'https://static.wikia.nocookie.net/avatar/images/4/40/Mai.png/revision/latest?cb=20090406114652',
+      'Jet': 'https://static.wikia.nocookie.net/avatar/images/1/1e/Jet.png/revision/latest?cb=20150324102352',
+      'Long Feng': 'https://static.wikia.nocookie.net/avatar/images/8/8d/Long_Feng_scheming.png/revision/latest?cb=20140510202422',
+      'Admiral Zhao': 'https://static.wikia.nocookie.net/avatar/images/e/e1/Commander_Zhao.png/revision/latest?cb=20140103180854',
+      'Pakku': 'https://static.wikia.nocookie.net/avatar/images/b/bb/Pakku_looking_smug.png/revision/latest?cb=20140119164142',
+      'Bumi': 'https://static.wikia.nocookie.net/avatar/images/0/06/Bumi.png/revision/latest?cb=20140318090248',
+      'Avatar Roku': 'https://static.wikia.nocookie.net/avatar/images/f/f6/Roku.png/revision/latest?cb=20220323130414',
+      'Avatar Kyoshi': 'https://static.wikia.nocookie.net/avatar/images/3/39/Kyoshi.png/revision/latest?cb=20230729120809',
+      'Hama': 'https://static.wikia.nocookie.net/avatar/images/4/4d/Sinister_Hama.png/revision/latest?cb=20111215082556',
+      'Combustion Man': 'https://static.wikia.nocookie.net/avatar/images/f/fc/Combustion_Man.png/revision/latest?cb=20140908141111',
+      'Appa': 'https://static.wikia.nocookie.net/avatar/images/6/65/Appa_flying.png/revision/latest?cb=20140517110636',
+      'Momo': 'https://static.wikia.nocookie.net/avatar/images/8/80/Momo_staring.png/revision/latest?cb=20200802080013',
+      'Hakoda': 'https://static.wikia.nocookie.net/avatar/images/4/4e/Hakoda_smiling.png/revision/latest?cb=20201220143258',
+      'Kanna': 'https://static.wikia.nocookie.net/avatar/images/4/47/Kanna.png/revision/latest?cb=20130822224809',
+      'Princess Yue': 'https://static.wikia.nocookie.net/avatar/images/9/9d/Kind_Yue.png/revision/latest?cb=20140122221734',
+      'Chief Arnook': 'https://static.wikia.nocookie.net/avatar/images/0/0c/Chief.png/revision/latest?cb=20140122221730',
+      'Bato': 'https://static.wikia.nocookie.net/avatar/images/e/e3/Bato_smiling.png/revision/latest?cb=20130626122901',
+      'Haru': 'https://static.wikia.nocookie.net/avatar/images/d/da/Haru.png/revision/latest?cb=20110104010244',
+      'The Mechanist': 'https://static.wikia.nocookie.net/avatar/images/b/b7/Mechanist.png/revision/latest?cb=20140118124602',
+      'Teo': 'https://static.wikia.nocookie.net/avatar/images/7/77/Teo.png/revision/latest?cb=20140118125457',
+      'Huu': 'https://static.wikia.nocookie.net/avatar/images/8/85/Huu.png/revision/latest?cb=20130630224726',
+      'The Earth King': 'https://static.wikia.nocookie.net/avatar/images/9/95/Earth_King_Kuei.png/revision/latest?cb=20130627082920',
+      'Joo Dee': 'https://static.wikia.nocookie.net/avatar/images/1/1f/Joo_Dee.png/revision/latest?cb=20140422090643',
+      'The Boulder': 'https://static.wikia.nocookie.net/avatar/images/7/70/The_Boulder.png/revision/latest?cb=20140317195145',
+      'Xin Fu': 'https://static.wikia.nocookie.net/avatar/images/0/02/Xin_Fu.png/revision/latest?cb=20140317211615',
+      'Master Yu': 'https://static.wikia.nocookie.net/avatar/images/e/e2/Yu.png/revision/latest?cb=20140317211616',
+      'Guru Pathik': 'https://static.wikia.nocookie.net/avatar/images/9/91/Guru_Pathik.png/revision/latest?cb=20140510202641',
+      'Longshot': 'https://static.wikia.nocookie.net/avatar/images/e/e7/Longshot.png/revision/latest?cb=20140413233811',
+      'Smellerbee': 'https://static.wikia.nocookie.net/avatar/images/3/3a/Smellerbee.png/revision/latest?cb=20140413234450',
+      'The Duke': 'https://static.wikia.nocookie.net/avatar/images/c/cd/The_Duke.png/revision/latest?cb=20130706011726',
+      'Pipsqueak': 'https://static.wikia.nocookie.net/avatar/images/e/ef/Pipsqueak.png/revision/latest?cb=20130706005357',
+      'Monk Gyatso': 'https://static.wikia.nocookie.net/avatar/images/a/a4/Monk_Gyatso.png/revision/latest?cb=20140103203807',
+      'Avatar Yangchen': 'https://static.wikia.nocookie.net/avatar/images/d/db/Yangchen.png/revision/latest?cb=20220324195813',
+      'Wan Shi Tong': 'https://static.wikia.nocookie.net/avatar/images/4/4c/Wan_Shi_Tong.png/revision/latest?cb=20140404204804',
+      'Hei Bai': 'https://static.wikia.nocookie.net/avatar/images/b/b2/Calm_Hei_Bai.png/revision/latest?cb=20140124170913',
+      'Koh the Face Stealer': 'https://static.wikia.nocookie.net/avatar/images/4/4f/Koh_the_Face_Stealer.png/revision/latest?cb=20251121221047',
+      'June': 'https://static.wikia.nocookie.net/avatar/images/e/ea/June.png/revision/latest?cb=20130626132827',
+      'Jeong Jeong': 'https://static.wikia.nocookie.net/avatar/images/a/a7/Jeong_Jeong_serious.png/revision/latest?cb=20140116113256',
+      'Piandao': 'https://static.wikia.nocookie.net/avatar/images/e/e1/Piandao.png/revision/latest?cb=20140905225031',
+      'Kya': 'https://static.wikia.nocookie.net/avatar/images/7/77/Kya_%28waterbender%29.png/revision/latest?cb=20151102093816',
+      'Ursa': 'https://static.wikia.nocookie.net/avatar/images/a/a6/Ursa.png/revision/latest?cb=20140331143655',
+      'Rina': 'https://static.wikia.nocookie.net/avatar/images/5/5e/Jinzuk_and_Rina.png/revision/latest?cb=20210530062157',
+      'Lo and Li': 'https://static.wikia.nocookie.net/avatar/images/1/14/Lo_and_Li.png/revision/latest?cb=20130111101305',
+      'Poon': 'https://static.wikia.nocookie.net/avatar/images/e/e5/Warden_Poon.png/revision/latest?cb=20130123150230'
+    };
+    function imageUrl(character) { return avatarImageUrls[character.name]; }
+    function status(guess, answer, key) { if (guess[key] === answer[key]) return 'correct'; if (key === 'age') return Number(guess.age) < Number(answer.age) ? 'higher' : 'lower'; if (key === 'arc') return arcOrder[guess.arc] < arcOrder[answer.arc] ? 'higher' : 'lower'; return 'absent'; }
+    function value(guess, answer, key) { if (key === 'age' && guess.age !== answer.age) return `${guess.age} ${guess.age < answer.age ? '↑' : '↓'}`; if (key === 'arc' && guess.arc !== answer.arc) return `${guess.arc} ${arcOrder[guess.arc] < arcOrder[answer.arc] ? '↑' : '↓'}`; return guess[key]; }
+    function renderSuggestions() { const query = normalize(input.value); suggestions.innerHTML = ''; suggestions.hidden = !query; if (!query) return; avatarCharacters.filter(character => !guesses.includes(character.name) && normalize(character.name).includes(query)).slice(0, 12).forEach(character => { const button = document.createElement('button'); button.type = 'button'; button.className = 'avatar-suggestion'; const image = document.createElement('img'); image.src = imageUrl(character); image.alt = ''; const name = document.createElement('span'); name.textContent = character.name; button.append(image, name); button.addEventListener('mousedown', event => event.preventDefault()); button.addEventListener('click', () => { input.value = character.name; suggestions.hidden = true; input.focus(); }); suggestions.append(button); }); suggestions.hidden = !suggestions.children.length; }
+    function renderGuess(guess) { const row = document.createElement('div'); row.className = 'row'; categories.forEach((category, index) => { const tile = document.createElement('div'); tile.className = `tile ${status(guess, target, category.key)} reveal`; tile.style.setProperty('--flip-delay', `${index * 90}ms`); tile.innerHTML = `<span class="trait-label">${category.label}</span><span class="trait-value">${value(guess, target, category.key)}</span>`; row.append(tile); }); board.prepend(row); }
+    function renderImageGuess(guess, correct) { const row = document.createElement('div'); row.className = `avatar-guess ${correct ? 'correct' : ''}`; row.innerHTML = `<span>${guess.name}</span><b>${correct ? 'Correct' : 'Not this character'}</b>`; board.prepend(row); }
+    function resetGame() { const index = playMode === 'daily' ? hash(`${getMstDateKey()}-${mode}`) % avatarCharacters.length : Math.floor(Math.random() * avatarCharacters.length); target = avatarCharacters[index]; guesses = []; over = false; board.innerHTML = ''; input.value = ''; suggestions.hidden = true; message.textContent = ''; guessCount.textContent = '0'; guessButton.disabled = false; giveUp.disabled = false; successPanel.hidden = true; newGame.hidden = playMode === 'daily'; imageClue.hidden = mode !== 'image'; imageClue.classList.remove('revealed'); imageClue.src = mode === 'image' ? imageUrl(target) : ''; clueTitle.textContent = mode === 'character' ? 'Find the character from the traits below' : 'Who is this?'; document.querySelector('#clueLabel').textContent = mode === 'character' ? 'Character clue' : 'Blurry image clue'; document.querySelectorAll('[data-mode]').forEach(button => { const active = button.dataset.mode === mode; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); }); const daily = playMode === 'daily'; dailyMode.classList.toggle('active', daily); freeplayMode.classList.toggle('active', !daily); modeNote.textContent = `${daily ? 'Daily' : 'Freeplay'} ${mode === 'character' ? 'character' : 'image'} target`; }
+    function showSuccess() { successImage.src = imageUrl(target); successImage.alt = target.name; successTitle.textContent = target.name; successDetails.textContent = `${target.bending} · ${target.faction}`; successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`; imageClue.classList.toggle('revealed', mode === 'image'); successPanel.hidden = false; successPanel.focus({ preventScroll: true }); }
+    function submitGuess() { const guess = avatarCharacters.find(character => normalize(character.name) === normalize(input.value)); if (!guess) { message.textContent = 'Choose a character from the suggestions.'; return; } if (guesses.includes(guess.name)) return; guesses.push(guess.name); guessCount.textContent = guesses.length; const correct = guess.name === target.name; if (mode === 'character') renderGuess(guess); else renderImageGuess(guess, correct); input.value = ''; suggestions.hidden = true; if (correct) { over = true; guessButton.disabled = true; giveUp.disabled = true; message.textContent = `Correct. ${target.name} was the answer.`; showSuccess(); } }
+    document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; resetGame(); })); dailyMode.addEventListener('click', () => { playMode = 'daily'; resetGame(); }); freeplayMode.addEventListener('click', () => { playMode = 'freeplay'; resetGame(); }); newGame.addEventListener('click', resetGame); guessButton.addEventListener('click', () => { if (!over) submitGuess(); }); giveUp.addEventListener('click', () => { over = true; guessButton.disabled = true; giveUp.disabled = true; imageClue.classList.toggle('revealed', mode === 'image'); message.textContent = `The hidden character was ${target.name}.`; }); input.addEventListener('input', renderSuggestions); input.addEventListener('keydown', event => { if (event.key === 'Enter' && !suggestions.hidden) { event.preventDefault(); suggestions.querySelector('button')?.click(); } else if (event.key === 'Enter' && !over) submitGuess(); }); document.querySelector('#successContinue').addEventListener('click', () => { mode = modes[(modes.indexOf(mode) + 1) % modes.length]; resetGame(); }); startDailyResetTimer(document.querySelector('#dailyResetTimer')); resetGame();
+  </script>
+</body>
+</html>

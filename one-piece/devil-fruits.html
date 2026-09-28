@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Devil Fruit Wordle | One Piece Traitle</title>
+  <link rel="stylesheet" href="file.css">
+  <link rel="stylesheet" href="collection.css">
+  <script src="character-data.js"></script>
+  <script src="notable-characters.js"></script>
+  <script src="hint-utils.js"></script>
+  <script src="daily-utils.js"></script>
+</head>
+<body>
+  <main class="game alternate-game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <div class="masthead-shade"></div>
+      <div class="masthead-content">
+        <div class="eyebrow">ONE PIECE / GRAND LINE</div>
+        <h1>DEVIL FRUITS</h1>
+        <p class="subtitle">Read the fruit. Find the user.</p>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="fruitDailyMode" class="mode-button active" type="button" aria-pressed="true">Daily</button>
+          <button id="fruitFreeplayMode" class="mode-button" type="button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="fruitModeNote" class="mode-note">Daily target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+        <nav class="collection-links" aria-label="Explore collections">
+          <a href="file.html">Characters</a>
+          <a href="bounty-posters.html">Bounty Posters</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="clue-panel alternate-clue" aria-labelledby="fruitClue">
+      <p class="collection-kicker">Devil Fruit clue</p>
+      <h2 id="fruitClue">Loading...</h2>
+      <p id="fruitType" class="clue-subtitle"></p>
+    </section>
+
+    <section id="fruitSuccess" class="mini-success" hidden aria-live="polite" tabindex="-1">
+      <div id="fruitConfetti" class="mini-confetti" aria-hidden="true"></div>
+      <img id="fruitSuccessImage" alt="">
+      <div>
+        <p class="collection-kicker">Log Pose complete</p>
+        <h2 id="fruitSuccessTitle"></h2>
+        <p id="fruitSuccessDetails"></p>
+        <button id="fruitKeepSailing" type="button">Keep sailing</button>
+        <div id="fruitDailyScore" class="daily-score" hidden>
+          <p>All daily modes complete</p>
+          <pre id="fruitDailyScoreText"></pre>
+          <button id="fruitCopyDailyScore" type="button">Copy results</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="guess-panel alternate-guess-panel">
+      <label for="fruitGuess">Guess the character</label>
+      <div class="mini-autocomplete">
+        <input id="fruitGuess" type="text" placeholder="Type a character name..." autocomplete="off" aria-controls="fruitSuggestions" aria-autocomplete="list">
+        <div id="fruitSuggestions" class="mini-suggestions" role="listbox"></div>
+      </div>
+      <div class="mini-actions">
+        <button id="fruitSubmit" type="button">Guess</button>
+        <button id="fruitGiveUp" type="button" class="secondary-action">Give up</button>
+        <button id="fruitNew" type="button" class="secondary-action" hidden>New fruit</button>
+        <button id="fruitAppearanceHint" type="button" class="secondary-action hint-button" hidden>Hint: first appearance</button>
+        <button id="fruitAffiliationHint" type="button" class="secondary-action hint-button" hidden>Hint: affiliation</button>
+      </div>
+      <p id="fruitMessage" class="mini-message" role="status" aria-live="polite"></p>
+      <p id="fruitHintMessage" class="hint-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="fruitGuesses" class="mini-guess-list" aria-label="Devil Fruit guesses"></section>
+  </main>
+
+  <script>
+    const fruitClue = document.querySelector('#fruitClue');
+    const fruitType = document.querySelector('#fruitType');
+    const fruitGuess = document.querySelector('#fruitGuess');
+    const fruitSuggestions = document.querySelector('#fruitSuggestions');
+    const fruitSubmit = document.querySelector('#fruitSubmit');
+    const fruitGiveUp = document.querySelector('#fruitGiveUp');
+    const fruitNew = document.querySelector('#fruitNew');
+    const fruitMessage = document.querySelector('#fruitMessage');
+    const fruitGuesses = document.querySelector('#fruitGuesses');
+    const fruitSuccess = document.querySelector('#fruitSuccess');
+    const fruitSuccessImage = document.querySelector('#fruitSuccessImage');
+    const fruitSuccessTitle = document.querySelector('#fruitSuccessTitle');
+    const fruitSuccessDetails = document.querySelector('#fruitSuccessDetails');
+    const fruitConfetti = document.querySelector('#fruitConfetti');
+    const fruitKeepSailing = document.querySelector('#fruitKeepSailing');
+    const fruitDailyMode = document.querySelector('#fruitDailyMode');
+    const fruitFreeplayMode = document.querySelector('#fruitFreeplayMode');
+    const fruitModeNote = document.querySelector('#fruitModeNote');
+    const fruitHintMessage = document.querySelector('#fruitHintMessage');
+    const fruitAppearanceHintButton = document.querySelector('#fruitAppearanceHint');
+    const fruitAffiliationHintButton = document.querySelector('#fruitAffiliationHint');
+    const fruitDailyScore = document.querySelector('#fruitDailyScore');
+    const fruitDailyScoreText = document.querySelector('#fruitDailyScoreText');
+    const fruitCopyDailyScore = document.querySelector('#fruitCopyDailyScore');
+    startDailyResetTimer(document.querySelector('#dailyResetTimer'));
+    let fruitTargets = [];
+    let fruitTarget = null;
+    let fruitAttempted = new Set();
+    let fruitSuggestionIndex = -1;
+    let fruitGameMode = 'daily';
+
+    const shortScreenTimeUsers = new Set([
+      'funkfreed', 'lassoo', 'bunbuku', 'pierre', 'stronger', 'hattori',
+      'smiley', 'minokoala', 'minotaurus', 'minorhinoceros', 'minozebra',
+      'minochihuahua', 'ageha woman', 'alpacaman', 'batman', 'beetleman',
+      'gazelleman', 'horseman', 'mouseman', 'rabbitman', 'snakeman'
+    ]);
+
+    const normalize = value => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const escapeHtml = value => { const div = document.createElement('div'); div.textContent = value ?? ''; return div.innerHTML; };
+
+    function getDailyIndex(length) {
+      const today = new Date().toISOString().slice(0, 10);
+      let hash = 2166136261;
+      for (let index = 0; index < today.length; index++) {
+        hash ^= today.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash) % length;
+    }
+
+    function updateFruitMode() {
+      const daily = fruitGameMode === 'daily';
+      fruitDailyMode.classList.toggle('active', daily);
+      fruitFreeplayMode.classList.toggle('active', !daily);
+      fruitDailyMode.setAttribute('aria-pressed', String(daily));
+      fruitFreeplayMode.setAttribute('aria-pressed', String(!daily));
+      fruitModeNote.textContent = daily ? 'Daily target' : 'Freeplay target';
+      fruitNew.hidden = daily;
+    }
+
+    function hasTooManyUnknowns(character) {
+      const fields = [character.age, character.bounty, character.origin, character.first_appearance_arc, character.affiliation];
+      return fields.filter(value => value === undefined || value === null || !String(value).trim() || /^unknown$/i.test(String(value).trim()) || Number(value) === 0).length > 1;
+    }
+
+    function resolveUser(rawUser) {
+      const user = String(rawUser || '').trim();
+      if (!user || /unknown|in circulation/i.test(user)) return null;
+      const exact = characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === normalize(user));
+      if (exact) return exact;
+      const withoutBrackets = normalize(user.replace(/\s*\[.*?\]/g, ''));
+      return characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === withoutBrackets)
+        || characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name).includes(withoutBrackets))
+        || null;
+    }
+
+    function renderFruitSuggestions() {
+      const query = normalize(fruitGuess.value);
+      fruitSuggestions.innerHTML = '';
+      fruitSuggestionIndex = -1;
+      fruitSuggestions.hidden = !query;
+      if (!query) return;
+      const matches = characterData.filter(character => isNotableCharacter(character) && !hasTooManyUnknowns(character) && !fruitAttempted.has(normalize(character.name)) && normalize(character.name).includes(query)).slice(0, 12);
+      matches.forEach((character, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.index = String(index);
+        button.dataset.name = character.name;
+        button.textContent = character.name;
+        button.addEventListener('mousedown', event => event.preventDefault());
+        button.addEventListener('click', () => selectFruitSuggestion(index));
+        fruitSuggestions.append(button);
+      });
+      fruitSuggestions.hidden = matches.length === 0;
+    }
+
+    function selectFruitSuggestion(index) {
+      const option = fruitSuggestions.querySelector(`[data-index="${index}"]`);
+      if (!option) return;
+      fruitGuess.value = option.dataset.name;
+      fruitSuggestions.hidden = true;
+      fruitSuggestionIndex = -1;
+      fruitGuess.focus();
+    }
+
+    function renderFruitGuess(character, correct) {
+      const row = document.createElement('div');
+      row.className = `mini-guess ${correct ? 'correct' : 'wrong'}`;
+      row.innerHTML = `<span>${escapeHtml(character.name)}</span><b>${correct ? 'Correct' : 'Not this user'}</b>`;
+      fruitGuesses.prepend(row);
+    }
+
+    function startFruitRound() {
+      if (!fruitTargets.length) {
+        fruitMessage.textContent = 'No significant Devil Fruit users could be loaded.';
+        return;
+      }
+      fruitTarget = fruitGameMode === 'daily'
+        ? fruitTargets[getDailyIndex(fruitTargets.length)]
+        : fruitTargets[Math.floor(Math.random() * fruitTargets.length)];
+      fruitAttempted = new Set();
+      fruitGuesses.innerHTML = '';
+      fruitGuess.value = '';
+      fruitMessage.textContent = '';
+      fruitSuggestions.hidden = true;
+      fruitSuccess.hidden = true;
+      fruitConfetti.innerHTML = '';
+      fruitHintMessage.textContent = '';
+      fruitAppearanceHintButton.hidden = true;
+      fruitAffiliationHintButton.hidden = true;
+      fruitAppearanceHintButton.disabled = false;
+      fruitAffiliationHintButton.disabled = false;
+      fruitSubmit.disabled = false;
+      fruitGiveUp.disabled = false;
+      fruitClue.textContent = fruitTarget.fruit.name;
+      fruitType.textContent = fruitTarget.fruit.type || 'Devil Fruit';
+      fruitGuess.focus();
+    }
+
+    function submitFruitGuess() {
+      const query = normalize(fruitGuess.value);
+      const character = characterData.find(item => isNotableCharacter(item) && normalize(item.name) === query);
+      if (!character) { fruitMessage.textContent = 'Choose a character from the suggestions.'; return; }
+      if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
+      fruitAttempted.add(query);
+      updateFruitHintButtons();
+      const correct = normalize(character.name) === normalize(fruitTarget.user.name);
+      renderFruitGuess(character, correct);
+      fruitGuess.value = '';
+      renderFruitSuggestions();
+      if (correct) {
+        fruitMessage.textContent = `Correct. ${character.name} had the ${fruitTarget.fruit.name}.`;
+        fruitSubmit.disabled = true;
+        fruitGiveUp.disabled = true;
+        showFruitVictory();
+      }
+      else fruitMessage.textContent = '';
+    }
+
+    function giveUpFruit() {
+      if (!fruitTarget) return;
+      fruitMessage.textContent = `The fruit user was ${fruitTarget.user.name}.`;
+      fruitSubmit.disabled = true;
+      fruitGiveUp.disabled = true;
+    }
+
+    function updateFruitHintButtons() {
+      fruitAppearanceHintButton.hidden = fruitAttempted.size < 5 || fruitAppearanceHintButton.disabled;
+      fruitAffiliationHintButton.hidden = fruitAttempted.size < 9 || fruitAffiliationHintButton.disabled;
+    }
+
+    function showFruitVictory() {
+      const progress = fruitGameMode === 'daily' ? saveDailyScore('fruit', fruitAttempted.size) : readDailyProgress();
+      fruitSuccessTitle.textContent = fruitTarget.user.name;
+      fruitSuccessDetails.textContent = `${fruitTarget.fruit.name} · ${fruitTarget.user.affiliation || 'Known voyager'}`;
+      fruitDailyScore.hidden = fruitGameMode !== 'daily' || !dailyProgressComplete(progress);
+      if (!fruitDailyScore.hidden) {
+        const scoreText = formatDailyScore(progress);
+        fruitDailyScoreText.textContent = scoreText;
+        enableCopyButton(fruitCopyDailyScore, scoreText);
+      }
+      fruitSuccessImage.src = fruitTarget.user.image ? `https://oparchive.com${fruitTarget.user.image}` : 'assets/grand-line.jpeg';
+      fruitSuccessImage.alt = fruitTarget.user.name;
+      fruitSuccess.hidden = false;
+      fruitConfetti.innerHTML = '';
+      for (let index = 0; index < 42; index++) {
+        const piece = document.createElement('i');
+        piece.style.setProperty('--x', `${Math.random() * 100}%`);
+        piece.style.setProperty('--drift', `${(Math.random() - 0.5) * 180}px`);
+        piece.style.setProperty('--spin', `${Math.random() * 720 - 360}deg`);
+        piece.style.setProperty('--delay', `${Math.random() * 180}ms`);
+        piece.style.setProperty('--color', ['#c83d32', '#f4bd4f', '#3d9b68', '#fff8e8'][index % 4]);
+        fruitConfetti.append(piece);
+      }
+      fruitSuccess.focus({ preventScroll: true });
+      fruitSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function loadFruitTargets() {
+      try {
+        const response = await fetch('https://oparchive.com/data/devil_fruits.json');
+        const fruits = await response.json();
+        fruitTargets = fruits.map(fruit => ({
+          fruit: { ...fruit, name: String(fruit.name || '').trim(), type: String(fruit.type || 'Unknown').trim() },
+          user: resolveUser(fruit.user)
+        })).filter(target => target.user && isNotableCharacter(target.user) && !shortScreenTimeUsers.has(normalize(target.user.name)) && target.fruit.name && target.fruit.type !== 'Unknown' && !/smile/i.test(target.fruit.name));
+        startFruitRound();
+      } catch (error) {
+        fruitMessage.textContent = 'The Devil Fruit round could not be loaded.';
+      }
+    }
+
+    fruitGuess.addEventListener('input', renderFruitSuggestions);
+    fruitGuess.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        if (fruitSuggestions.hidden) return;
+        event.preventDefault();
+        const count = fruitSuggestions.querySelectorAll('button').length;
+        fruitSuggestionIndex = event.key === 'ArrowDown' ? (fruitSuggestionIndex + 1) % count : (fruitSuggestionIndex - 1 + count) % count;
+        fruitSuggestions.querySelectorAll('button').forEach((button, index) => button.classList.toggle('active', index === fruitSuggestionIndex));
+        return;
+      }
+      if (event.key === 'Enter' && !fruitSuggestions.hidden) {
+        event.preventDefault();
+        selectFruitSuggestion(fruitSuggestionIndex >= 0 ? fruitSuggestionIndex : 0);
+        return;
+      }
+      if (event.key === 'Enter') submitFruitGuess();
+    });
+    fruitSubmit.addEventListener('click', submitFruitGuess);
+    fruitGiveUp.addEventListener('click', giveUpFruit);
+    fruitNew.addEventListener('click', startFruitRound);
+    fruitDailyMode.addEventListener('click', () => { fruitGameMode = 'daily'; updateFruitMode(); startFruitRound(); });
+    fruitFreeplayMode.addEventListener('click', () => { fruitGameMode = 'freeplay'; updateFruitMode(); startFruitRound(); });
+    fruitAppearanceHintButton.addEventListener('click', () => {
+      appendHintMessage(fruitHintMessage, firstAppearanceHint(fruitTarget.user));
+      fruitAppearanceHintButton.disabled = true;
+      fruitAppearanceHintButton.hidden = true;
+    });
+    fruitAffiliationHintButton.addEventListener('click', () => {
+      appendHintMessage(fruitHintMessage, affiliationHint(fruitTarget.user));
+      fruitAffiliationHintButton.disabled = true;
+      fruitAffiliationHintButton.hidden = true;
+    });
+    fruitKeepSailing.addEventListener('click', () => { window.location.href = 'bounty-posters.html'; });
+    updateFruitMode();
+    loadFruitTargets();
+  </script>
+</body>
+</html>

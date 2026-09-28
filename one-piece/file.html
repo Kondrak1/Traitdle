@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>One Piece Traitle</title>
+  <link rel="stylesheet" href="file.css">
+  <script src="character-data.js"></script>
+  <script src="hint-utils.js"></script>
+  <script src="daily-utils.js"></script>
+</head>
+<body>
+  <main class="game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <div class="masthead-shade"></div>
+      <div class="masthead-content">
+        <div class="eyebrow">ONE PIECE / GRAND LINE</div>
+        <h1>TRAITLE</h1>
+        <p class="subtitle">Read the route. Find the pirate.</p>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="dailyMode" class="mode-button active" type="button" aria-pressed="true">Daily</button>
+          <button id="freeplayMode" class="mode-button" type="button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="modeNote" class="mode-note">Daily target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+        <nav class="collection-links" aria-label="Explore collections">
+          <a href="devil-fruits.html">Devil Fruits</a>
+          <a href="bounty-posters.html">Bounty Posters</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="controls">
+        <div class="guess-count" aria-live="polite">Guesses <b id="guessCount">0</b></div>
+        <div class="autocomplete">
+          <input id="guessInput" type="text" placeholder="Type any One Piece character..." aria-label="Guess a character" autocomplete="off" aria-autocomplete="list" aria-controls="suggestions">
+          <div id="suggestions" class="suggestions" role="listbox"></div>
+        </div>
+        <button id="guessBtn" type="button">Guess</button>
+        <button id="giveUp" type="button" class="secondary" disabled>Give up</button>
+        <button id="newGame" type="button" class="secondary" hidden>New game</button>
+        <button id="appearanceHint" type="button" class="secondary hint-button" hidden>Hint: first appearance</button>
+        <button id="affiliationHint" type="button" class="secondary hint-button" hidden>Hint: affiliation</button>
+      </div>
+      <p id="hintMessage" class="hint-message" role="status" aria-live="polite"></p>
+    </div>
+
+    <section id="successPanel" class="success-panel" aria-live="polite" aria-labelledby="successTitle" tabindex="-1" hidden>
+      <div id="confetti" class="confetti" aria-hidden="true"></div>
+      <div class="success-art-wrap">
+        <img id="successImage" class="success-art" alt="">
+      </div>
+      <div class="success-copy">
+        <p class="success-kicker">LOG POSE COMPLETE</p>
+        <h2 id="successTitle">Character found</h2>
+        <p id="successDetails" class="success-details"></p>
+        <p id="successGuessCount" class="success-guess-count"></p>
+        <button id="successContinue" type="button">Keep sailing</button>
+        <div id="dailyScore" class="daily-score" hidden>
+          <p>All daily modes complete</p>
+          <pre id="dailyScoreText"></pre>
+          <button id="copyDailyScore" type="button">Copy results</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="board" aria-label="Character trait board"></div>
+    <div id="message" role="status" aria-live="polite"></div>
+
+    <div class="legend" aria-label="Legend">
+      <span><i class="dot correct"></i>Exact</span>
+      <span><i class="dot present"></i>Present</span>
+      <span><i class="dot absent"></i>Missing</span>
+    </div>
+  </main>
+
+  <script>
+    
+    const categories = [
+      { key: 'name', label: 'Character' },
+      { key: 'gender', label: 'Gender' },
+      { key: 'age', label: 'Age' },
+      { key: 'bounty', label: 'Bounty' },
+      { key: 'devilFruitType', label: 'Devil Fruit Type' },
+      { key: 'hakiTypes', label: 'Haki Types' },
+      { key: 'firstArc', label: 'First Arc' },
+      { key: 'birthplace', label: 'Birthplace' },
+      { key: 'affiliation', label: 'Crew / Organization' }
+    ];
+
+    const fallbackCharacterDatabase = [
+      { name: 'Monkey D. Luffy', epithet: 'Straw Hat', affiliation: 'Straw Hat Pirates', devil_fruit: 'Hito Hito no Mi, Model: Nika (Awakened)', haki: ['Conquerors', 'Observation', 'Armament'], bounty: 3000000000, origin: 'East Blue (Foosha Village)', age: 19, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Captain of the Straw Hat Pirates.' },
+      { name: 'Roronoa Zoro', epithet: 'Pirate Hunter', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: ['Observation', 'Armament'], bounty: 1111000000, origin: 'East Blue (Shimotsuki Village)', age: 21, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Swordsman of the Straw Hat Pirates.' },
+      { name: 'Nami', epithet: 'Cat Burglar', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: [], bounty: 366000000, origin: 'East Blue (Cocoyasi Village)', age: 20, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Navigator of the Straw Hat Pirates.' },
+      { name: 'Sanji', epithet: 'Black Leg', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: ['Observation'], bounty: 1032000000, origin: 'North Blue (Baratie)', age: 21, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Cook of the Straw Hat Pirates.' },
+      { name: 'Usopp', epithet: 'Sogeking', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: ['Observation'], bounty: 500000000, origin: 'East Blue (Syrup Village)', age: 19, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Sniper of the Straw Hat Pirates.' },
+      { name: 'Nico Robin', epithet: 'Devil Child', affiliation: 'Straw Hat Pirates', devil_fruit: 'Hana Hana no Mi', haki: [], bounty: 930000000, origin: 'West Blue (Ohara)', age: 30, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Archaeologist of the Straw Hat Pirates.' },
+      { name: 'Franky', epithet: 'Cyborg', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: ['Armament'], bounty: 394000000, origin: 'Water 7', age: 36, first_appearance_arc: 'Chapter 1', race: 'Cyborg', status: 'Alive', description: 'Shipwright of the Straw Hat Pirates.' },
+      { name: 'Brook', epithet: 'Humming Swordsman', affiliation: 'Straw Hat Pirates', devil_fruit: 'Yomi Yomi no Mi', haki: ['Observation'], bounty: 383000000, origin: 'West Blue', age: 90, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'Skeleton musician of the Straw Hat Pirates.' },
+      { name: 'Jinbe', epithet: 'Knight of the Sea', affiliation: 'Straw Hat Pirates', devil_fruit: 'None', haki: ['Observation', 'Armament'], bounty: 1100000000, origin: 'Fish-Man Island', age: 46, first_appearance_arc: 'Chapter 1', race: 'Fish-man', status: 'Alive', description: 'Helmsman of the Straw Hat Pirates.' },
+      { name: 'Kaido', epithet: 'The Strongest Creature', affiliation: 'Beasts Pirates', devil_fruit: 'Uo Uo no Mi, Model: Seiryu', haki: ['Conquerors', 'Observation', 'Armement'], bounty: 4611000000, origin: 'Wano Country', age: 39, first_appearance_arc: 'Chapter 1', race: 'Fish-man', status: 'Alive', description: 'One of the Yonko and ruler of Wano.' },
+      { name: 'Shanks', epithet: 'Red Hair', affiliation: 'Red Hair Pirates', devil_fruit: 'None', haki: ['Conquerors', 'Observation', 'Armament'], bounty: 4048000000, origin: 'West Blue', age: 39, first_appearance_arc: 'Chapter 1', race: 'Human', status: 'Alive', description: 'One of the Yonko.' }
+    ];
+
+    const board = document.querySelector('#board');
+    const guessInput = document.querySelector('#guessInput');
+    const message = document.querySelector('#message');
+    const guessBtn = document.querySelector('#guessBtn');
+    const giveUpBtn = document.querySelector('#giveUp');
+    const newGameBtn = document.querySelector('#newGame');
+    const suggestions = document.querySelector('#suggestions');
+    const dailyModeBtn = document.querySelector('#dailyMode');
+    const freeplayModeBtn = document.querySelector('#freeplayMode');
+    const modeNote = document.querySelector('#modeNote');
+    const successPanel = document.querySelector('#successPanel');
+    const successImage = document.querySelector('#successImage');
+    const successTitle = document.querySelector('#successTitle');
+    const successDetails = document.querySelector('#successDetails');
+    const successGuessCount = document.querySelector('#successGuessCount');
+    const guessCount = document.querySelector('#guessCount');
+    const successContinue = document.querySelector('#successContinue');
+    const confetti = document.querySelector('#confetti');
+    const dailyResetTimer = document.querySelector('#dailyResetTimer');
+    const dailyScore = document.querySelector('#dailyScore');
+    const dailyScoreText = document.querySelector('#dailyScoreText');
+    const copyDailyScore = document.querySelector('#copyDailyScore');
+    startDailyResetTimer(dailyResetTimer);
+    const hintMessage = document.querySelector('#hintMessage');
+    const appearanceHintButton = document.querySelector('#appearanceHint');
+    const affiliationHintButton = document.querySelector('#affiliationHint');
+
+    let guesses = [];
+    let over = false;
+    let target = null;
+    let characterDatabase = [];
+    let gameMode = 'daily';
+    let suggestionIndex = -1;
+
+    const genderOverrides = {
+      absalom: 'Male',
+      'monkey d. luffy': 'Male',
+      'roronoa zoro': 'Male',
+      nami: 'Female',
+      sanji: 'Male',
+      usopp: 'Male',
+      'nico robin': 'Female',
+      franky: 'Male',
+      brook: 'Male',
+      jinbe: 'Male',
+      kaido: 'Male',
+      shanks: 'Male',
+      perona: 'Female',
+      'boa hancock': 'Female',
+      crocodile: 'Male',
+      'jewelry bonney': 'Female',
+      'portgas d. ace': 'Male',
+      sabo: 'Male',
+      'trafalgar law': 'Male',
+      smoker: 'Male',
+      buggy: 'Male',
+      mihawk: 'Male',
+      'dracule mihawk': 'Male',
+      'monkey d. garp': 'Male',
+      koby: 'Male',
+      kuzan: 'Male',
+      aokiji: 'Male',
+      kizaru: 'Male',
+      borsalino: 'Male',
+      fujitora: 'Male',
+      enel: 'Male',
+      moria: 'Male',
+      'gecko moria': 'Male',
+      killer: 'Male',
+      'big mom': 'Female',
+      'charlotte linlin': 'Female',
+      'boa sandersonia': 'Female',
+      'boa marigold': 'Female',
+      yamato: 'Female',
+      'scien [queen]': 'Male',
+      alvida: 'Female',
+      'aramaki [ryokugyu]': 'Male',
+      bartolomeo: 'Male',
+      bastille: 'Male',
+      'belo betty': 'Female',
+      bluejam: 'Male',
+      'borsalino [kizaru]': 'Male',
+      brannew: 'Male',
+      brogy: 'Male',
+      buchi: 'Male',
+      'caesar clown': 'Male',
+      'charlotte perospero': 'Male',
+      chew: 'Male',
+      chinjao: 'Male',
+      'daz bonez [mr. 1]': 'Male',
+      'demalo black': 'Male',
+      diamante: 'Male',
+      'doc q': 'Male',
+      dorry: 'Male',
+      'eustass kid': 'Male',
+      foxy: 'Male',
+      fullbody: 'Male',
+      'galdino [mr. 3]': 'Male',
+      'gem [mr. 5]': 'Male',
+      gladiuss: 'Male',
+      gladius: 'Male',
+      gotti: 'Male',
+      hibari: 'Female',
+      higuma: 'Male',
+      hina: 'Female',
+      inazuma: 'Male',
+      'issho [fujitora]': 'Male',
+      jack: 'Male',
+      jango: 'Male',
+      'jesus burgess': 'Male',
+      karasu: 'Male',
+      krieg: 'Male',
+      kujaku: 'Female',
+      kuroobi: 'Male',
+      'lao g': 'Male',
+      'little oars jr.': 'Male',
+      machvise: 'Male',
+      'marianne [miss goldenweek]': 'Female',
+      momonga: 'Male',
+      'mont blanc cricket': 'Male',
+      orlumbus: 'Male',
+      pica: 'Male',
+      'prince grus': 'Male',
+      sarquiss: 'Male',
+      sasaki: 'Male',
+      'scratchmen apoo': 'Male',
+      sham: 'Male',
+      squard: 'Male',
+      suleiman: 'Male',
+      tashigi: 'Female',
+      'tony tony chopper': 'Male',
+      trebol: 'Male',
+      tsuru: 'Female',
+      'van augur': 'Male',
+      vito: 'Male',
+      'zala [miss doublefinger]': 'Female'
+    };
+
+    const birthplaceOverrides = {
+      yamato: 'Wano Country'
+    };
+
+    const affiliationOverrides = {
+      yamato: 'Wano Country / Independent',
+      ulti: 'Beasts Pirates (Tobiroppo)',
+      'page one': 'Beasts Pirates (Tobiroppo)'
+    };
+
+    function normalizeText(value) {
+      return (value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function formatBounty(value) {
+      if (value === undefined || value === null || String(value).trim() === '') return 'Unknown';
+      const numeric = Number(String(value).replace(/[^0-9.-]/g, ''));
+      if (Number.isNaN(numeric) || numeric <= 0) return 'Unknown';
+      return new Intl.NumberFormat('en-US').format(numeric);
+    }
+
+    function formatText(value) {
+      if (Array.isArray(value)) {
+        return value.map(entry => String(entry).trim()).filter(Boolean).join(', ') || 'None';
+      }
+      if (typeof value === 'string') {
+        return value.trim() || 'Unknown';
+      }
+      return value === undefined || value === null ? 'Unknown' : String(value);
+    }
+
+    function inferGender(character) {
+      if (character.gender && !/^unknown$/i.test(String(character.gender))) return character.gender;
+      const normalizedName = normalizeText(character.name);
+      const override = genderOverrides[normalizedName];
+      if (override) return override;
+      if (/\bmiss\b|\bwoman\b|\bgirl\b|\blady\b|\bqueen\b|\bprincess\b/.test(normalizedName)) return 'Female';
+      if (/\bmr\.?\b|\bman\b|\bboy\b|\bking\b|\bprince\b/.test(normalizedName)) return 'Male';
+      const text = [character.epithet, character.description, character.affiliation].join(' ').toLowerCase();
+      if (/(^|\W)(she|her|hers|woman|lady|girl|mother|queen|princess|daughter)(\W|$)/.test(text)) return 'Female';
+      if (/(^|\W)(he|him|his|man|boy|father|king|prince|son|brother)(\W|$)/.test(text)) return 'Male';
+      return 'Unknown';
+    }
+
+    function parseDevilFruit(rawValue) {
+      if (rawValue === undefined || rawValue === null || String(rawValue).trim() === '') return 'None';
+      const text = formatText(rawValue);
+      if (!text || /none/i.test(text)) return 'None';
+      if (/unknown|unnamed|in circulation/i.test(text)) return 'Unknown';
+      const lowerText = text.toLowerCase();
+      const zoanFruitFamilies = /(?:ushi|hito|tori|inu|uma|neko|zou|hebi|mushi|kame|tama|sara|batto|rako|ryu|kumo|uo)\s+no\s+mi/;
+      const logiaFruitFamilies = /(?:moku|suna|goro|hie|yami|pika|magu|susu|numa|gasu|mera|mori|yuki)\s+no\s+mi/;
+      if (/model:|model\s|zoan|mythical|ancient/.test(lowerText) || zoanFruitFamilies.test(lowerText)) return 'Zoan';
+      if (/logia/.test(lowerText) || logiaFruitFamilies.test(lowerText)) return 'Logia';
+      return 'Paramecia';
+    }
+
+    function parseHaki(rawValue) {
+      const values = Array.isArray(rawValue) ? rawValue : String(rawValue || '').split(',');
+      const cleaned = values
+        .map(value => String(value).replace(/\bmodel\b|\bno\b|\bmi\b/gi, '').trim())
+        .filter(Boolean)
+        .map(value => value.replace(/\s+/g, ' '));
+
+      return cleaned.length ? cleaned.join(', ') : 'None';
+    }
+
+    function extractBirthplace(originValue) {
+      const text = formatText(originValue);
+      if (!text || /unknown/i.test(text)) return 'Unknown';
+      const match = text.match(/\(([^)]+)\)/);
+      return match ? match[1].trim() : text;
+    }
+
+    function getStoryArcFromChapter(chapterText) {
+      const match = String(chapterText || '').match(/Chapter\s+(\d+)/i);
+      const chapter = match ? Number(match[1]) : 0;
+      if (chapter >= 1126) return 'Elbaph';
+      if (chapter >= 1058) return 'Egghead';
+      if (chapter >= 909) return 'Wano Country';
+      if (chapter >= 903) return 'Levely';
+      if (chapter >= 825) return 'Whole Cake Island';
+      if (chapter >= 802) return 'Zou';
+      if (chapter >= 700) return 'Dressrosa';
+      if (chapter >= 654) return 'Punk Hazard';
+      if (chapter >= 603) return 'Fish-Man Island';
+      if (chapter >= 598) return 'Return to Sabaody';
+      if (chapter >= 581) return 'Post-War';
+      if (chapter >= 550) return 'Marineford';
+      if (chapter >= 525) return 'Impel Down';
+      if (chapter >= 514) return 'Amazon Lily';
+      if (chapter >= 490) return 'Sabaody Archipelago';
+      if (chapter >= 442) return 'Thriller Bark';
+      if (chapter >= 431) return 'Post-Enies Lobby';
+      if (chapter >= 375) return 'Enies Lobby';
+      if (chapter >= 322) return 'Water 7';
+      if (chapter >= 303) return 'Long Ring Long Land';
+      if (chapter >= 237) return 'Skypiea';
+      if (chapter >= 218) return 'Jaya';
+      if (chapter >= 155) return 'Arabasta';
+      if (chapter >= 130) return 'Drum Island';
+      if (chapter >= 115) return 'Little Garden';
+      if (chapter >= 106) return 'Whisky Peak';
+      if (chapter >= 101) return 'Reverse Mountain';
+      if (chapter >= 96) return 'Loguetown';
+      if (chapter >= 69) return 'Arlong Park';
+      if (chapter >= 42) return 'Baratie';
+      if (chapter >= 22) return 'Syrup Village';
+      if (chapter >= 8) return 'Orange Town';
+      if (chapter >= 1) return 'Romance Dawn';
+      return 'Unknown';
+    }
+
+    function buildAliases(character) {
+      const names = new Set();
+      [character.name, character.epithet, character.affiliation].forEach(value => {
+        if (!value) return;
+        const text = String(value).trim();
+        names.add(text);
+        const parts = text.split(/\s+/);
+        if (parts.length > 1) {
+          names.add(parts[parts.length - 1]);
+          const cleaned = text.replace(/\s+\(.*?\)/g, '');
+          if (cleaned !== text) names.add(cleaned);
+        }
+      });
+
+      return [...names].map(name => normalizeText(name)).filter(Boolean);
+    }
+
+    function mapCharacter(character) {
+      if (!character || !character.name) return null;
+
+      const rawAge = character.age;
+      const age = rawAge !== undefined && rawAge !== null && String(rawAge).trim() && !/^unknown$/i.test(String(rawAge).trim())
+        ? Number(rawAge)
+        : 'Unknown';
+      const chapterMatch = String(character.first_appearance_arc || '').match(/Chapter\s+(\d+)/i);
+      const normalizedName = normalizeText(character.name);
+      const resolvedAffiliation = affiliationOverrides[normalizedName] || formatText(character.affiliation);
+
+      return {
+        name: String(character.name).trim(),
+        image: character.image || '',
+        aliases: buildAliases({ ...character, affiliation: resolvedAffiliation }),
+        gender: inferGender(character),
+        age: Number.isFinite(age) ? age : 'Unknown',
+        bounty: formatBounty(character.bounty),
+        devilFruitType: parseDevilFruit(character.devil_fruit),
+        hakiTypes: parseHaki(character.haki),
+        firstArc: getStoryArcFromChapter(character.first_appearance_arc),
+        firstArcOrder: chapterMatch ? Number(chapterMatch[1]) : null,
+        firstAppearanceChapter: chapterMatch ? Number(chapterMatch[1]) : null,
+        birthplace: birthplaceOverrides[normalizedName] || extractBirthplace(character.origin),
+        affiliation: resolvedAffiliation,
+        unknownTraitCount: 0
+      };
+    }
+
+    function hasUnknownValue(value) {
+      return value === undefined || value === null || !String(value).trim() || /^unknown$/i.test(String(value).trim());
+    }
+
+    function hasEnoughTraits(character) {
+      const traitKeys = ['gender', 'age', 'bounty', 'devilFruitType', 'hakiTypes', 'firstArc', 'birthplace', 'affiliation'];
+      character.unknownTraitCount = traitKeys.filter(key => hasUnknownValue(character[key])).length;
+      return character.unknownTraitCount < 2;
+    }
+
+    function pickRandomCharacter() {
+      if (!characterDatabase.length) return null;
+      return characterDatabase[Math.floor(Math.random() * characterDatabase.length)];
+    }
+
+    function getDailyIndex() {
+      const today = new Date().toISOString().slice(0, 10);
+      let hash = 2166136261;
+      for (let index = 0; index < today.length; index++) {
+        hash ^= today.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash) % characterDatabase.length;
+    }
+
+    function pickTarget() {
+      if (!characterDatabase.length) return null;
+      return gameMode === 'daily' ? characterDatabase[getDailyIndex()] : pickRandomCharacter();
+    }
+
+    function updateModeButtons() {
+      const daily = gameMode === 'daily';
+      dailyModeBtn.classList.toggle('active', daily);
+      freeplayModeBtn.classList.toggle('active', !daily);
+      dailyModeBtn.setAttribute('aria-pressed', String(daily));
+      freeplayModeBtn.setAttribute('aria-pressed', String(!daily));
+      modeNote.textContent = daily ? 'Daily target' : 'Freeplay target';
+      newGameBtn.hidden = daily;
+    }
+
+    async function loadCharacterDatabase() {
+      guessBtn.disabled = true;
+      message.textContent = 'Loading custom character roster...';
+      const source = Array.isArray(characterData) ? characterData : fallbackCharacterDatabase;
+      characterDatabase = source.map(mapCharacter).filter(Boolean).filter(hasEnoughTraits);
+
+      target = pickTarget();
+      updateModeButtons();
+      guessBtn.disabled = false;
+      giveUpBtn.disabled = false;
+      if (message.textContent === 'Loading custom character roster...') {
+        message.textContent = '';
+      }
+      renderSuggestions('');
+    }
+
+    function ensureRow(index) {
+      if (board.children[index]) return;
+      const row = document.createElement('div');
+      row.className = 'row';
+      for (let i = 0; i < categories.length; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        row.append(tile);
+      }
+      board.append(row);
+    }
+
+    function parseHakiValues(raw) {
+      const text = String(raw || '');
+      if (!text || /none/i.test(text)) return new Set();
+      return new Set(
+        text
+          .split(',')
+          .map(value => value.trim())
+          .filter(Boolean)
+          .map(value => value.replace(/\s+/g, ' '))
+      );
+    }
+
+    function valueIsClose(guessText, targetText) {
+      const guess = Number(String(guessText).replace(/[^0-9]/g, ''));
+      const target = Number(String(targetText).replace(/[^0-9]/g, ''));
+      if (Number.isNaN(guess) || Number.isNaN(target)) return false;
+      return Math.abs(guess - target) <= 500000000;
+    }
+
+    function getStatus(guessValue, targetValue, key) {
+      const guessText = String(guessValue ?? 'Unknown');
+      const targetText = String(targetValue ?? 'Unknown');
+
+      if (guessText.toLowerCase() === targetText.toLowerCase()) return 'correct';
+
+      if (key === 'age') {
+        const guess = Number(guessText.replace(/[^0-9.-]/g, ''));
+        const target = Number(targetText.replace(/[^0-9.-]/g, ''));
+        if (!Number.isNaN(guess) && !Number.isNaN(target) && Math.abs(guess - target) <= 5) return 'present';
+      }
+
+      if (key === 'bounty') {
+        if (valueIsClose(guessText, targetText)) return 'present';
+      }
+
+      if (key === 'hakiTypes') {
+        const guessSet = parseHakiValues(guessText);
+        const targetSet = parseHakiValues(targetText);
+        const overlap = [...guessSet].filter(value => targetSet.has(value));
+        if (overlap.length > 0) return 'present';
+      }
+
+      if (key === 'devilFruitType') {
+        const guessLower = guessText.toLowerCase();
+        const targetLower = targetText.toLowerCase();
+        if (guessLower.includes(targetLower) || targetLower.includes(guessLower)) return 'present';
+      }
+
+      if (key === 'firstArc') {
+        const guessLower = guessText.toLowerCase();
+        const targetLower = targetText.toLowerCase();
+        if (guessLower.includes(targetLower) || targetLower.includes(guessLower)) return 'present';
+      }
+
+      if (key === 'birthplace') {
+        const guessLower = guessText.toLowerCase();
+        const targetLower = targetText.toLowerCase();
+        if (guessLower.includes(targetLower) || targetLower.includes(guessLower)) return 'present';
+      }
+
+      return 'absent';
+    }
+
+    function getDirectionalResult(guess, target, key) {
+      if (key === 'age') {
+        const guessNumber = Number(guess.age);
+        const targetNumber = Number(target.age);
+        if (guessNumber === targetNumber) return { status: 'correct', text: String(guess.age) };
+        return { status: 'absent', text: `${guess.age} ${guessNumber < targetNumber ? '↑' : '↓'}` };
+      }
+
+      if (key === 'bounty') {
+        const guessNumber = Number(String(guess.bounty).replace(/[^0-9]/g, ''));
+        const targetNumber = Number(String(target.bounty).replace(/[^0-9]/g, ''));
+        if (guessNumber === targetNumber) return { status: 'correct', text: guess.bounty };
+        return { status: 'absent', text: `${guess.bounty} ${guessNumber < targetNumber ? '↑' : '↓'}` };
+      }
+
+      if (key === 'firstArc') {
+        if (guess.firstArc === target.firstArc) return { status: 'correct', text: guess.firstArc };
+        return { status: 'absent', text: `${guess.firstArc} ${guess.firstArcOrder < target.firstArcOrder ? '↑' : '↓'}` };
+      }
+
+      return { status: getStatus(guess[key], target[key], key), text: guess[key] };
+    }
+
+    function findCharacter(input) {
+      const search = normalizeText(input);
+      if (!search) return null;
+
+      return characterDatabase.find(character => {
+        const matchesName = normalizeText(character.name) === search || normalizeText(character.name).includes(search);
+        const matchesAlias = (character.aliases || []).some(alias => normalizeText(alias) === search || normalizeText(alias).includes(search));
+        return matchesName || matchesAlias;
+      }) || null;
+    }
+
+    function hasBeenGuessed(character) {
+      const name = normalizeText(character.name);
+      return guesses.some(guessName => normalizeText(guessName) === name);
+    }
+
+    function renderSuggestions(value) {
+      const search = normalizeText(value);
+      suggestions.innerHTML = '';
+      suggestionIndex = -1;
+      guessInput.removeAttribute('aria-activedescendant');
+      suggestions.hidden = !search;
+      if (!search) return;
+
+      const matches = characterDatabase.filter(character => normalizeText(character.name).includes(search));
+      const availableMatches = matches.filter(character => !hasBeenGuessed(character));
+
+      availableMatches.forEach((character, index) => {
+        const option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'suggestion';
+        option.id = `suggestion-${index}`;
+        option.dataset.index = String(index);
+        option.dataset.name = character.name;
+        option.setAttribute('role', 'option');
+        option.innerHTML = `
+          <img src="https://oparchive.com${character.image || ''}" alt="" loading="lazy">
+          <span>${character.name}</span>
+        `;
+        option.addEventListener('mousedown', event => event.preventDefault());
+        option.addEventListener('click', () => selectSuggestion(index));
+        suggestions.append(option);
+      });
+
+      suggestions.hidden = availableMatches.length === 0;
+    }
+
+    function selectSuggestion(index) {
+      const option = suggestions.querySelector(`[data-index="${index}"]`);
+      if (!option) return;
+      const character = characterDatabase.find(item => item.name === option.dataset.name) || findCharacter(option.textContent);
+      if (!character || hasBeenGuessed(character)) {
+        renderSuggestions(guessInput.value);
+        return;
+      }
+      guessInput.value = character.name;
+      suggestions.hidden = true;
+      suggestionIndex = -1;
+      guessInput.focus();
+    }
+
+    function renderGuess(characterName) {
+      const guess = findCharacter(characterName);
+      if (!guess) {
+        message.textContent = 'That character is not in the archive.';
+        return;
+      }
+
+      ensureRow(guesses.length);
+      const row = board.children[guesses.length];
+
+      categories.forEach((category, index) => {
+        const tile = row.children[index];
+        const result = getDirectionalResult(guess, target, category.key);
+
+        tile.className = `tile ${result.status} reveal`;
+        tile.style.setProperty('--flip-delay', `${index * 130}ms`);
+        tile.innerHTML = `
+          <span class="trait-label">${category.label}</span>
+          <span class="trait-value">${result.text}</span>
+        `;
+      });
+    }
+
+    function resetGame() {
+      guesses = [];
+      guessCount.textContent = '0';
+      over = false;
+      board.innerHTML = '';
+      guessInput.value = '';
+      suggestions.hidden = true;
+      message.textContent = '';
+      hintMessage.textContent = '';
+      appearanceHintButton.hidden = true;
+      affiliationHintButton.hidden = true;
+      appearanceHintButton.disabled = false;
+      affiliationHintButton.disabled = false;
+      hideSuccess();
+      target = pickTarget();
+      guessBtn.disabled = false;
+      giveUpBtn.disabled = false;
+      updateModeButtons();
+    }
+
+    function giveUp() {
+      if (over || !target) return;
+      over = true;
+      message.textContent = `The hidden character was ${target.name}.`;
+      guessBtn.disabled = true;
+      giveUpBtn.disabled = true;
+    }
+
+    function showSuccess(character) {
+      const progress = gameMode === 'daily' ? saveDailyScore('classic', guesses.length) : readDailyProgress();
+      successTitle.textContent = character.name;
+      successDetails.textContent = `${character.epithet ? `${character.epithet} · ` : ''}${character.affiliation || 'Known voyager'}`;
+      successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
+      dailyScore.hidden = gameMode !== 'daily' || !dailyProgressComplete(progress);
+      if (!dailyScore.hidden) {
+        const scoreText = formatDailyScore(progress);
+        dailyScoreText.textContent = scoreText;
+        enableCopyButton(copyDailyScore, scoreText);
+      }
+      successImage.alt = character.name;
+      successImage.src = character.image ? `https://oparchive.com${character.image}` : '';
+      successPanel.hidden = false;
+      document.querySelector('.game').classList.add('success-state');
+      confetti.innerHTML = '';
+
+      for (let index = 0; index < 42; index++) {
+        const piece = document.createElement('i');
+        piece.style.setProperty('--x', `${Math.random() * 100}%`);
+        piece.style.setProperty('--drift', `${(Math.random() - 0.5) * 180}px`);
+        piece.style.setProperty('--spin', `${Math.random() * 720 - 360}deg`);
+        piece.style.setProperty('--delay', `${Math.random() * 180}ms`);
+        piece.style.setProperty('--color', ['#c83d32', '#f4bd4f', '#3d9b68', '#fff8e8'][index % 4]);
+        confetti.append(piece);
+      }
+
+      successPanel.focus({ preventScroll: true });
+      successPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function hideSuccess() {
+      successPanel.hidden = true;
+      document.querySelector('.game').classList.remove('success-state');
+      confetti.innerHTML = '';
+    }
+
+    function submitGuess() {
+      const value = guessInput.value.trim();
+      if (!value) {
+        message.textContent = 'Type a character name first.';
+        return;
+      }
+
+      const character = findCharacter(value);
+      if (!character) {
+        message.textContent = 'That character is not in the archive.';
+        return;
+      }
+
+      if (guesses.some(entry => entry.toLowerCase() === character.name.toLowerCase())) {
+        message.textContent = 'You already guessed that character.';
+        return;
+      }
+
+      renderGuess(character.name);
+      guesses.push(character.name);
+      guessCount.textContent = String(guesses.length);
+      updateHintButtons();
+      renderSuggestions('');
+
+      if (character.name.toLowerCase() === target.name.toLowerCase()) {
+        over = true;
+        message.textContent = `🏴‍☠️ Correct! The hidden character was ${target.name}.`;
+        giveUpBtn.disabled = true;
+        showSuccess(target);
+        return;
+      }
+
+      guessInput.value = '';
+      message.textContent = '';
+    }
+
+    guessBtn.addEventListener('click', () => {
+      if (!over && !guessBtn.disabled) submitGuess();
+    });
+
+    guessInput.addEventListener('keydown', (event) => {
+      if ((event.key === 'ArrowDown' || event.key === 'ArrowUp') && !suggestions.hidden) {
+        event.preventDefault();
+        const count = suggestions.querySelectorAll('.suggestion').length;
+        suggestionIndex = event.key === 'ArrowDown'
+          ? (suggestionIndex + 1) % count
+          : (suggestionIndex - 1 + count) % count;
+        suggestions.querySelectorAll('.suggestion').forEach((option, index) => {
+          option.classList.toggle('active', index === suggestionIndex);
+        });
+        guessInput.setAttribute('aria-activedescendant', `suggestion-${suggestionIndex}`);
+        return;
+      }
+      if (event.key === 'Escape') {
+        suggestions.hidden = true;
+        suggestionIndex = -1;
+        return;
+      }
+      if (event.key === 'Enter' && !suggestions.hidden) {
+        event.preventDefault();
+        const firstSuggestionIndex = suggestionIndex >= 0 ? suggestionIndex : 0;
+        selectSuggestion(firstSuggestionIndex);
+        return;
+      }
+      if (event.key === 'Enter' && !over && !guessBtn.disabled) {
+        submitGuess();
+      }
+    });
+
+    guessInput.addEventListener('input', () => renderSuggestions(guessInput.value));
+    guessInput.addEventListener('focus', () => renderSuggestions(guessInput.value));
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.autocomplete')) suggestions.hidden = true;
+    });
+
+    giveUpBtn.addEventListener('click', giveUp);
+
+    function updateHintButtons() {
+      appearanceHintButton.hidden = guesses.length < 5 || appearanceHintButton.disabled;
+      affiliationHintButton.hidden = guesses.length < 9 || affiliationHintButton.disabled;
+    }
+
+    appearanceHintButton.addEventListener('click', () => {
+      appendHintMessage(hintMessage, firstAppearanceHint(target));
+      appearanceHintButton.disabled = true;
+      appearanceHintButton.hidden = true;
+    });
+
+    affiliationHintButton.addEventListener('click', () => {
+      appendHintMessage(hintMessage, affiliationHint(target));
+      affiliationHintButton.disabled = true;
+      affiliationHintButton.hidden = true;
+    });
+
+    dailyModeBtn.addEventListener('click', () => {
+      gameMode = 'daily';
+      resetGame();
+    });
+
+    freeplayModeBtn.addEventListener('click', () => {
+      gameMode = 'freeplay';
+      resetGame();
+    });
+
+    newGameBtn.addEventListener('click', () => {
+      resetGame();
+    });
+
+    successContinue.addEventListener('click', () => {
+      window.location.href = 'devil-fruits.html';
+    });
+
+    loadCharacterDatabase();
+  </script>
+</body>
+</html>

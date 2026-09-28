@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bounty Poster Wordle | One Piece Traitle</title>
+  <link rel="stylesheet" href="file.css">
+  <link rel="stylesheet" href="collection.css">
+  <script src="character-data.js"></script>
+  <script src="notable-characters.js"></script>
+  <script src="hint-utils.js"></script>
+  <script src="daily-utils.js"></script>
+</head>
+<body>
+  <main class="game alternate-game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <div class="masthead-shade"></div>
+      <div class="masthead-content">
+        <div class="eyebrow">ONE PIECE / GRAND LINE</div>
+        <h1>BOUNTY POSTERS</h1>
+        <p class="subtitle">Read the poster. Find the character.</p>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="posterDailyMode" class="mode-button active" type="button" aria-pressed="true">Daily</button>
+          <button id="posterFreeplayMode" class="mode-button" type="button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="posterModeNote" class="mode-note">Daily target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+        <nav class="collection-links" aria-label="Explore collections">
+          <a href="file.html">Characters</a>
+          <a href="devil-fruits.html">Devil Fruits</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="poster-clue" aria-labelledby="posterClueTitle">
+      <p id="posterClueTitle" class="collection-kicker">Daily wanted poster</p>
+      <img id="posterClueImage" alt="Mystery bounty poster" src="">
+    </section>
+
+    <section id="posterSuccess" class="mini-success" hidden aria-live="polite" tabindex="-1">
+      <div id="posterConfetti" class="mini-confetti" aria-hidden="true"></div>
+      <img id="posterSuccessImage" alt="">
+      <div>
+        <p class="collection-kicker">Log Pose complete</p>
+        <h2 id="posterSuccessTitle"></h2>
+        <p id="posterSuccessDetails"></p>
+        <button id="posterKeepSailing" type="button">Keep sailing</button>
+        <div id="posterDailyScore" class="daily-score" hidden>
+          <p>All daily modes complete</p>
+          <pre id="posterDailyScoreText"></pre>
+          <button id="posterCopyDailyScore" type="button">Copy results</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="guess-panel alternate-guess-panel">
+      <label for="posterGuess">Guess the character</label>
+      <div class="mini-autocomplete">
+        <input id="posterGuess" type="text" placeholder="Type a character name..." autocomplete="off" aria-controls="posterSuggestions" aria-autocomplete="list">
+        <div id="posterSuggestions" class="mini-suggestions" role="listbox"></div>
+      </div>
+      <div class="mini-actions">
+        <button id="posterSubmit" type="button">Guess</button>
+        <button id="posterGiveUp" type="button" class="secondary-action">Give up</button>
+        <button id="posterNew" type="button" class="secondary-action" hidden>New poster</button>
+        <button id="posterAppearanceHint" type="button" class="secondary-action hint-button" hidden>Hint: first appearance</button>
+        <button id="posterAffiliationHint" type="button" class="secondary-action hint-button" hidden>Hint: affiliation</button>
+      </div>
+      <p id="posterMessage" class="mini-message" role="status" aria-live="polite"></p>
+      <p id="posterHintMessage" class="hint-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="posterGuesses" class="mini-guess-list" aria-label="Bounty poster guesses"></section>
+  </main>
+
+  <script>
+    const posterImage = document.querySelector('#posterClueImage');
+    const posterGuess = document.querySelector('#posterGuess');
+    const posterSuggestions = document.querySelector('#posterSuggestions');
+    const posterSubmit = document.querySelector('#posterSubmit');
+    const posterGiveUp = document.querySelector('#posterGiveUp');
+    const posterNew = document.querySelector('#posterNew');
+    const posterMessage = document.querySelector('#posterMessage');
+    const posterGuesses = document.querySelector('#posterGuesses');
+    const posterSuccess = document.querySelector('#posterSuccess');
+    const posterSuccessImage = document.querySelector('#posterSuccessImage');
+    const posterSuccessTitle = document.querySelector('#posterSuccessTitle');
+    const posterSuccessDetails = document.querySelector('#posterSuccessDetails');
+    const posterConfetti = document.querySelector('#posterConfetti');
+    const posterKeepSailing = document.querySelector('#posterKeepSailing');
+    const posterDailyMode = document.querySelector('#posterDailyMode');
+    const posterFreeplayMode = document.querySelector('#posterFreeplayMode');
+    const posterModeNote = document.querySelector('#posterModeNote');
+    const posterHintMessage = document.querySelector('#posterHintMessage');
+    const posterAppearanceHintButton = document.querySelector('#posterAppearanceHint');
+    const posterAffiliationHintButton = document.querySelector('#posterAffiliationHint');
+    const posterDailyScore = document.querySelector('#posterDailyScore');
+    const posterDailyScoreText = document.querySelector('#posterDailyScoreText');
+    const posterCopyDailyScore = document.querySelector('#posterCopyDailyScore');
+    startDailyResetTimer(document.querySelector('#dailyResetTimer'));
+    let posterTarget = null;
+    let posterAttempted = new Set();
+    let posterCandidates = [];
+    let posterSuggestionIndex = -1;
+    let posterGameMode = 'daily';
+
+    const normalize = value => String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const escapeHtml = value => { const div = document.createElement('div'); div.textContent = value ?? ''; return div.innerHTML; };
+    const bountyValue = character => Number(String(character.bounty || '').replace(/[^0-9]/g, '')) || 0;
+
+    function getDailyIndex(length) {
+      const today = new Date().toISOString().slice(0, 10);
+      let hash = 2166136261;
+      for (let index = 0; index < today.length; index++) {
+        hash ^= today.charCodeAt(index);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash) % length;
+    }
+
+    function updatePosterMode() {
+      const daily = posterGameMode === 'daily';
+      posterDailyMode.classList.toggle('active', daily);
+      posterFreeplayMode.classList.toggle('active', !daily);
+      posterDailyMode.setAttribute('aria-pressed', String(daily));
+      posterFreeplayMode.setAttribute('aria-pressed', String(!daily));
+      posterModeNote.textContent = daily ? 'Daily target' : 'Freeplay target';
+      posterNew.hidden = daily;
+    }
+
+    const posterSlugOverrides = {
+      kaidou: 'kaido',
+      'arber [king]': 'king',
+      'scien [queen]': 'queen',
+      'borsalino [kizaru]': 'kizaru',
+      'issho [fujitora]': 'fujitora',
+      'kuzan [aokiji]': 'kuzan',
+      'sakazuki [akainu]': 'sakazuki',
+      'marshall d. teach [blackbeard]': 'marshall-d-teach'
+    };
+
+    function isPirate(character) {
+      const affiliation = normalize(character.affiliation);
+      return /pirates|cross guild|kuja|baroque works|donquixote/.test(affiliation) && !/marines|revolutionary army/.test(affiliation);
+    }
+
+    function unknownTraitCount(character) {
+      const fields = [character.age, character.bounty, character.origin, character.first_appearance_arc, character.affiliation];
+      return fields.filter(value => value === undefined || value === null || !String(value).trim() || /^unknown$/i.test(String(value).trim()) || Number(value) === 0).length;
+    }
+
+    function posterSlug(character) {
+      const key = normalize(character.name);
+      if (posterSlugOverrides[key]) return posterSlugOverrides[key];
+      return key.replace(/\s*\[.*?\]/g, '').replace(/['’.]/g, '').replace(/\s+/g, '-');
+    }
+
+    function posterUrl(character) {
+      return `https://onepiecewanted.com/images/bounties/posters/512/poster-wanted-marine-bounty-${posterSlug(character)}-${bountyValue(character)}.webp`;
+    }
+
+    function characterImage(character) {
+      if (character.image) return `https://oparchive.com${character.image}`;
+      const initials = character.name.split(/\s+/).map(word => word[0]).join('').slice(0, 3);
+      return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 760"><rect width="600" height="760" fill="#c8ad6f"/><text x="300" y="390" fill="#7d241f" font-family="Georgia" font-size="120" text-anchor="middle">${initials}</text></svg>`)}`;
+    }
+
+    function setCharacterImage(image, character, preferPoster) {
+      image.onerror = () => {
+        image.onerror = null;
+        image.src = characterImage(character);
+      };
+      image.src = preferPoster ? posterUrl(character) : characterImage(character);
+    }
+
+    function renderPosterSuggestions() {
+      const query = normalize(posterGuess.value);
+      posterSuggestions.innerHTML = '';
+      posterSuggestionIndex = -1;
+      posterSuggestions.hidden = !query;
+      if (!query) return;
+      const matches = posterCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query)).slice(0, 12);
+      matches.forEach((character, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.index = String(index);
+        button.dataset.name = character.name;
+        button.textContent = character.name;
+        button.addEventListener('mousedown', event => event.preventDefault());
+        button.addEventListener('click', () => selectPosterSuggestion(index));
+        posterSuggestions.append(button);
+      });
+      posterSuggestions.hidden = matches.length === 0;
+    }
+
+    function selectPosterSuggestion(index) {
+      const option = posterSuggestions.querySelector(`[data-index="${index}"]`);
+      if (!option) return;
+      posterGuess.value = option.dataset.name;
+      posterSuggestions.hidden = true;
+      posterSuggestionIndex = -1;
+      posterGuess.focus();
+    }
+
+    function renderPosterGuess(character, correct) {
+      const row = document.createElement('div');
+      row.className = `mini-guess ${correct ? 'correct' : 'wrong'}`;
+      row.innerHTML = `<span>${escapeHtml(character.name)}</span><b>${correct ? 'Correct' : 'Not this pirate'}</b>`;
+      posterGuesses.prepend(row);
+    }
+
+    function startPosterRound() {
+      if (!posterCandidates.length) {
+        posterMessage.textContent = 'No significant wanted characters could be loaded.';
+        return;
+      }
+      posterTarget = posterGameMode === 'daily'
+        ? posterCandidates[getDailyIndex(posterCandidates.length)]
+        : posterCandidates[Math.floor(Math.random() * posterCandidates.length)];
+      posterAttempted = new Set();
+      posterGuesses.innerHTML = '';
+      posterGuess.value = '';
+      posterMessage.textContent = '';
+      posterSuggestions.hidden = true;
+      posterSubmit.disabled = false;
+      posterGiveUp.disabled = false;
+      posterSuccess.hidden = true;
+      posterConfetti.innerHTML = '';
+      posterImage.style.filter = '';
+      posterImage.style.transform = '';
+      posterHintMessage.textContent = '';
+      posterAppearanceHintButton.hidden = true;
+      posterAffiliationHintButton.hidden = true;
+      posterAppearanceHintButton.disabled = false;
+      posterAffiliationHintButton.disabled = false;
+      setCharacterImage(posterImage, posterTarget, true);
+      posterImage.alt = 'Mystery bounty poster';
+      posterGuess.focus();
+    }
+
+    function submitPosterGuess() {
+      const query = normalize(posterGuess.value);
+      const character = posterCandidates.find(item => normalize(item.name) === query);
+      if (!character) { posterMessage.textContent = 'Choose a character from the suggestions.'; return; }
+      if (posterAttempted.has(query)) { posterMessage.textContent = 'You already tried that character.'; return; }
+      posterAttempted.add(query);
+      updatePosterHintButtons();
+      const correct = normalize(character.name) === normalize(posterTarget.name);
+      renderPosterGuess(character, correct);
+      posterGuess.value = '';
+      renderPosterSuggestions();
+      if (correct) {
+        posterImage.style.filter = 'none';
+        posterImage.style.transform = 'none';
+        posterMessage.textContent = `Correct. ${character.name} is wanted for ${bountyValue(character).toLocaleString('en-US')} berries.`;
+        posterSubmit.disabled = true;
+        posterGiveUp.disabled = true;
+        showPosterVictory();
+      }
+      else posterMessage.textContent = '';
+    }
+
+    function giveUpPoster() {
+      if (!posterTarget) return;
+      posterImage.style.filter = 'none';
+      posterImage.style.transform = 'none';
+      posterMessage.textContent = `The wanted character was ${posterTarget.name}.`;
+      posterSubmit.disabled = true;
+      posterGiveUp.disabled = true;
+    }
+
+    function updatePosterHintButtons() {
+      posterAppearanceHintButton.hidden = posterAttempted.size < 5 || posterAppearanceHintButton.disabled;
+      posterAffiliationHintButton.hidden = posterAttempted.size < 9 || posterAffiliationHintButton.disabled;
+    }
+
+    function showPosterVictory() {
+      const progress = posterGameMode === 'daily' ? saveDailyScore('wanted', posterAttempted.size) : readDailyProgress();
+      posterSuccessTitle.textContent = posterTarget.name;
+      posterSuccessDetails.textContent = `${bountyValue(posterTarget).toLocaleString('en-US')} berries · ${posterTarget.affiliation}`;
+      posterDailyScore.hidden = posterGameMode !== 'daily' || !dailyProgressComplete(progress);
+      if (!posterDailyScore.hidden) {
+        const scoreText = formatDailyScore(progress);
+        posterDailyScoreText.textContent = scoreText;
+        enableCopyButton(posterCopyDailyScore, scoreText);
+      }
+      setCharacterImage(posterSuccessImage, posterTarget, true);
+      posterSuccessImage.alt = posterTarget.name;
+      posterSuccess.hidden = false;
+      posterConfetti.innerHTML = '';
+      for (let index = 0; index < 42; index++) {
+        const piece = document.createElement('i');
+        piece.style.setProperty('--x', `${Math.random() * 100}%`);
+        piece.style.setProperty('--drift', `${(Math.random() - 0.5) * 180}px`);
+        piece.style.setProperty('--spin', `${Math.random() * 720 - 360}deg`);
+        piece.style.setProperty('--delay', `${Math.random() * 180}ms`);
+        piece.style.setProperty('--color', ['#c83d32', '#f4bd4f', '#3d9b68', '#fff8e8'][index % 4]);
+        posterConfetti.append(piece);
+      }
+      posterSuccess.focus({ preventScroll: true });
+      posterSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    posterGuess.addEventListener('input', renderPosterSuggestions);
+    posterGuess.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        if (posterSuggestions.hidden) return;
+        event.preventDefault();
+        const count = posterSuggestions.querySelectorAll('button').length;
+        posterSuggestionIndex = event.key === 'ArrowDown' ? (posterSuggestionIndex + 1) % count : (posterSuggestionIndex - 1 + count) % count;
+        posterSuggestions.querySelectorAll('button').forEach((button, index) => button.classList.toggle('active', index === posterSuggestionIndex));
+        return;
+      }
+      if (event.key === 'Enter' && !posterSuggestions.hidden) {
+        event.preventDefault();
+        selectPosterSuggestion(posterSuggestionIndex >= 0 ? posterSuggestionIndex : 0);
+        return;
+      }
+      if (event.key === 'Enter') submitPosterGuess();
+    });
+    posterSubmit.addEventListener('click', submitPosterGuess);
+    posterGiveUp.addEventListener('click', giveUpPoster);
+    posterNew.addEventListener('click', startPosterRound);
+    posterDailyMode.addEventListener('click', () => { posterGameMode = 'daily'; updatePosterMode(); startPosterRound(); });
+    posterFreeplayMode.addEventListener('click', () => { posterGameMode = 'freeplay'; updatePosterMode(); startPosterRound(); });
+    posterAppearanceHintButton.addEventListener('click', () => {
+      appendHintMessage(posterHintMessage, firstAppearanceHint(posterTarget));
+      posterAppearanceHintButton.disabled = true;
+      posterAppearanceHintButton.hidden = true;
+    });
+    posterAffiliationHintButton.addEventListener('click', () => {
+      appendHintMessage(posterHintMessage, affiliationHint(posterTarget));
+      posterAffiliationHintButton.disabled = true;
+      posterAffiliationHintButton.hidden = true;
+    });
+    posterKeepSailing.addEventListener('click', () => { window.location.href = 'file.html'; });
+    posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
+    updatePosterMode();
+    startPosterRound();
+  </script>
+</body>
+</html>

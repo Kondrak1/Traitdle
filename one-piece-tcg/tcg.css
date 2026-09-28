@@ -1,0 +1,36 @@
+:root { --tcg-ink: #152337; --tcg-paper: #f5f0df; --tcg-red: #c94c36; --tcg-blue: #2d6e9f; --tcg-gold: #e7b84e; --tcg-green: #3f9a73; --tcg-gray: #68747b; }
+
+.tcg-game { background: rgb(10 26 43 / 94%); border-color: rgb(231 184 78 / 55%); }
+.tcg-game header { min-height: 360px; background: linear-gradient(145deg, #102e48, #1d6380 55%, #8d3d30); border-bottom-color: var(--tcg-gold); }
+.tcg-game h1 { color: var(--tcg-paper); text-shadow: 4px 5px 0 #9b3328; }
+.tcg-game .mode-switch { border-color: rgb(231 184 78 / 62%); }
+.tcg-game .mode-button.active { background: var(--tcg-gold); color: var(--tcg-ink); }
+.tcg-intro { margin: 0 auto 20px; padding: 18px 22px; border: 1px solid rgb(231 184 78 / 40%); border-radius: 12px; background: linear-gradient(135deg, #163b56, #102539); text-align: center; }
+.tcg-intro p { margin: 0; color: var(--tcg-gold); font: 800 .76rem Arial, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
+.tcg-intro h2 { margin: 8px 0 0; color: var(--tcg-paper); font: 800 clamp(1.35rem, 4vw, 2.4rem) Georgia, serif; }
+.tcg-image-clue { display: block; width: min(280px, 100%); height: 280px; margin: 16px auto 0; border: 5px solid var(--tcg-gold); border-radius: 4px; object-fit: contain; background: #d8c89c; filter: blur(16px) saturate(.7); transform: scale(1.08); }
+.tcg-image-clue[hidden] { display: none; }
+.tcg-image-clue.revealed { filter: none; transform: none; }
+.tcg-game .toolbar { background: linear-gradient(90deg, #102b44, #173b58, #102b44); border-color: rgb(231 184 78 / 42%); }
+.tcg-game #board { display: grid; gap: 10px; }
+.tcg-game .row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.tcg-game .tile { min-height: 78px; display: grid; align-content: center; gap: 5px; padding: 8px; border: 1px solid rgb(21 35 55 / 18%); border-radius: 7px; background: var(--tcg-paper); color: var(--tcg-ink); text-align: center; }
+.tcg-game .tile.correct { background: var(--tcg-green); color: #fff; }
+.tcg-game .tile.higher, .tcg-game .tile.lower { background: var(--tcg-blue); color: #fff; }
+.tcg-game .tile.lower { background: var(--tcg-red); }
+.tcg-game .tile.absent { background: var(--tcg-gray); color: #fff; }
+.tcg-game .tile.present { background: var(--tcg-gold); color: var(--tcg-ink); }
+.tcg-game .trait-label { font-size: .62rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.tcg-game .trait-value { font-weight: 900; overflow-wrap: anywhere; }
+.tcg-game .tcg-suggestion { display: flex; align-items: center; gap: 9px; width: 100%; text-align: left; }
+.tcg-game .tcg-suggestion img { width: 34px; height: 48px; flex: 0 0 34px; object-fit: cover; border-radius: 3px; }
+.tcg-game .success-panel { background: linear-gradient(135deg, #173d59, #542c2c); }
+.tcg-game .success-art-wrap { width: min(220px, 100%); min-height: 0; aspect-ratio: 600 / 838; justify-self: center; }
+.tcg-card-image { display: block; width: 100%; height: 100%; object-fit: contain; padding: 8px; background: #d8c89c; }
+.tcg-guess-result { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border-left: 5px solid var(--tcg-red); border-radius: 8px; background: #16344e; color: var(--tcg-paper); font-weight: 800; }
+.tcg-guess-result.correct { border-left-color: var(--tcg-green); }
+.tcg-guess-result b { color: var(--tcg-gold); }
+.tcg-game .tcg-source-note { margin: 18px 0 0; color: #b7c3c9; font: .72rem Arial, sans-serif; text-align: center; }
+.tcg-game .tcg-source-note a { color: var(--tcg-gold); }
+@media (max-width: 760px) { .tcg-game .row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tcg-game .row .tile:first-child { grid-column: span 2; } }
+@media (max-width: 700px) { .tcg-game .success-art-wrap { width: min(190px, 100%); height: auto; min-height: 0; } }

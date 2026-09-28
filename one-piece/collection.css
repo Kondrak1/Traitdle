@@ -317,7 +317,9 @@ body {
 .mini-suggestions[hidden] { display: none; }
 
 .mini-suggestions button {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 9px;
   width: 100%;
   border: 0;
   border-radius: 0;
@@ -327,6 +329,15 @@ body {
   font: 700 0.9rem Arial, sans-serif;
   text-align: left;
   cursor: pointer;
+}
+
+.mini-suggestions button img {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--gray);
 }
 
 .mini-suggestions button:hover,

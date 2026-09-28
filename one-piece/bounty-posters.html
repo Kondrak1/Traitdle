@@ -187,7 +187,13 @@
         button.type = 'button';
         button.dataset.index = String(index);
         button.dataset.name = character.name;
-        button.textContent = character.name;
+        const image = document.createElement('img');
+        image.alt = '';
+        image.loading = 'lazy';
+        setCharacterImage(image, character, false);
+        const name = document.createElement('span');
+        name.textContent = character.name;
+        button.append(image, name);
         button.addEventListener('mousedown', event => event.preventDefault());
         button.addEventListener('click', () => selectPosterSuggestion(index));
         posterSuggestions.append(button);

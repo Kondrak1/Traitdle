@@ -5,13 +5,43 @@ const dailyModeLabels = {
   wanted: '💰 Wanted'
 };
 
-function getMstDateKey(date = new Date()) {
-  return new Date(date.getTime() - 29 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const mountainTimeZone = 'America/Denver';
+const mountainDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: mountainTimeZone,
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  hourCycle: 'h23',
+  timeZoneName: 'shortOffset'
+});
+
+function getMountainDateTimeParts(date) {
+  return Object.fromEntries(mountainDateTimeFormatter.formatToParts(date).filter(part => part.type !== 'literal').map(part => [part.type, part.value]));
 }
 
-function getDailyResetTimestamp() {
-  const resetDay = new Date(Date.now() - 29 * 60 * 60 * 1000);
-  return Date.UTC(resetDay.getUTCFullYear(), resetDay.getUTCMonth(), resetDay.getUTCDate() + 1) + 29 * 60 * 60 * 1000;
+function getMountainOffsetMinutes(date) {
+  const offset = getMountainDateTimeParts(date).timeZoneName;
+  if (offset === 'GMT') return 0;
+  const match = offset.match(/^GMT([+-])(\d{1,2})(?::(\d{2}))?$/);
+  if (!match) return 0;
+  const minutes = Number(match[2]) * 60 + Number(match[3] || 0);
+  return match[1] === '+' ? minutes : -minutes;
+}
+
+function getMstDateKey(date = new Date()) {
+  const parts = getMountainDateTimeParts(date);
+  const localDate = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
+  const gameDate = Number(parts.hour) < 22 ? new Date(localDate - 24 * 60 * 60 * 1000) : new Date(localDate);
+  return gameDate.toISOString().slice(0, 10);
+}
+
+function getDailyResetTimestamp(now = new Date()) {
+  const parts = getMountainDateTimeParts(now);
+  const localDate = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
+  const resetDate = Number(parts.hour) >= 22 ? localDate + 24 * 60 * 60 * 1000 : localDate;
+  const resetLocalAsUtc = new Date(resetDate + 22 * 60 * 60 * 1000);
+  return resetLocalAsUtc.getTime() - getMountainOffsetMinutes(resetLocalAsUtc) * 60 * 1000;
 }
 
 function readDailyProgress() {

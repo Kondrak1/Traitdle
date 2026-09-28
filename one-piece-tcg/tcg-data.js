@@ -4,6 +4,32 @@ const tcgSetSources = [
   'PRB01', 'PRB02'
 ];
 
+const tcgSetReleaseData = {
+  OP01: { releaseDate: '2022-12-02', releaseOrder: 1 },
+  OP02: { releaseDate: '2023-03-10', releaseOrder: 2 },
+  OP03: { releaseDate: '2023-06-30', releaseOrder: 3 },
+  OP04: { releaseDate: '2023-09-22', releaseOrder: 4 },
+  OP05: { releaseDate: '2023-12-08', releaseOrder: 5 },
+  OP06: { releaseDate: '2024-03-15', releaseOrder: 6 },
+  EB01: { releaseDate: '2024-05-03', releaseOrder: 7 },
+  OP07: { releaseDate: '2024-06-28', releaseOrder: 8 },
+  OP08: { releaseDate: '2024-09-13', releaseOrder: 9 },
+  PRB01: { releaseDate: '2024-11-08', releaseOrder: 10 },
+  OP09: { releaseDate: '2024-12-13', releaseOrder: 11 },
+  OP10: { releaseDate: '2025-03-21', releaseOrder: 12 },
+  EB02: { releaseDate: '2025-05-09', releaseOrder: 13 },
+  OP11: { releaseDate: '2025-06-06', releaseOrder: 14 },
+  OP12: { releaseDate: '2025-08-22', releaseOrder: 15 },
+  PRB02: { releaseDate: '2025-10-03', releaseOrder: 16 },
+  OP13: { releaseDate: '2025-11-07', releaseOrder: 17 },
+  OP14: { releaseDate: '2026-01-16', releaseOrder: 18 },
+  EB04: { releaseDate: '2026-01-16', releaseOrder: 19 },
+  EB03: { releaseDate: '2026-02-20', releaseOrder: 20 },
+  OP15: { releaseDate: '2026-04-03', releaseOrder: 21 },
+  OP16: { releaseDate: '2026-06-12', releaseOrder: 22 },
+  OP17: { releaseDate: '2026-08-28', releaseOrder: 23 }
+};
+
 const tcgFemaleNameParts = [
   'Boa.Hancock', 'Bonney', 'Catarina.Devon', 'Charlotte.Amande', 'Charlotte.Brûlée', 'Charlotte.Galette',
   'Charlotte.Pudding', 'Conis', 'Curly.Dadan', 'Hiyori', 'Jewelry', 'Kaya', 'Koala', 'Kozuki.Toki',

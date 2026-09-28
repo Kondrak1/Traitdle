@@ -44,6 +44,7 @@ body {
 .mode-selector { margin-top: 14px; }
 .mode-selector .mode-button { min-width: 130px; }
 .game #board .row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.game #board .tile { min-width: 0; height: auto; overflow: visible; overflow-wrap: anywhere; }
 .toolbar { background: linear-gradient(90deg, rgb(23 19 43 / 96%), rgb(55 38 79 / 88%), rgb(23 19 43 / 96%)); }
 .success-panel { background: linear-gradient(135deg, rgb(89 39 73 / 94%), rgb(42 22 57 / 96%)); }
 #successContinue { background: var(--gold); }
@@ -143,4 +144,13 @@ body {
   .mode-selector .mode-button { min-width: 0; }
   .success-panel { grid-template-columns: 1fr; text-align: center; }
   .success-copy { text-align: center; }
+  .game #board .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .game #board .tile { min-height: 88px; padding: 10px; }
+}
+
+@media (max-width: 480px) {
+  .game { padding-left: 8px; padding-right: 8px; }
+  .game #board .row { grid-template-columns: 1fr; }
+  .game #board .tile { min-height: 72px; }
+  .game #board .trait-value { font-size: .82rem; line-height: 1.3; white-space: normal; }
 }

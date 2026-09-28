@@ -111,7 +111,7 @@
     const bountyValue = character => Number(String(character.bounty || '').replace(/[^0-9]/g, '')) || 0;
 
     function getDailyIndex(length) {
-      const today = new Date().toISOString().slice(0, 10);
+      const today = getMstDateKey();
       let hash = 2166136261;
       for (let index = 0; index < today.length; index++) {
         hash ^= today.charCodeAt(index);

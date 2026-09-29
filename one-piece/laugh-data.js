@@ -1,0 +1,20 @@
+const onePieceLaughs = [
+  { name: 'Roronoa Zoro', audio: 'assets/laughs/zoro-08-09.mp3' },
+  { name: 'Trebol', audio: 'assets/laughs/trebol.mp3' },
+  { name: 'Jaguar D. Saul', audio: 'assets/laughs/jaguar-d-saul.mp3' },
+  { name: 'Donquixote Doflamingo', audio: 'assets/laughs/doflamingo.mp3' },
+  { name: 'Hogback', audio: 'assets/laughs/hogback.mp3' },
+  { name: 'Edward Newgate', audio: 'assets/laughs/whitebeard.mp3' },
+  { name: 'Perona', audio: 'assets/laughs/perona.mp3' },
+  { name: 'Dr. Kureha', audio: 'assets/laughs/kureha.mp3' },
+  { name: 'Gecko Moria', audio: 'assets/laughs/gecko-moria.mp3' },
+  { name: 'Bartolomeo', audio: 'assets/laughs/bartolomeo.mp3' },
+  { name: 'Satori', audio: 'assets/laughs/satori.mp3' },
+  { name: 'Pica', audio: 'assets/laughs/pica.mp3' },
+  { name: 'Perospero', audio: 'assets/laughs/perospero.mp3' },
+  { name: 'Caesar Clown', audio: 'assets/laughs/caesar-clown.mp3' },
+  { name: 'Charlotte Brulee', audio: 'assets/laughs/charlotte-brulee.mp3' },
+  { name: 'Kaido', audio: 'assets/laughs/kaido.mp3' },
+  { name: 'Brook', audio: 'assets/laughs/brook.mp3' },
+  { name: 'Marshall D. Teach', audio: 'assets/laughs/blackbeard.mp3' }
+];

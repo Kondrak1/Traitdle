@@ -28,7 +28,7 @@
         <p id="posterModeNote" class="mode-note">Daily target</p>
         <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
         <nav class="collection-links" aria-label="Explore collections">
-          <a href="file.html">Characters</a>
+          <a href="onepiece.html">Characters</a>
           <a href="devil-fruits.html">Devil Fruits</a>
         </nav>
       </div>
@@ -347,7 +347,7 @@
       posterAffiliationHintButton.disabled = true;
       posterAffiliationHintButton.hidden = true;
     });
-    posterKeepSailing.addEventListener('click', () => { window.location.href = 'file.html'; });
+    posterKeepSailing.addEventListener('click', () => { window.location.href = 'onepiece.html'; });
     posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
     updatePosterMode();
     startPosterRound();

@@ -6,7 +6,7 @@ const dailyModeLabels = {
 };
 const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
 const traitdleWorldUrls = {
-  onePiece: `${traitdleShareUrl}one-piece/file.html`,
+  onePiece: `${traitdleShareUrl}one-piece/onepiece.html`,
   tcg: `${traitdleShareUrl}one-piece-tcg/tcg.html`,
   jjk: `${traitdleShareUrl}jjk/jjk.html`,
   pokemon: `${traitdleShareUrl}pokemon/pokemon.html`,

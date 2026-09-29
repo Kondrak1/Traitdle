@@ -697,10 +697,11 @@
 
     function showSuccess(character) {
       const progress = gameMode === 'daily' ? saveDailyScore('classic', guesses.length) : readDailyProgress();
+      const allModesComplete = dailyProgressComplete(progress);
       successTitle.textContent = character.name;
       successDetails.textContent = `${character.epithet ? `${character.epithet} · ` : ''}${character.affiliation || 'Known voyager'}`;
       successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
-      dailyScore.hidden = gameMode !== 'daily';
+      dailyScore.hidden = gameMode !== 'daily' || !allModesComplete;
       if (!dailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         dailyScoreText.textContent = scoreText;
@@ -853,8 +854,9 @@
       successDetails.textContent = target.name;
       successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
       const progress = gameMode === 'daily' ? saveDailyScore('classic', null) : readDailyProgress();
+      const allModesComplete = dailyProgressComplete(progress);
       dailyScoreText.textContent = formatDailyScore(progress);
-      dailyScore.hidden = gameMode !== 'daily';
+      dailyScore.hidden = gameMode !== 'daily' || !allModesComplete;
       if (!dailyScore.hidden) enableCopyButton(copyDailyScore, dailyScoreText.textContent);
       successImage.alt = target.name;
       successImage.src = target.image || 'assets/grand-line.jpeg';

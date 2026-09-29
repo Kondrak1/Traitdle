@@ -101,7 +101,17 @@ function saveDailyGameState(storageKey, mode, guesses, over) {
 }
 
 function dailyProgressComplete(progress) {
-  return ['classic', 'fruit', 'wanted', 'laugh'].every(mode => Number.isFinite(progress[mode]));
+  const modeStorageKeys = {
+    classic: 'one-piece-traitdle-daily-guesses',
+    fruit: 'one-piece-traitdle-daily-guesses',
+    wanted: 'one-piece-traitdle-daily-guesses',
+    laugh: 'one-piece-laughdle-daily-guesses'
+  };
+  return ['classic', 'fruit', 'wanted', 'laugh'].every(mode => {
+    if (Number.isFinite(progress[mode])) return true;
+    const storageKey = modeStorageKeys[mode];
+    return Boolean(storageKey && readDailyGameState(storageKey, mode).over);
+  });
 }
 
 function appendShareLink(text, url = traitdleShareUrl) {

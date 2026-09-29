@@ -169,9 +169,10 @@
         button.dataset.index = String(index);
         button.dataset.name = character.name;
         const image = document.createElement('img');
+        const localImage = character.image ? `assets/characters/${character.image.split('/').pop()}` : 'assets/grand-line.jpeg';
         image.alt = '';
         image.loading = 'lazy';
-        image.src = character.image || 'assets/grand-line.jpeg';
+        image.src = localImage;
         image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.jpeg'; };
         const name = document.createElement('span');
         name.textContent = character.name;
@@ -266,9 +267,10 @@
 
     function showFruitVictory() {
       const progress = fruitGameMode === 'daily' ? saveDailyScore('fruit', fruitAttempted.size) : readDailyProgress();
+      const allModesComplete = dailyProgressComplete(progress);
       fruitSuccessTitle.textContent = fruitTarget.user.name;
       fruitSuccessDetails.textContent = `${fruitTarget.fruit.name} · ${fruitTarget.user.affiliation || 'Known voyager'}`;
-      fruitDailyScore.hidden = fruitGameMode !== 'daily';
+      fruitDailyScore.hidden = fruitGameMode !== 'daily' || !allModesComplete;
       if (!fruitDailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         fruitDailyScoreText.textContent = scoreText;
@@ -345,8 +347,9 @@
       fruitSuccessTitle.textContent = 'The answer was revealed';
       fruitSuccessDetails.textContent = `${fruitTarget.user.name} · ${fruitTarget.fruit.name}`;
       const progress = fruitGameMode === 'daily' ? saveDailyScore('fruit', null) : readDailyProgress();
+      const allModesComplete = dailyProgressComplete(progress);
       fruitDailyScoreText.textContent = formatDailyScore(progress);
-      fruitDailyScore.hidden = fruitGameMode !== 'daily';
+      fruitDailyScore.hidden = fruitGameMode !== 'daily' || !allModesComplete;
       if (!fruitDailyScore.hidden) enableCopyButton(fruitCopyDailyScore, fruitDailyScoreText.textContent);
       fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
       fruitSuccessImage.alt = fruitTarget.user.name;

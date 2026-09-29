@@ -291,9 +291,10 @@
 
     function showPosterVictory() {
       const progress = posterGameMode === 'daily' ? saveDailyScore('wanted', posterAttempted.size) : readDailyProgress();
+      const allModesComplete = dailyProgressComplete(progress);
       posterSuccessTitle.textContent = posterTarget.name;
       posterSuccessDetails.textContent = `${bountyValue(posterTarget).toLocaleString('en-US')} berries · ${posterTarget.affiliation}`;
-      posterDailyScore.hidden = posterGameMode !== 'daily';
+      posterDailyScore.hidden = posterGameMode !== 'daily' || !allModesComplete;
       if (!posterDailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         posterDailyScoreText.textContent = scoreText;
@@ -359,10 +360,11 @@
       if (posterGameMode === 'daily') {
         const progress = readDailyProgress();
         progress.wanted = null;
+        const allModesComplete = dailyProgressComplete(progress);
         const scoreText = formatDailyScore(progress);
         posterDailyScoreText.textContent = scoreText;
-        posterDailyScore.hidden = false;
-        enableCopyButton(posterCopyDailyScore, scoreText);
+        posterDailyScore.hidden = !allModesComplete;
+        if (!posterDailyScore.hidden) enableCopyButton(posterCopyDailyScore, scoreText);
       } else posterDailyScore.hidden = true;
       setCharacterImage(posterSuccessImage, posterTarget, true);
       posterSuccessImage.alt = posterTarget.name;

@@ -53,8 +53,10 @@ async function loadTcgCards() {
     return response.json();
   }));
 
-  const cards = sets.flatMap(set => set.data.cards
-    .filter(card => ['SR', 'SEC'].includes(card.rarity) && ['2', '3', '4', '5', 'X'].includes(String(card.blockIcon)) && !card.isParallel)
+  const cards = sets.flatMap(set => {
+    if (['PRB01', 'PRB02'].includes(set.data.code)) return [];
+    return set.data.cards
+    .filter(card => ['SR', 'SEC'].includes(card.rarity) && ['2', '3', '4', '5', 'X'].includes(String(card.blockIcon)) && !card.isParallel && !/_r\d+$/i.test(card.id))
     .map(card => ({
       id: card.id,
       name: card.name.replace(/\./g, ' '),
@@ -67,7 +69,8 @@ async function loadTcgCards() {
       block: String(card.blockIcon),
       image: `assets/cards/${card.id}.png`,
       cardClass: card.cardClass
-    })));
+    }));
+  });
 
   return cards.sort((left, right) => left.id.localeCompare(right.id));
 }

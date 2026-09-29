@@ -7,6 +7,7 @@ const dailyModeLabels = {
 const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
 
 const mountainTimeZone = 'America/Denver';
+const dailyResetHour = 18;
 const mountainDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: mountainTimeZone,
   year: 'numeric',
@@ -33,15 +34,15 @@ function getMountainOffsetMinutes(date) {
 function getMstDateKey(date = new Date()) {
   const parts = getMountainDateTimeParts(date);
   const localDate = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
-  const gameDate = Number(parts.hour) < 22 ? new Date(localDate - 24 * 60 * 60 * 1000) : new Date(localDate);
+  const gameDate = Number(parts.hour) < dailyResetHour ? new Date(localDate - 24 * 60 * 60 * 1000) : new Date(localDate);
   return gameDate.toISOString().slice(0, 10);
 }
 
 function getDailyResetTimestamp(now = new Date()) {
   const parts = getMountainDateTimeParts(now);
   const localDate = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
-  const resetDate = Number(parts.hour) >= 22 ? localDate + 24 * 60 * 60 * 1000 : localDate;
-  const resetLocalAsUtc = new Date(resetDate + 22 * 60 * 60 * 1000);
+  const resetDate = Number(parts.hour) >= dailyResetHour ? localDate + 24 * 60 * 60 * 1000 : localDate;
+  const resetLocalAsUtc = new Date(resetDate + dailyResetHour * 60 * 60 * 1000);
   return resetLocalAsUtc.getTime() - getMountainOffsetMinutes(resetLocalAsUtc) * 60 * 1000;
 }
 
@@ -113,7 +114,7 @@ function updateDailyResetTimer(element) {
   const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
   const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
   const seconds = String(totalSeconds % 60).padStart(2, '0');
-  element.textContent = `Next daily reset at 10:00pm in ${hours}:${minutes}:${seconds}`;
+  element.textContent = `Next daily reset at 6:00pm in ${hours}:${minutes}:${seconds}`;
 }
 
 function startDailyResetTimer(element) {

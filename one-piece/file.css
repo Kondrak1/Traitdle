@@ -691,12 +691,59 @@ button.secondary {
     min-width: 0;
   }
 
-  .row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  body .game #board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    overflow: visible;
+    padding: 8px 0;
   }
 
-  .tile {
-    min-height: 90px;
+  body .game #board .row {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 4px;
+    border-right: 1px solid rgb(244 189 79 / 38%);
+  }
+
+  body .game #board .row:nth-child(3n) {
+    border-right: 0;
+  }
+
+  body .game #board .tile {
+    width: 100%;
+    min-height: 58px;
+    padding: 6px 3px;
+  }
+
+  body .game #board .tile:first-child {
+    grid-column: auto;
+  }
+
+  body .game #board .trait-label {
+    margin-bottom: 4px;
+    font-size: 0.45rem;
+    letter-spacing: 0.04em;
+  }
+
+  body .game #board .trait-value {
+    font-size: 0.58rem;
+    line-height: 1.1;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  body .game #board .tile {
+    min-height: 54px;
+    padding: 5px 2px;
+  }
+
+  body .game #board .trait-value {
+    font-size: 0.54rem;
   }
 }
 

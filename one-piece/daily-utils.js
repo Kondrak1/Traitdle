@@ -5,6 +5,13 @@ const dailyModeLabels = {
   wanted: '💰 Wanted'
 };
 const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
+const traitdleWorldUrls = {
+  onePiece: `${traitdleShareUrl}one-piece/file.html`,
+  tcg: `${traitdleShareUrl}one-piece-tcg/tcg.html`,
+  jjk: `${traitdleShareUrl}jjk/jjk.html`,
+  pokemon: `${traitdleShareUrl}pokemon/pokemon.html`,
+  avatar: `${traitdleShareUrl}avatar/avatar.html`
+};
 
 const mountainTimeZone = 'America/Denver';
 const dailyResetHour = 18;
@@ -94,8 +101,8 @@ function dailyProgressComplete(progress) {
   return ['classic', 'fruit', 'wanted'].every(mode => Number.isFinite(progress[mode]));
 }
 
-function appendShareLink(text) {
-  return `${text}\n${traitdleShareUrl}`;
+function appendShareLink(text, url = traitdleShareUrl) {
+  return `${text}\n${url}`;
 }
 
 function formatDailyScore(progress) {
@@ -104,7 +111,7 @@ function formatDailyScore(progress) {
     `${dailyModeLabels.classic}: ${progress.classic ?? '-'}`,
     `${dailyModeLabels.fruit}: ${progress.fruit ?? '-'}`,
     `${dailyModeLabels.wanted}: ${progress.wanted ?? '-'}`
-  ].join('\n'));
+  ].join('\n'), traitdleWorldUrls.onePiece);
 }
 
 function updateDailyResetTimer(element) {

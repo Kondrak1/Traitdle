@@ -181,7 +181,7 @@
       posterSuggestionIndex = -1;
       posterSuggestions.hidden = !query;
       if (!query) return;
-      const matches = posterCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query)).slice(0, 12);
+      const matches = posterCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -213,7 +213,7 @@
     function renderPosterGuess(character, correct) {
       const row = document.createElement('div');
       row.className = `mini-guess ${correct ? 'correct' : 'wrong'}`;
-      row.innerHTML = `<span>${escapeHtml(character.name)}</span><b>${correct ? 'Correct' : 'Not this pirate'}</b>`;
+      row.innerHTML = `<span><span class="trait-label">Character</span>${escapeHtml(character.name)}</span><b>${correct ? 'Correct' : 'Not this pirate'}</b>`;
       posterGuesses.prepend(row);
     }
 

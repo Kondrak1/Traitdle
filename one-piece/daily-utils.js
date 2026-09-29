@@ -15,6 +15,7 @@ const traitdleWorldUrls = {
 
 const mountainTimeZone = 'America/Denver';
 const dailyResetHour = 18;
+const dailyResetOverride = { date: '2026-09-28', revision: 'reset-1' };
 const mountainDateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: mountainTimeZone,
   year: 'numeric',
@@ -42,7 +43,8 @@ function getMstDateKey(date = new Date()) {
   const parts = getMountainDateTimeParts(date);
   const localDate = Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day));
   const gameDate = Number(parts.hour) < dailyResetHour ? new Date(localDate - 24 * 60 * 60 * 1000) : new Date(localDate);
-  return gameDate.toISOString().slice(0, 10);
+  const dateKey = gameDate.toISOString().slice(0, 10);
+  return dateKey === dailyResetOverride.date ? `${dateKey}-${dailyResetOverride.revision}` : dateKey;
 }
 
 function getDailyResetTimestamp(now = new Date()) {

@@ -25,6 +25,10 @@
 .tcg-game .trait-value { font-weight: 900; overflow-wrap: anywhere; }
 .tcg-game .tcg-suggestion { display: flex; align-items: center; gap: 9px; width: 100%; text-align: left; }
 .tcg-game .tcg-suggestion img { width: 34px; height: 48px; flex: 0 0 34px; object-fit: cover; border-radius: 3px; }
+.tcg-card-preview { position: fixed; z-index: 20; display: grid; width: 220px; gap: 8px; padding: 8px; border: 2px solid var(--tcg-gold); border-radius: 7px; background: #102b44; box-shadow: 0 16px 34px rgb(0 0 0 / 48%); pointer-events: none; }
+.tcg-card-preview[hidden] { display: none; }
+.tcg-card-preview img { display: block; width: 100%; aspect-ratio: 600 / 838; object-fit: contain; background: #d8c89c; }
+.tcg-card-preview span { color: var(--tcg-paper); font: 800 .72rem/1.2 Arial, sans-serif; overflow-wrap: anywhere; }
 .tcg-game .success-panel { background: linear-gradient(135deg, #173d59, #542c2c); }
 .tcg-game .success-art-wrap { width: min(220px, 100%); min-height: 0; aspect-ratio: 600 / 838; justify-self: center; }
 .tcg-card-image { display: block; width: 100%; height: 100%; object-fit: contain; padding: 8px; background: #d8c89c; }
@@ -36,3 +40,4 @@
 @media (max-width: 760px) { .tcg-game .row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tcg-game .row .tile:first-child { grid-column: span 2; } }
 @media (max-width: 480px) { .tcg-game { padding-left: 8px; padding-right: 8px; } .tcg-game .row { grid-template-columns: 1fr; } .tcg-game .row .tile:first-child { grid-column: auto; } .tcg-game .tile { min-height: 72px; padding: 10px; } .tcg-game .trait-value { font-size: .82rem; line-height: 1.3; white-space: normal; } }
 @media (max-width: 700px) { .tcg-game .success-art-wrap { width: min(190px, 100%); height: auto; min-height: 0; } }
+@media (max-width: 700px) { .tcg-card-preview { width: 170px; } }

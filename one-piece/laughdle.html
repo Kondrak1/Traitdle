@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>One Piece Laughdle</title>
+  <link rel="stylesheet" href="file.css">
+  <link rel="stylesheet" href="laughdle.css">
+  <script src="daily-utils.js"></script>
+  <script src="laugh-data.js"></script>
+</head>
+<body>
+  <main class="game laughdle-game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <div class="masthead-content">
+        <div class="eyebrow">ONE PIECE / GRAND LINE</div>
+        <h1>LAUGHDLE</h1>
+        <p class="subtitle">Hear the laugh. Find the pirate.</p>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="dailyMode" class="mode-button active" type="button" aria-pressed="true">Daily</button>
+          <button id="freeplayMode" class="mode-button" type="button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="modeNote" class="mode-note">Daily laugh target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+        <nav class="collection-links" aria-label="Explore One Piece games">
+          <a href="onepiece.html">Characters</a>
+          <a href="devil-fruits.html">Devil Fruits</a>
+          <a href="bounty-posters.html">Bounty Posters</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="laughdle-intro" aria-labelledby="laughTitle">
+      <p>Character laugh clue</p>
+      <h2 id="laughTitle">Who makes this laugh?</h2>
+      <small id="laughStatus">Press play, listen closely, and make your guess.</small>
+      <div class="laugh-controls">
+        <button id="playLaugh" class="laugh-play" type="button">Play laugh</button>
+      </div>
+      <audio id="laughAudio" preload="auto"></audio>
+    </section>
+
+    <div class="toolbar">
+      <div class="controls">
+        <div class="guess-count" aria-live="polite">Guesses <b id="guessCount">0</b></div>
+        <div class="autocomplete"><input id="guessInput" placeholder="Type a character name..." aria-label="Guess the One Piece character" autocomplete="off"><div id="suggestions" class="suggestions"></div></div>
+        <button id="guessBtn" type="button">Guess</button>
+        <button id="giveUp" type="button" class="secondary">Give up</button>
+        <button id="newGame" type="button" class="secondary" hidden>New game</button>
+      </div>
+      <p id="message" class="hint-message" role="status" aria-live="polite"></p>
+    </div>
+
+    <section id="successPanel" class="success-panel" hidden tabindex="-1" aria-live="polite">
+      <div class="success-art-wrap"><img id="successImage" class="success-art" alt=""></div>
+      <div class="success-copy"><p id="successKicker" class="success-kicker">LAUGH IDENTIFIED</p><h2 id="successTitle"></h2><p id="successDetails" class="success-details"></p><p id="successGuessCount"></p><div id="dailyScore" class="daily-score"><pre id="dailyScoreText"></pre><button id="copyResults" type="button">Copy results</button></div><button id="successContinue" type="button">Back to Characters</button></div>
+    </section>
+
+    <section id="guessBoard" class="laugh-guess-list" aria-label="Laugh guesses"></section>
+    <p class="laughdle-source">Laugh clips are stored locally in <code>assets/laughs</code>.</p>
+  </main>
+  <script>
+    const board = document.querySelector('#guessBoard');
+    const input = document.querySelector('#guessInput');
+    const suggestions = document.querySelector('#suggestions');
+    const message = document.querySelector('#message');
+    const audio = document.querySelector('#laughAudio');
+    const playButton = document.querySelector('#playLaugh');
+    const guessButton = document.querySelector('#guessBtn');
+    const giveUpButton = document.querySelector('#giveUp');
+    const newGameButton = document.querySelector('#newGame');
+    const guessCount = document.querySelector('#guessCount');
+    const laughStatus = document.querySelector('#laughStatus');
+    const modeNote = document.querySelector('#modeNote');
+    const successPanel = document.querySelector('#successPanel');
+    const successTitle = document.querySelector('#successTitle');
+    const successDetails = document.querySelector('#successDetails');
+    const successGuessCount = document.querySelector('#successGuessCount');
+    const successImage = document.querySelector('#successImage');
+    const dailyScore = document.querySelector('#dailyScore');
+    const dailyScoreText = document.querySelector('#dailyScoreText');
+    const copyResultsButton = document.querySelector('#copyResults');
+    const dailyMode = document.querySelector('#dailyMode');
+    const freeplayMode = document.querySelector('#freeplayMode');
+    const dailyResetTimer = document.querySelector('#dailyResetTimer');
+    const successContinue = document.querySelector('#successContinue');
+    let gameMode = 'daily';
+    let target = null;
+    let guesses = [];
+    let over = false;
+
+    function normalize(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+    function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
+    function cardFor(name) { return onePieceLaughs.find(laugh => normalize(laugh.name) === normalize(name)); }
+    function chooseTarget() { const index = gameMode === 'daily' ? hash(`${getMstDateKey()}-one-piece-laughdle`) % onePieceLaughs.length : Math.floor(Math.random() * onePieceLaughs.length); return onePieceLaughs[index]; }
+    function updateMode() { const daily = gameMode === 'daily'; dailyMode.classList.toggle('active', daily); freeplayMode.classList.toggle('active', !daily); dailyMode.setAttribute('aria-pressed', String(daily)); freeplayMode.setAttribute('aria-pressed', String(!daily)); modeNote.textContent = `${daily ? 'Daily' : 'Freeplay'} laugh target`; newGameButton.hidden = daily; }
+    function renderSuggestions() { const query = normalize(input.value); suggestions.innerHTML = ''; suggestions.hidden = !query; if (!query) return; const matches = onePieceLaughs.filter(laugh => !guesses.includes(laugh.name) && normalize(laugh.name).includes(query)); matches.forEach(laugh => { const option = document.createElement('button'); option.type = 'button'; option.className = 'laugh-suggestion'; option.textContent = laugh.name; option.addEventListener('mousedown', event => event.preventDefault()); option.addEventListener('click', () => { input.value = laugh.name; suggestions.hidden = true; input.focus(); }); suggestions.append(option); }); suggestions.hidden = !matches.length; }
+    function renderGuess(name, correct) { const row = document.createElement('div'); row.className = `laugh-guess ${correct ? 'correct' : ''}`; row.innerHTML = `<span>${name}</span><b>${correct ? 'Correct' : 'Not this laugh'}</b>`; board.prepend(row); }
+    function playLaugh() { if (!target) return; audio.currentTime = 0; audio.play().catch(() => { message.textContent = 'Press play again to allow audio in this browser.'; }); playButton.classList.add('playing'); laughStatus.textContent = 'Playing the laugh...'; }
+    function resetGame() { target = chooseTarget(); const saved = gameMode === 'daily' ? readDailyGameState('one-piece-laughdle-daily-guesses', 'laugh') : { guesses: [], over: false }; guesses = saved.guesses; over = saved.over; board.innerHTML = ''; input.value = ''; suggestions.hidden = true; guessCount.textContent = String(guesses.length); successPanel.hidden = true; dailyScore.hidden = true; guessButton.disabled = over; giveUpButton.disabled = over; audio.src = target.audio; laughStatus.textContent = 'Press play, listen closely, and make your guess.'; successImage.src = 'assets/grand-line.jpeg'; updateMode(); guesses.forEach(name => renderGuess(name, normalize(name) === normalize(target.name))); if (over) showResult(target, false); }
+    function showResult(answer, gaveUp) { const progress = gameMode === 'daily' ? saveDailyScore('laugh', gaveUp ? null : guesses.length) : readDailyProgress(); successTitle.textContent = answer.name; successDetails.textContent = gaveUp ? 'The laugh has been identified.' : 'You recognized the voice.'; successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`; successImage.src = 'assets/characters/' + answer.name.toLowerCase().replace(/[^a-z0-9]+/g, '_') + '.webp'; successImage.onerror = () => { successImage.onerror = null; successImage.src = 'assets/grand-line.jpeg'; }; dailyScoreText.textContent = formatDailyScore(progress); dailyScore.hidden = false; successPanel.hidden = false; successPanel.focus({ preventScroll: true }); }
+    function submitGuess() { const value = normalize(input.value); const guess = onePieceLaughs.find(laugh => normalize(laugh.name) === value); if (!guess) { message.textContent = 'Choose a character from the suggestions.'; return; } if (guesses.includes(guess.name)) { message.textContent = 'You already guessed that character.'; return; } guesses.push(guess.name); const correct = normalize(guess.name) === normalize(target.name); renderGuess(guess.name, correct); guessCount.textContent = String(guesses.length); input.value = ''; suggestions.hidden = true; if (gameMode === 'daily') saveDailyGameState('one-piece-laughdle-daily-guesses', 'laugh', guesses, correct); if (correct) { over = true; guessButton.disabled = true; giveUpButton.disabled = true; message.textContent = `Correct. ${target.name} was the laugh.`; showResult(target, false); } }
+    audio.addEventListener('play', () => { playButton.classList.add('playing'); laughStatus.textContent = 'Playing the laugh...'; }); audio.addEventListener('ended', () => { playButton.classList.remove('playing'); laughStatus.textContent = 'Laugh ended. Replay it or make your guess.'; });
+    playButton.addEventListener('click', playLaugh); dailyMode.addEventListener('click', () => { gameMode = 'daily'; resetGame(); }); freeplayMode.addEventListener('click', () => { gameMode = 'freeplay'; resetGame(); }); newGameButton.addEventListener('click', resetGame); guessButton.addEventListener('click', () => { if (!over) submitGuess(); }); giveUpButton.addEventListener('click', () => { if (over) return; over = true; guessButton.disabled = true; giveUpButton.disabled = true; if (gameMode === 'daily') saveDailyGameState('one-piece-laughdle-daily-guesses', 'laugh', guesses, true); message.textContent = `The laugh was ${target.name}.`; showResult(target, true); }); successContinue.addEventListener('click', () => { window.location.href = 'onepiece.html'; }); copyResultsButton.addEventListener('click', () => { enableCopyButton(copyResultsButton, dailyScoreText.textContent); }); input.addEventListener('input', renderSuggestions); input.addEventListener('keydown', event => { if (event.key === 'Enter' && !suggestions.hidden) { event.preventDefault(); suggestions.querySelector('button')?.click(); } else if (event.key === 'Enter' && !over) submitGuess(); }); startDailyResetTimer(dailyResetTimer); resetGame();
+  </script>
+</body>
+</html>

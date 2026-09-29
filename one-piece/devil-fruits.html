@@ -30,6 +30,7 @@
         <nav class="collection-links" aria-label="Explore collections">
           <a href="onepiece.html">Characters</a>
           <a href="bounty-posters.html">Bounty Posters</a>
+          <a href="laughdle.html">Laughdle</a>
         </nav>
       </div>
     </header>
@@ -167,7 +168,14 @@
         button.type = 'button';
         button.dataset.index = String(index);
         button.dataset.name = character.name;
-        button.textContent = character.name;
+        const image = document.createElement('img');
+        image.alt = '';
+        image.loading = 'lazy';
+        image.src = character.image || 'assets/grand-line.jpeg';
+        image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.jpeg'; };
+        const name = document.createElement('span');
+        name.textContent = character.name;
+        button.append(image, name);
         button.addEventListener('mousedown', event => event.preventDefault());
         button.addEventListener('click', () => selectFruitSuggestion(index));
         fruitSuggestions.append(button);
@@ -260,7 +268,7 @@
       const progress = fruitGameMode === 'daily' ? saveDailyScore('fruit', fruitAttempted.size) : readDailyProgress();
       fruitSuccessTitle.textContent = fruitTarget.user.name;
       fruitSuccessDetails.textContent = `${fruitTarget.fruit.name} · ${fruitTarget.user.affiliation || 'Known voyager'}`;
-      fruitDailyScore.hidden = fruitGameMode !== 'daily' || !dailyProgressComplete(progress);
+      fruitDailyScore.hidden = fruitGameMode !== 'daily';
       if (!fruitDailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         fruitDailyScoreText.textContent = scoreText;
@@ -336,7 +344,10 @@
       fruitSuccess.querySelector('.collection-kicker').textContent = 'ROUND OVER';
       fruitSuccessTitle.textContent = 'The answer was revealed';
       fruitSuccessDetails.textContent = `${fruitTarget.user.name} · ${fruitTarget.fruit.name}`;
-      fruitDailyScore.hidden = true;
+      const progress = fruitGameMode === 'daily' ? saveDailyScore('fruit', null) : readDailyProgress();
+      fruitDailyScoreText.textContent = formatDailyScore(progress);
+      fruitDailyScore.hidden = fruitGameMode !== 'daily';
+      if (!fruitDailyScore.hidden) enableCopyButton(fruitCopyDailyScore, fruitDailyScoreText.textContent);
       fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
       fruitSuccessImage.alt = fruitTarget.user.name;
       fruitSuccess.hidden = false;

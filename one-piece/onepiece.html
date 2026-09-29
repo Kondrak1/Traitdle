@@ -28,6 +28,7 @@
         <nav class="collection-links" aria-label="Explore collections">
           <a href="devil-fruits.html">Devil Fruits</a>
           <a href="bounty-posters.html">Bounty Posters</a>
+          <a href="laughdle.html">Laughdle</a>
         </nav>
       </div>
     </header>
@@ -699,7 +700,7 @@
       successTitle.textContent = character.name;
       successDetails.textContent = `${character.epithet ? `${character.epithet} · ` : ''}${character.affiliation || 'Known voyager'}`;
       successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
-      dailyScore.hidden = gameMode !== 'daily' || !dailyProgressComplete(progress);
+      dailyScore.hidden = gameMode !== 'daily';
       if (!dailyScore.hidden) {
         const scoreText = formatDailyScore(progress);
         dailyScoreText.textContent = scoreText;
@@ -851,7 +852,10 @@
       successTitle.textContent = 'The answer was revealed';
       successDetails.textContent = target.name;
       successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
-      dailyScore.hidden = true;
+      const progress = gameMode === 'daily' ? saveDailyScore('classic', null) : readDailyProgress();
+      dailyScoreText.textContent = formatDailyScore(progress);
+      dailyScore.hidden = gameMode !== 'daily';
+      if (!dailyScore.hidden) enableCopyButton(copyDailyScore, dailyScoreText.textContent);
       successImage.alt = target.name;
       successImage.src = target.image || 'assets/grand-line.jpeg';
       successPanel.hidden = false;

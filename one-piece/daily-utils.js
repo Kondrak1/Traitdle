@@ -2,7 +2,8 @@ const dailyProgressKey = 'one-piece-traitdle-daily-progress';
 const dailyModeLabels = {
   classic: '❓ Classic',
   fruit: '🍇 Devil fruit',
-  wanted: '💰 Wanted'
+  wanted: '💰 Wanted',
+  laugh: '🔊 Laugh'
 };
 const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
 const traitdleWorldUrls = {
@@ -59,9 +60,9 @@ function readDailyProgress() {
   const today = getMstDateKey();
   try {
     const saved = JSON.parse(localStorage.getItem(dailyProgressKey) || '{}');
-    return saved.date === today ? saved : { date: today, classic: null, fruit: null, wanted: null };
+    return saved.date === today ? saved : { date: today, classic: null, fruit: null, wanted: null, laugh: null };
   } catch (error) {
-    return { date: today, classic: null, fruit: null, wanted: null };
+    return { date: today, classic: null, fruit: null, wanted: null, laugh: null };
   }
 }
 
@@ -100,7 +101,7 @@ function saveDailyGameState(storageKey, mode, guesses, over) {
 }
 
 function dailyProgressComplete(progress) {
-  return ['classic', 'fruit', 'wanted'].every(mode => Number.isFinite(progress[mode]));
+  return ['classic', 'fruit', 'wanted', 'laugh'].every(mode => Number.isFinite(progress[mode]));
 }
 
 function appendShareLink(text, url = traitdleShareUrl) {
@@ -112,7 +113,8 @@ function formatDailyScore(progress) {
     `I've completed all the modes of #OnePiece Traitdle today:`,
     `${dailyModeLabels.classic}: ${progress.classic ?? '-'}`,
     `${dailyModeLabels.fruit}: ${progress.fruit ?? '-'}`,
-    `${dailyModeLabels.wanted}: ${progress.wanted ?? '-'}`
+    `${dailyModeLabels.wanted}: ${progress.wanted ?? '-'}`,
+    `${dailyModeLabels.laugh}: ${progress.laugh ?? '-'}`
   ].join('\n'), traitdleWorldUrls.onePiece);
 }
 

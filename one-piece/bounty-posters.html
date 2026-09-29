@@ -30,6 +30,7 @@
         <nav class="collection-links" aria-label="Explore collections">
           <a href="onepiece.html">Characters</a>
           <a href="devil-fruits.html">Devil Fruits</a>
+          <a href="laughdle.html">Laughdle</a>
         </nav>
       </div>
     </header>
@@ -347,7 +348,7 @@
       posterAffiliationHintButton.disabled = true;
       posterAffiliationHintButton.hidden = true;
     });
-    posterKeepSailing.addEventListener('click', () => { window.location.href = 'onepiece.html'; });
+    posterKeepSailing.addEventListener('click', () => { window.location.href = 'laughdle.html'; });
     posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
     updatePosterMode();
     startPosterRound();

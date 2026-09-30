@@ -1,10 +1,10 @@
 :root {
-  --sea: #071b2d;
-  --deep-sea: #04111e;
-  --panel: #0e2d45;
-  --gold: #f4bd4f;
+  --sea: #061522;
+  --deep-sea: #041018;
+  --panel: #0b2a40;
+  --gold: #d7a84b;
   --red: #c83d32;
-  --paper: #f2dfb2;
+  --paper: #ead39a;
   --ink: #1f2930;
   --muted: #d9cfba;
   --line: #c99a4a;
@@ -18,8 +18,9 @@ body {
   color: #fff8e8;
   font-family: Georgia, 'Times New Roman', serif;
   background:
-    linear-gradient(rgb(4 17 30 / 84%), rgb(4 17 30 / 94%)),
-    url('assets/grand-line.jpeg') center / cover fixed;
+    linear-gradient(rgb(6 21 34 / 88%), rgb(6 21 34 / 96%)),
+    repeating-linear-gradient(0deg, rgb(255 244 214 / 3%) 0 2px, transparent 2px 32px),
+    linear-gradient(115deg, #123c55 0%, #071824 58%, #3d1c23 100%);
 }
 
 .collection-shell {
@@ -34,8 +35,8 @@ body {
   gap: 24px;
   padding: 28px 30px;
   border: 1px solid rgb(244 189 79 / 40%);
-  border-radius: 20px;
-  background: linear-gradient(115deg, rgb(14 45 69 / 96%), rgb(7 27 45 / 88%));
+  border-radius: 10px;
+  background: linear-gradient(115deg, rgb(11 42 64 / 96%), rgb(7 24 37 / 92%));
   box-shadow: 0 20px 50px rgb(0 0 0 / 28%);
 }
 

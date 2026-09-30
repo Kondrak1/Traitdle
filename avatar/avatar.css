@@ -1,11 +1,13 @@
 :root { --avatar-sky: #5aa9d6; --avatar-teal: #2d7f86; --avatar-gold: #e8b94f; --avatar-ink: #172531; --avatar-paper: #edf3ed; }
-body { background: linear-gradient(145deg, #102532, #1c5967 58%, #8a542e); }
-.avatar-game { background: rgb(18 35 44 / 94%); border-color: rgb(232 185 79 / 60%); }
+body { background: radial-gradient(circle at 16% 14%, #e8b94f 0 10%, transparent 11%), linear-gradient(145deg, #d8c39a, #2d7f86 58%, #8a542e); }
+.avatar-game { --bg: #102532; --panel: #1b3a48; --line: #5aa9d6; --text: var(--avatar-paper); --muted: #c2d2d0; --gold: var(--avatar-gold); --red: #c86b55; --shadow: #2d7f86; border-radius: 12px; background: #17313e; border: 3px solid var(--avatar-gold); box-shadow: 0 24px 68px rgb(16 37 50 / 42%); }
 .avatar-game header { min-height: 360px; background: radial-gradient(circle at 50% 20%, rgb(90 169 214 / 45%), transparent 38%), linear-gradient(145deg, #173d4d, #2d7f86 55%, #6f432d); border-bottom-color: var(--avatar-gold); }
+.avatar-game .masthead-art { opacity: .72; filter: saturate(1.1) contrast(1.06); }
+.avatar-game .masthead-shade { background: linear-gradient(180deg, rgb(23 61 77 / 22%), rgb(23 61 77 / 62%) 58%, rgb(18 35 44 / 97%) 100%), linear-gradient(90deg, rgb(18 35 44 / 42%), transparent 48%, rgb(111 67 45 / 38%)); }
 .avatar-game h1 { color: var(--avatar-paper); text-shadow: 4px 5px 0 #2d7f86; }
 .avatar-game .mode-switch { border-color: rgb(232 185 79 / 60%); }
 .avatar-game .mode-button.active { background: var(--avatar-gold); color: var(--avatar-ink); }
-.avatar-clue { margin: 0 auto 20px; padding: 22px; border: 1px solid rgb(90 169 214 / 42%); border-radius: 14px; background: linear-gradient(135deg, #1b3a48, #142a36); text-align: center; }
+.avatar-clue { margin: 0 auto 20px; padding: 22px; border: 2px solid rgb(232 185 79 / 62%); border-radius: 4px; background: linear-gradient(135deg, #234b55, #17313e); box-shadow: inset 0 0 0 5px rgb(216 195 154 / 12%); text-align: center; }
 .avatar-clue p { margin: 0; color: var(--avatar-gold); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
 .avatar-clue h2 { margin: 8px 0 0; color: var(--avatar-paper); font: 800 clamp(1.6rem, 5vw, 3rem) Georgia, serif; }
 .avatar-image-clue { display: block; width: min(300px, 100%); height: 300px; margin: 16px auto 0; border: 6px solid var(--avatar-gold); border-radius: 4px; object-fit: cover; filter: blur(16px) saturate(.65); transform: scale(1.12); }
@@ -14,6 +16,7 @@ body { background: linear-gradient(145deg, #102532, #1c5967 58%, #8a542e); }
 .avatar-suggestion { display: flex; align-items: center; gap: 9px; width: 100%; text-align: left; }
 .avatar-suggestion img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
 .avatar-game #board .row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.avatar-game .toolbar { background: linear-gradient(90deg, #234b55, #3a6d6b, #234b55); border-color: rgb(232 185 79 / 58%); }
 .avatar-game .tile { background: #d7e0dc; color: var(--avatar-ink); }
 .avatar-game .tile { min-width: 0; height: auto; overflow-wrap: anywhere; }
 .avatar-game .tile.correct { background: #4eaa78; color: #fff; }

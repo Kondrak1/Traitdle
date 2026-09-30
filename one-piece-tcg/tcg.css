@@ -1,19 +1,21 @@
 :root { --tcg-ink: #152337; --tcg-paper: #f5f0df; --tcg-red: #c94c36; --tcg-blue: #2d6e9f; --tcg-gold: #e7b84e; --tcg-green: #3f9a73; --tcg-gray: #68747b; }
 
-.tcg-game { overflow: visible; background: rgb(10 26 43 / 94%); border-color: rgb(231 184 78 / 55%); }
+.tcg-game { --bg: #071b2d; --panel: #102e48; --line: #e7b84e; --text: #f5f0df; --muted: #b7c3c9; --gold: var(--tcg-gold); --red: var(--tcg-red); --shadow: #9b3328; overflow: visible; border-radius: 12px; background: #0a1a2b; border: 2px solid rgb(231 184 78 / 68%); box-shadow: 0 28px 80px rgb(0 0 0 / 44%); }
 .tcg-game .suggestions:not([hidden]) { max-height: min(420px, 55vh); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .tcg-game .suggestions.open-up { top: auto; bottom: calc(100% + 6px); }
-.tcg-game header { min-height: 360px; background: linear-gradient(145deg, #102e48, #1d6380 55%, #8d3d30); border-bottom-color: var(--tcg-gold); }
+.tcg-game header { min-height: 360px; border-radius: 10px 10px 0 0; background: linear-gradient(145deg, #102e48, #1d6380 55%, #8d3d30); border-bottom-color: var(--tcg-gold); }
+.tcg-game .masthead-art { opacity: .72; filter: saturate(1.2) contrast(1.08); }
+.tcg-game .masthead-shade { background: linear-gradient(180deg, rgb(16 46 72 / 25%), rgb(16 46 72 / 64%) 58%, rgb(10 26 43 / 97%) 100%), linear-gradient(90deg, rgb(10 26 43 / 48%), transparent 48%, rgb(141 61 48 / 38%)); }
 .tcg-game h1 { color: var(--tcg-paper); text-shadow: 4px 5px 0 #9b3328; }
 .tcg-game .mode-switch { border-color: rgb(231 184 78 / 62%); }
 .tcg-game .mode-button.active { background: var(--tcg-gold); color: var(--tcg-ink); }
-.tcg-intro { margin: 0 auto 20px; padding: 18px 22px; border: 1px solid rgb(231 184 78 / 40%); border-radius: 12px; background: linear-gradient(135deg, #163b56, #102539); text-align: center; }
+.tcg-intro { margin: 0 auto 20px; padding: 18px 22px; border: 1px solid rgb(231 184 78 / 40%); border-radius: 5px; background: linear-gradient(135deg, #163b56, #102539); box-shadow: inset 0 1px rgb(255 255 255 / 8%), 0 12px 24px rgb(0 0 0 / 18%); text-align: center; }
 .tcg-intro p { margin: 0; color: var(--tcg-gold); font: 800 .76rem Arial, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
 .tcg-intro h2 { margin: 8px 0 0; color: var(--tcg-paper); font: 800 clamp(1.35rem, 4vw, 2.4rem) Georgia, serif; }
 .tcg-image-clue { display: block; width: min(280px, 100%); height: 280px; margin: 16px auto 0; border: 5px solid var(--tcg-gold); border-radius: 4px; object-fit: contain; background: #d8c89c; filter: blur(16px) saturate(.7); transform: scale(1.08); }
 .tcg-image-clue[hidden] { display: none; }
 .tcg-image-clue.revealed { filter: none; transform: none; }
-.tcg-game .toolbar { background: linear-gradient(90deg, #102b44, #173b58, #102b44); border-color: rgb(231 184 78 / 42%); }
+.tcg-game .toolbar { border-radius: 6px; background: linear-gradient(90deg, #102b44, #173b58, #102b44); border-color: rgb(231 184 78 / 42%); }
 .tcg-game #board { display: grid; gap: 10px; }
 .tcg-game .row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
 .tcg-game .tile { min-height: 78px; display: grid; align-content: center; gap: 5px; padding: 8px; border: 1px solid rgb(21 35 55 / 18%); border-radius: 7px; background: var(--tcg-paper); color: var(--tcg-ink); text-align: center; }

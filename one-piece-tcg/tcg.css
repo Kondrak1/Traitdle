@@ -1,6 +1,7 @@
 :root { --tcg-ink: #152337; --tcg-paper: #f5f0df; --tcg-red: #c94c36; --tcg-blue: #2d6e9f; --tcg-gold: #e7b84e; --tcg-green: #3f9a73; --tcg-gray: #68747b; }
 
-.tcg-game { background: rgb(10 26 43 / 94%); border-color: rgb(231 184 78 / 55%); }
+.tcg-game { overflow: visible; background: rgb(10 26 43 / 94%); border-color: rgb(231 184 78 / 55%); }
+.tcg-game .suggestions:not([hidden]) { max-height: min(420px, 55vh); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 .tcg-game header { min-height: 360px; background: linear-gradient(145deg, #102e48, #1d6380 55%, #8d3d30); border-bottom-color: var(--tcg-gold); }
 .tcg-game h1 { color: var(--tcg-paper); text-shadow: 4px 5px 0 #9b3328; }
 .tcg-game .mode-switch { border-color: rgb(231 184 78 / 62%); }

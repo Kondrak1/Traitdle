@@ -61,24 +61,24 @@
   </main>
   <script>
     const onePieceLaughs = [
-      { name: 'Roronoa Zoro', audio: 'assets/laughs/zoro.mp3' },
-      { name: 'Trebol', audio: 'assets/laughs/trebol.mp3' },
-      { name: 'Jaguar D. Saul', audio: 'assets/laughs/jaguar-d-saul.mp3' },
-      { name: 'Donquixote Doflamingo', audio: 'assets/laughs/doflamingo.mp3' },
-      { name: 'Hogback', audio: 'assets/laughs/hogback.mp3' },
-      { name: 'Edward Newgate', audio: 'assets/laughs/whitebeard.mp3' },
-      { name: 'Perona', audio: 'assets/laughs/perona.mp3' },
-      { name: 'Dr. Kureha', audio: 'assets/laughs/kureha.mp3' },
-      { name: 'Gecko Moria', audio: 'assets/laughs/gecko-moria.mp3' },
-      { name: 'Bartolomeo', audio: 'assets/laughs/bartolomeo.mp3' },
-      { name: 'Satori', audio: 'assets/laughs/satori.mp3' },
-      { name: 'Pica', audio: 'assets/laughs/pica.mp3' },
-      { name: 'Perospero', audio: 'assets/laughs/perospero.mp3' },
-      { name: 'Caesar Clown', audio: 'assets/laughs/caesar-clown.mp3' },
+      { name: 'Roronoa Zoro', audio: 'assets/laughs/zoro.mp3', image: 'assets/characters/Roronoa_Zoro.webp' },
+      { name: 'Trebol', audio: 'assets/laughs/trebol.mp3', image: 'assets/characters/Trebol.webp' },
+      { name: 'Jaguar D. Saul', audio: 'assets/laughs/jaguar-d-saul.mp3', image: 'assets/characters/Jaguar_D._Saul.webp' },
+      { name: 'Donquixote Doflamingo', audio: 'assets/laughs/doflamingo.mp3', image: 'assets/characters/Donquixote_Doflamingo.webp' },
+      { name: 'Hogback', audio: 'assets/laughs/hogback.mp3', image: 'assets/characters/Hogback.webp' },
+      { name: 'Edward Newgate', audio: 'assets/laughs/whitebeard.mp3', image: 'assets/characters/Edward_Newgate.webp' },
+      { name: 'Perona', audio: 'assets/laughs/perona.mp3', image: 'assets/characters/Perona.webp' },
+      { name: 'Dr. Kureha', audio: 'assets/laughs/kureha.mp3', image: 'assets/characters/Kureha.webp' },
+      { name: 'Gecko Moria', audio: 'assets/laughs/gecko-moria.mp3', image: 'assets/characters/Gecko_Moria.webp' },
+      { name: 'Bartolomeo', audio: 'assets/laughs/bartolomeo.mp3', image: 'assets/characters/Bartolomeo.webp' },
+      { name: 'Satori', audio: 'assets/laughs/satori.mp3', image: 'assets/characters/Satori.webp' },
+      { name: 'Pica', audio: 'assets/laughs/pica.mp3', image: 'assets/characters/Pica.webp' },
+      { name: 'Perospero', audio: 'assets/laughs/perospero.mp3', image: 'assets/characters/Charlotte_Perospero.webp' },
+      { name: 'Caesar Clown', audio: 'assets/laughs/caesar-clown.mp3', image: 'assets/characters/Caesar_Clown.webp' },
       { name: 'Charlotte Brulee', audio: 'assets/laughs/charlotte-brulee.mp3' },
-      { name: 'Kaido', audio: 'assets/laughs/kaido.mp3' },
-      { name: 'Brook', audio: 'assets/laughs/brook.mp3' },
-      { name: 'Marshall D. Teach', audio: 'assets/laughs/blackbeard.mp3' }
+      { name: 'Kaido', audio: 'assets/laughs/kaido.mp3', image: 'assets/characters/Kaidou.webp' },
+      { name: 'Brook', audio: 'assets/laughs/brook.mp3', image: 'assets/characters/Brook.webp' },
+      { name: 'Marshall D. Teach', audio: 'assets/laughs/blackbeard.mp3', image: 'assets/characters/Teach.webp' }
     ];
     const board = document.querySelector('#guessBoard');
     const input = document.querySelector('#guessInput');
@@ -118,7 +118,7 @@
     function renderGuess(name, correct) { const row = document.createElement('div'); row.className = `laugh-guess ${correct ? 'correct' : ''}`; row.innerHTML = `<span>${name}</span><b>${correct ? 'Correct' : 'Not this laugh'}</b>`; board.prepend(row); }
     function playLaugh() { if (!target) return; audio.currentTime = 0; audio.play().catch(() => { message.textContent = 'Press play again to allow audio in this browser.'; }); playButton.classList.add('playing'); laughStatus.textContent = 'Playing the laugh...'; }
     function resetGame() { target = chooseTarget(); const saved = gameMode === 'daily' ? readDailyGameState('one-piece-laughdle-daily-guesses', 'laugh') : { guesses: [], over: false }; guesses = saved.guesses; over = saved.over; board.innerHTML = ''; input.value = ''; suggestions.hidden = true; guessCount.textContent = String(guesses.length); successPanel.hidden = true; dailyScore.hidden = true; guessButton.disabled = over; giveUpButton.disabled = over; audio.src = target.audio; laughStatus.textContent = 'Press play, listen closely, and make your guess.'; successImage.src = 'assets/grand-line.jpeg'; updateMode(); guesses.forEach(name => renderGuess(name, normalize(name) === normalize(target.name))); if (over) showResult(target, false); }
-    function showResult(answer, gaveUp) { const progress = gameMode === 'daily' ? saveDailyScore('laugh', gaveUp ? null : guesses.length) : readDailyProgress(); const allModesComplete = dailyProgressComplete(progress); successTitle.textContent = answer.name; successDetails.textContent = gaveUp ? 'The laugh has been identified.' : 'You recognized the voice.'; successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`; successImage.src = 'assets/characters/' + answer.name.toLowerCase().replace(/[^a-z0-9]+/g, '_') + '.webp'; successImage.onerror = () => { successImage.onerror = null; successImage.src = 'assets/grand-line.jpeg'; }; dailyScoreText.textContent = formatDailyScore(progress); dailyScore.hidden = gameMode !== 'daily' || !allModesComplete; if (!dailyScore.hidden) enableCopyButton(copyResultsButton, dailyScoreText.textContent); successPanel.hidden = false; successPanel.focus({ preventScroll: true }); }
+    function showResult(answer, gaveUp) { const progress = gameMode === 'daily' ? saveDailyScore('laugh', gaveUp ? null : guesses.length) : readDailyProgress(); const allModesComplete = dailyProgressComplete(progress); successTitle.textContent = answer.name; successDetails.textContent = gaveUp ? 'The laugh has been identified.' : 'You recognized the voice.'; successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`; successImage.alt = answer.name; successImage.src = answer.image || 'assets/grand-line.jpeg'; successImage.onerror = () => { successImage.onerror = null; successImage.src = 'assets/grand-line.jpeg'; }; dailyScoreText.textContent = formatDailyScore(progress); dailyScore.hidden = gameMode !== 'daily' || !allModesComplete; if (!dailyScore.hidden) enableCopyButton(copyResultsButton, dailyScoreText.textContent); successPanel.hidden = false; successPanel.focus({ preventScroll: true }); }
     function submitGuess() { const value = normalize(input.value); const guess = onePieceLaughs.find(laugh => normalize(laugh.name) === value); if (!guess) { message.textContent = 'Choose a character from the suggestions.'; return; } if (guesses.includes(guess.name)) { message.textContent = 'You already guessed that character.'; return; } guesses.push(guess.name); const correct = normalize(guess.name) === normalize(target.name); renderGuess(guess.name, correct); guessCount.textContent = String(guesses.length); input.value = ''; suggestions.hidden = true; if (gameMode === 'daily') saveDailyGameState('one-piece-laughdle-daily-guesses', 'laugh', guesses, correct); if (correct) { over = true; guessButton.disabled = true; giveUpButton.disabled = true; message.textContent = `Correct. ${target.name} was the laugh.`; showResult(target, false); } }
     audio.addEventListener('play', () => { playButton.classList.add('playing'); laughStatus.textContent = 'Playing the laugh...'; }); audio.addEventListener('ended', () => { playButton.classList.remove('playing'); laughStatus.textContent = 'Laugh ended. Replay it or make your guess.'; });
     playButton.addEventListener('click', playLaugh); dailyMode.addEventListener('click', () => { gameMode = 'daily'; resetGame(); }); freeplayMode.addEventListener('click', () => { gameMode = 'freeplay'; resetGame(); }); newGameButton.addEventListener('click', resetGame); guessButton.addEventListener('click', () => { if (!over) submitGuess(); }); giveUpButton.addEventListener('click', () => { if (over) return; over = true; guessButton.disabled = true; giveUpButton.disabled = true; if (gameMode === 'daily') saveDailyGameState('one-piece-laughdle-daily-guesses', 'laugh', guesses, true); message.textContent = `The laugh was ${target.name}.`; showResult(target, true); }); successContinue.addEventListener('click', () => { window.location.href = 'onepiece.html'; }); copyResultsButton.addEventListener('click', () => { enableCopyButton(copyResultsButton, dailyScoreText.textContent); }); input.addEventListener('input', renderSuggestions); input.addEventListener('keydown', event => { if (event.key === 'Enter' && !suggestions.hidden) { event.preventDefault(); suggestions.querySelector('button')?.click(); } else if (event.key === 'Enter' && !over) submitGuess(); }); startDailyResetTimer(dailyResetTimer); resetGame();

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="file.css">
   <link rel="stylesheet" href="collection.css">
   <script src="character-data.js"></script>
+  <script src="character-mode-answers.js"></script>
   <script src="notable-characters.js"></script>
   <script src="hint-utils.js"></script>
   <script src="daily-utils.js"></script>
@@ -104,6 +105,7 @@
     let posterTarget = null;
     let posterAttempted = new Set();
     let posterCandidates = [];
+    let posterSuggestionCandidates = [];
     let posterSuggestionIndex = -1;
     let posterGameMode = 'daily';
 
@@ -182,7 +184,7 @@
       posterSuggestionIndex = -1;
       posterSuggestions.hidden = !query;
       if (!query) return;
-      const matches = posterCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
+      const matches = posterSuggestionCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -245,14 +247,14 @@
       posterAffiliationHintButton.disabled = false;
       setCharacterImage(posterImage, posterTarget, true);
       posterImage.alt = 'Mystery bounty poster';
-      posterAttempted.forEach(name => { const character = posterCandidates.find(item => normalize(item.name) === name); if (character) renderPosterGuess(character, normalize(character.name) === normalize(posterTarget.name)); });
+      posterAttempted.forEach(name => { const character = posterSuggestionCandidates.find(item => normalize(item.name) === name); if (character) renderPosterGuess(character, normalize(character.name) === normalize(posterTarget.name)); });
       if (savedState.over) { posterSubmit.disabled = true; posterGiveUp.disabled = true; showPosterVictory(); }
       posterGuess.focus();
     }
 
     function submitPosterGuess() {
       const query = normalize(posterGuess.value);
-      const character = posterCandidates.find(item => normalize(item.name) === query);
+      const character = posterSuggestionCandidates.find(item => normalize(item.name) === query);
       if (!character) { posterMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (posterAttempted.has(query)) { posterMessage.textContent = 'You already tried that character.'; return; }
       posterAttempted.add(query);
@@ -351,6 +353,7 @@
     });
     posterKeepSailing.addEventListener('click', () => { window.location.href = 'laughdle.html'; });
     posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
+    posterSuggestionCandidates = characterData.filter(character => characterModeAnswerNames.has(character.name));
     updatePosterMode();
     startPosterRound();
     posterGiveUp.addEventListener('click', () => {

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="file.css">
   <link rel="stylesheet" href="collection.css">
   <script src="character-data.js"></script>
+  <script src="character-mode-answers.js"></script>
   <script src="notable-characters.js"></script>
   <script src="hint-utils.js"></script>
   <script src="daily-utils.js"></script>
@@ -162,7 +163,7 @@
       fruitSuggestionIndex = -1;
       fruitSuggestions.hidden = !query;
       if (!query) return;
-      const matches = characterData.filter(character => isNotableCharacter(character) && !hasTooManyUnknowns(character) && !fruitAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
+      const matches = characterData.filter(character => characterModeAnswerNames.has(character.name) && !fruitAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -225,14 +226,14 @@
       fruitGiveUp.disabled = false;
       fruitClue.textContent = fruitTarget.fruit.name;
       fruitType.textContent = fruitTarget.fruit.type || 'Devil Fruit';
-      fruitAttempted.forEach(name => { const character = characterData.find(item => isNotableCharacter(item) && normalize(item.name) === name); if (character) renderFruitGuess(character, normalize(character.name) === normalize(fruitTarget.user.name)); });
+      fruitAttempted.forEach(name => { const character = characterData.find(item => normalize(item.name) === name); if (character) renderFruitGuess(character, normalize(character.name) === normalize(fruitTarget.user.name)); });
       if (savedState.over) { fruitSubmit.disabled = true; fruitGiveUp.disabled = true; showFruitVictory(); }
       fruitGuess.focus();
     }
 
     function submitFruitGuess() {
       const query = normalize(fruitGuess.value);
-      const character = characterData.find(item => isNotableCharacter(item) && normalize(item.name) === query);
+      const character = characterData.find(item => characterModeAnswerNames.has(item.name) && normalize(item.name) === query);
       if (!character) { fruitMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
       fruitAttempted.add(query);

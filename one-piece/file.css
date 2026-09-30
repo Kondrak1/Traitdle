@@ -425,6 +425,13 @@ h1 {
   min-width: 280px;
 }
 
+.tcg-image-clue,
+.jjk-image-clue,
+.avatar-image-clue {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 #guessInput {
   width: 100%;
   background: #fff8e8;

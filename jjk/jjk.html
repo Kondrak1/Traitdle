@@ -39,6 +39,7 @@
       <h2 id="clueTitle">Loading...</h2>
       <p id="clueType"></p>
       <img id="imageClue" class="jjk-image-clue" alt="Blurred mystery character" hidden>
+        <img id="imageClue" class="jjk-image-clue" alt="Blurred mystery character" draggable="false" hidden>
     </section>
 
     <div class="toolbar">
@@ -130,6 +131,8 @@
     let target = null;
     let guesses = [];
     let over = false;
+    imageClue.draggable = false;
+    imageClue.addEventListener('dragstart', event => event.preventDefault());
 
     function normalize(value) { return String(value || '').trim().toLowerCase().replace(/\s+/g, ' '); }
     function hashValue(value) { let hash = 2166136261; for (const character of value) { hash ^= character.charCodeAt(0); hash = Math.imul(hash, 16777619); } return Math.abs(hash); }

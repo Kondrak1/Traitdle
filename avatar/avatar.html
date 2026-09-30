@@ -33,6 +33,7 @@
       <p id="clueLabel">Character clue</p>
       <h2 id="clueTitle">Find the character from the traits below</h2>
       <img id="imageClue" class="avatar-image-clue" alt="Blurred mystery character" hidden>
+        <img id="imageClue" class="avatar-image-clue" alt="Blurred mystery character" draggable="false" hidden>
     </section>
     <div class="toolbar">
       <div class="controls">
@@ -52,6 +53,8 @@
     const categories = [{ key: 'name', label: 'Character' }, { key: 'gender', label: 'Gender' }, { key: 'age', label: 'Age' }, { key: 'bending', label: 'Bending style' }, { key: 'faction', label: 'Faction' }, { key: 'birthplace', label: 'Birthplace' }, { key: 'arc', label: 'Arc introduced' }];
     const modes = ['character', 'image']; let mode = 'character', playMode = 'daily', target, guesses = [], over = false;
     const board = document.querySelector('#board'), input = document.querySelector('#guessInput'), suggestions = document.querySelector('#suggestions'), message = document.querySelector('#message'), imageClue = document.querySelector('#imageClue'), clueTitle = document.querySelector('#clueTitle'), modeNote = document.querySelector('#modeNote'), guessCount = document.querySelector('#guessCount'), guessButton = document.querySelector('#guessBtn'), giveUp = document.querySelector('#giveUp'), newGame = document.querySelector('#newGame'), successPanel = document.querySelector('#successPanel'), successImage = document.querySelector('#successImage'), successTitle = document.querySelector('#successTitle'), successDetails = document.querySelector('#successDetails'), successGuessCount = document.querySelector('#successGuessCount'), dailyScore = document.querySelector('#dailyScore'), dailyScoreText = document.querySelector('#dailyScoreText'), copyDailyScore = document.querySelector('#copyDailyScore');
+    imageClue.draggable = false;
+    imageClue.addEventListener('dragstart', event => event.preventDefault());
     function normalize(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
     function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
     function readAvatarProgress() { const date = getMstDateKey(); try { const saved = JSON.parse(localStorage.getItem('avatar-traitdle-daily-progress') || '{}'); return saved.date === date ? saved : { date, character: null, image: null }; } catch (error) { return { date, character: null, image: null }; } }

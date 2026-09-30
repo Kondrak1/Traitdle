@@ -1,5 +1,19 @@
 ﻿const characterData = [
   {
+    "name": "Charlotte Brulee",
+    "image": "/images/characters/Charlotte_Brulee.webp",
+    "affiliation": "Big Mom Pirates",
+    "devil_fruit": "Mira Mira no Mi",
+    "origin": "Totto Land",
+    "age": 43,
+    "bounty": 48000000,
+    "first_appearance_arc": "Chapter 651",
+    "gender": "Female",
+    "race": "Human",
+    "status": "Alive",
+    "description": "A Charlotte Family officer and mirror-world user of the Big Mom Pirates."
+  },
+  {
     "name": "A O",
     "image": "/images/characters/A_O.webp",
     "affiliation": "A O Pirates",

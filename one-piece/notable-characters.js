@@ -1,5 +1,5 @@
 ﻿const notableCharacterNames = new Set([
-  'monkey d luffy', 'roronoa zoro', 'nami', 'usopp', 'sanji', 'tony tony chopper',
+  'monkey d luffy', 'roronoa zoro', 'nami', 'usopp', 'sanji', 'tony tony chopper', 'charlotte brulee',
   'nico robin', 'franky', 'brook', 'jinbe', 'nefertari vivi', 'karoo',
   'portgas d ace', 'sabo', 'shanks', 'marshall d teach', 'edward newgate', 'charlotte linlin',
   'kaido', 'big mom', 'buggy', 'dracule mihawk', 'boa hancock', 'silvers rayleigh',

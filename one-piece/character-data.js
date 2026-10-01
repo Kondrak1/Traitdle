@@ -5119,7 +5119,7 @@
     ]
   },
   {
-    "name": "Charlotte Linlin [Big Mom]",
+    "name": "Charlotte Linlin",
     "image": "/images/characters/Charlotte_Linlin.webp",
     "epithet": "Evil Spirit",
     "affiliation": "Big Mom Pirates",

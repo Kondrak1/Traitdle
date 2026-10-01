@@ -367,7 +367,10 @@
         if (parts.length > 1) {
           names.add(parts[parts.length - 1]);
           const cleaned = text.replace(/\s+(?:\(.*?\)|\[.*?\])/g, '');
-          if (cleaned !== text) names.add(cleaned);
+          if (cleaned !== text) {
+            names.add(cleaned);
+            names.add(cleaned.split(/\s+/).pop());
+          }
         }
       });
 
@@ -580,6 +583,10 @@
       }) || null;
     }
 
+    function characterIdentity(character) {
+      return normalizeText(character.name).replace(/\s*\[.*?\]/g, '').trim();
+    }
+
     function hasBeenGuessed(character) {
       const name = normalizeText(character.name);
       return guesses.some(guessName => normalizeText(guessName) === name);
@@ -758,7 +765,7 @@
       updateHintButtons();
       renderSuggestions('');
 
-      if (character.name.toLowerCase() === target.name.toLowerCase()) {
+      if (characterIdentity(character) === characterIdentity(target)) {
         over = true;
         if (gameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'classic', guesses, over);
         message.textContent = `🏴‍☠️ Correct! The hidden character was ${target.name}.`;

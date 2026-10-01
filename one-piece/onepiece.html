@@ -588,7 +588,7 @@
     }
 
     function characterIdentity(character) {
-      return normalizeText(character.name).replace(/\s*\[.*?\]/g, '').trim();
+      return normalizeText(character.name.replace(/\s*\[.*?\]/g, '')).trim();
     }
 
     function hasBeenGuessed(character) {

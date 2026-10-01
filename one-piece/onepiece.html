@@ -583,6 +583,10 @@
       }) || null;
     }
 
+    function displayCharacterName(character) {
+      return characterIdentity(character) === 'charlotte linlin' ? 'Charlotte Linlin' : character.name;
+    }
+
     function characterIdentity(character) {
       return normalizeText(character.name).replace(/\s*\[.*?\]/g, '').trim();
     }
@@ -620,7 +624,7 @@
         image.loading = 'lazy';
         setSuggestionImage(image, character);
         const name = document.createElement('span');
-        name.textContent = character.name;
+        name.textContent = displayCharacterName(character);
         option.append(image, name);
         option.addEventListener('mousedown', event => event.preventDefault());
         option.addEventListener('click', () => selectSuggestion(index));
@@ -638,7 +642,7 @@
         renderSuggestions(guessInput.value);
         return;
       }
-      guessInput.value = character.name;
+      guessInput.value = displayCharacterName(character);
       suggestions.hidden = true;
       suggestionIndex = -1;
       guessInput.focus();

@@ -353,7 +353,7 @@
     });
     posterKeepSailing.addEventListener('click', () => { window.location.href = 'laughdle.html'; });
     posterCandidates = characterData.filter(character => isNotableCharacter(character) && bountyValue(character) > 0 && unknownTraitCount(character) <= 1);
-    posterSuggestionCandidates = characterData.filter(character => characterModeAnswerNames.has(character.name));
+    posterSuggestionCandidates = characterData.filter(character => characterModeAnswerNames.has(character.name) && isAllowedCharacter(character));
     updatePosterMode();
     startPosterRound();
     posterGiveUp.addEventListener('click', () => {

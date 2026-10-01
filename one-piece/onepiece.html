@@ -366,7 +366,7 @@
         const parts = text.split(/\s+/);
         if (parts.length > 1) {
           names.add(parts[parts.length - 1]);
-          const cleaned = text.replace(/\s+\(.*?\)/g, '');
+          const cleaned = text.replace(/\s+(?:\(.*?\)|\[.*?\])/g, '');
           if (cleaned !== text) names.add(cleaned);
         }
       });
@@ -460,7 +460,7 @@
       guessBtn.disabled = true;
       message.textContent = 'Loading custom character roster...';
       const source = Array.isArray(characterData) ? characterData : fallbackCharacterDatabase;
-      characterDatabase = source.map(mapCharacter).filter(Boolean).filter(hasEnoughTraits);
+      characterDatabase = source.map(mapCharacter).filter(isAllowedCharacter).filter(hasEnoughTraits);
 
       resetGame();
       guessBtn.disabled = false;

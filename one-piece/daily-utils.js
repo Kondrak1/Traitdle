@@ -5,7 +5,7 @@ const dailyModeLabels = {
   wanted: '💰 Wanted',
   laugh: '🔊 Laugh'
 };
-const traitdleShareUrl = 'http://kondrak1.github.io/Traitdle/';
+const traitdleShareUrl = 'https://kondrak1.github.io/Traitdle/';
 const traitdleWorldUrls = {
   onePiece: `${traitdleShareUrl}one-piece/onepiece.html`,
   tcg: `${traitdleShareUrl}one-piece-tcg/tcg.html`,
@@ -13,6 +13,20 @@ const traitdleWorldUrls = {
   pokemon: `${traitdleShareUrl}pokemon/pokemon.html`,
   avatar: `${traitdleShareUrl}avatar/avatar.html`
 };
+const excludedCharacterNames = new Set([
+  'Charlotte Angel',
+  'Charlotte Broyé',
+  'Charlotte Brûlée',
+  'Charlotte Cinnamon',
+  'Charlotte Citron',
+  'Charlotte Custard',
+  'Charlotte Praline',
+  'Charlotte Prim'
+]);
+
+function isAllowedCharacter(character) {
+  return character && !excludedCharacterNames.has(character.name);
+}
 
 const mountainTimeZone = 'America/Denver';
 const dailyResetHour = 18;
@@ -152,7 +166,7 @@ function startDailyResetTimer(element) {
 }
 
 function enableCopyButton(button, text) {
-  button.addEventListener('click', async () => {
+  button.onclick = async () => {
     try {
       await navigator.clipboard.writeText(text);
     } catch (error) {
@@ -164,5 +178,5 @@ function enableCopyButton(button, text) {
       fallback.remove();
     }
     button.textContent = 'Copied';
-  });
+  };
 }

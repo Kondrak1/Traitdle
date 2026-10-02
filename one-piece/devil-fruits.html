@@ -151,9 +151,7 @@
       const toLocalCharacter = character => character ? { ...character, image: character.image ? `assets/characters/${character.image.split('/').pop()}` : '' } : null;
       const exact = characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === normalize(user));
       if (exact) return toLocalCharacter(exact);
-      const withoutBrackets = normalize(user.replace(/\s*\[.*?\]/g, ''));
-      return toLocalCharacter(characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name) === withoutBrackets)
-        || characterData.find(character => !hasTooManyUnknowns(character) && normalize(character.name).includes(withoutBrackets))
+      return toLocalCharacter(characterData.find(character => !hasTooManyUnknowns(character) && characterNameMatches(character, user))
       );
     }
 
@@ -163,7 +161,7 @@
       fruitSuggestionIndex = -1;
       fruitSuggestions.hidden = !query;
       if (!query) return;
-      const matches = characterData.filter(character => characterModeAnswerNames.has(character.name) && isAllowedCharacter(character) && !fruitAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
+      const matches = characterData.filter(character => characterModeAnswerNames.has(character.name) && isAllowedCharacter(character) && !fruitAttempted.has(normalize(character.name)) && characterNameMatches(character, query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -176,7 +174,7 @@
         image.src = localImage;
         image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.jpeg'; };
         const name = document.createElement('span');
-        name.textContent = character.name;
+        name.textContent = displayCharacterName(character);
         button.append(image, name);
         button.addEventListener('mousedown', event => event.preventDefault());
         button.addEventListener('click', () => selectFruitSuggestion(index));
@@ -239,7 +237,7 @@
       fruitAttempted.add(query);
       if (fruitGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'fruit', [...fruitAttempted], false);
       updateFruitHintButtons();
-      const correct = normalize(character.name) === normalize(fruitTarget.user.name);
+      const correct = characterIdentitiesMatch(character.name, fruitTarget.user.name);
       renderFruitGuess(character, correct);
       fruitGuess.value = '';
       renderFruitSuggestions();

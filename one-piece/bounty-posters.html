@@ -184,7 +184,7 @@
       posterSuggestionIndex = -1;
       posterSuggestions.hidden = !query;
       if (!query) return;
-      const matches = posterSuggestionCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && normalize(character.name).includes(query));
+      const matches = posterSuggestionCandidates.filter(character => !posterAttempted.has(normalize(character.name)) && characterNameMatches(character, query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -195,7 +195,7 @@
         image.loading = 'lazy';
         setCharacterImage(image, character, false);
         const name = document.createElement('span');
-        name.textContent = character.name;
+        name.textContent = displayCharacterName(character);
         button.append(image, name);
         button.addEventListener('mousedown', event => event.preventDefault());
         button.addEventListener('click', () => selectPosterSuggestion(index));
@@ -207,7 +207,8 @@
     function selectPosterSuggestion(index) {
       const option = posterSuggestions.querySelector(`[data-index="${index}"]`);
       if (!option) return;
-      posterGuess.value = option.dataset.name;
+      const character = posterSuggestionCandidates.find(item => item.name === option.dataset.name);
+      posterGuess.value = character ? displayCharacterName(character) : option.dataset.name;
       posterSuggestions.hidden = true;
       posterSuggestionIndex = -1;
       posterGuess.focus();
@@ -254,13 +255,13 @@
 
     function submitPosterGuess() {
       const query = normalize(posterGuess.value);
-      const character = posterSuggestionCandidates.find(item => normalize(item.name) === query);
+      const character = posterSuggestionCandidates.find(item => characterNameMatches(item, query));
       if (!character) { posterMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (posterAttempted.has(query)) { posterMessage.textContent = 'You already tried that character.'; return; }
       posterAttempted.add(query);
       if (posterGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'wanted', [...posterAttempted], false);
       updatePosterHintButtons();
-      const correct = normalize(character.name) === normalize(posterTarget.name);
+      const correct = characterIdentitiesMatch(character.name, posterTarget.name);
       renderPosterGuess(character, correct);
       posterGuess.value = '';
       renderPosterSuggestions();

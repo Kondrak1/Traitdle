@@ -24,6 +24,39 @@ const excludedCharacterNames = new Set([
   'Charlotte Prim'
 ]);
 
+function normalizeCharacterName(value) {
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function characterNameVariants(value) {
+  const name = String(value || '').trim();
+  const variants = new Set([normalizeCharacterName(name)]);
+  const withoutAliases = name.replace(/\s*[\[(].*?[\])]/g, '').trim();
+  if (withoutAliases !== name) variants.add(normalizeCharacterName(withoutAliases));
+  for (const match of name.matchAll(/[\[(]([^\])]+)[\])]/g)) {
+    variants.add(normalizeCharacterName(match[1]));
+  }
+  return [...variants].filter(Boolean);
+}
+
+function characterNameMatches(character, value) {
+  const search = normalizeCharacterName(value);
+  return Boolean(search) && characterNameVariants(character.name).some(name => name === search || name.includes(search));
+}
+
+function displayCharacterName(character) {
+  return String(character.name || '').replace(/\s*[\[(].*?[\])]/g, '').trim();
+}
+
+function characterIdentityKey(value) {
+  return normalizeCharacterName(String(value || '').replace(/\s*[\[(].*?[\])]/g, ''));
+}
+
+function characterIdentitiesMatch(first, second) {
+  const secondVariants = new Set(characterNameVariants(second));
+  return characterNameVariants(first).some(variant => secondVariants.has(variant));
+}
+
 function isAllowedCharacter(character) {
   return character && !excludedCharacterNames.has(character.name);
 }

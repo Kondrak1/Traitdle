@@ -576,19 +576,12 @@
       const search = normalizeText(input);
       if (!search) return null;
 
-      return characterDatabase.find(character => {
-        const matchesName = normalizeText(character.name) === search || normalizeText(character.name).includes(search);
-        const matchesAlias = (character.aliases || []).some(alias => normalizeText(alias) === search || normalizeText(alias).includes(search));
-        return matchesName || matchesAlias;
-      }) || null;
-    }
-
-    function displayCharacterName(character) {
-      return characterIdentity(character) === 'charlotte linlin' ? 'Charlotte Linlin' : character.name;
+      return characterDatabase.find(character => characterNameMatches(character, search)
+        || (character.aliases || []).some(alias => normalizeText(alias) === search || normalizeText(alias).includes(search))) || null;
     }
 
     function characterIdentity(character) {
-      return normalizeText(character.name.replace(/\s*\[.*?\]/g, '')).trim();
+      return normalizeText(displayCharacterName(character));
     }
 
     function hasBeenGuessed(character) {
@@ -608,7 +601,7 @@
       suggestions.hidden = !search;
       if (!search) return;
 
-      const matches = characterDatabase.filter(character => normalizeText(character.name).includes(search));
+      const matches = characterDatabase.filter(character => characterNameMatches(character, search));
       const availableMatches = matches.filter(character => !hasBeenGuessed(character));
 
       availableMatches.forEach((character, index) => {
@@ -769,7 +762,7 @@
       updateHintButtons();
       renderSuggestions('');
 
-      if (characterIdentity(character) === characterIdentity(target)) {
+      if (characterIdentitiesMatch(character.name, target.name)) {
         over = true;
         if (gameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'classic', guesses, over);
         message.textContent = `🏴‍☠️ Correct! The hidden character was ${target.name}.`;

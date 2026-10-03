@@ -30,19 +30,58 @@ const tcgSetReleaseData = {
   OP17: { releaseDate: '2026-08-28', releaseOrder: 23 }
 };
 
-const tcgFemaleNameParts = [
-  'Boa.Hancock', 'Bonney', 'Catarina.Devon', 'Charlotte.Amande', 'Charlotte.Brûlée', 'Charlotte.Galette',
-  'Charlotte.Pudding', 'Conis', 'Curly.Dadan', 'Hiyori', 'Jewelry', 'Kaya', 'Koala', 'Kozuki.Toki',
-  'Kikunojo', 'Makino', 'Marguerite', 'Miss.All.Sunday', 'Miss.Doublefinger', 'Miss.Goldenweek',
-  'Miss.Merry.Christmas', 'Miss.Valentine', 'Nami', 'Nefeltari.Vivi', 'Nico.Robin', 'Perona',
-  'Rebecca', 'Reiju', 'Shirahoshi', 'Stussy', 'Sugar', 'Tashigi', 'Ulti', 'Uta', 'Viola', 'Yamato',
-  'Vinsmoke.Sora', 'Vinsmoke.Reiju'
-];
+function normalizeTcgGenderName(name) {
+  return String(name || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+const tcgGenderOverrides = new Map([
+  ['Boa Hancock', 'Female'],
+  ['Bonney', 'Female'],
+  ['Carrot', 'Female'],
+  ['Charlotte Linlin', 'Female'],
+  ['Charlotte Pudding', 'Female'],
+  ['Conis', 'Female'],
+  ['Hibari', 'Female'],
+  ['Jewelry Bonney', 'Female'],
+  ['Kikunojo', 'Female'],
+  ['Koala', 'Female'],
+  ['Kouzuki Hiyori', 'Female'],
+  ['Kujyaku', 'Female'],
+  ['Lim', 'Female'],
+  ['Lilith', 'Female'],
+  ['Ms. All Sunday', 'Female'],
+  ['Ms. Wednesday', 'Female'],
+  ['Monet', 'Female'],
+  ['Nami', 'Female'],
+  ['Nefeltari Vivi', 'Female'],
+  ['Nico Robin', 'Female'],
+  ['Perona', 'Female'],
+  ['Porche', 'Female'],
+  ['Rebecca', 'Female'],
+  ['Shirahoshi', 'Female'],
+  ['S Snake', 'Female'],
+  ['Stussy', 'Female'],
+  ['Tashigi', 'Female'],
+  ['Ulti', 'Female'],
+  ['Uta', 'Female'],
+  ['Viola', 'Female'],
+  ['Vinsmoke Reiju', 'Female'],
+  ['Yamato', 'Female'],
+  ['Black Maria', 'Female'],
+  ['Gloriosa', 'Female'],
+  ['Inazuma', 'Mixed'],
+  ['Emporio Ivankov', 'Mixed'],
+  ['Sanji & Pudding', 'Mixed'],
+  ['Rosinante & Law', 'Mixed'],
+  ['Kaido & Linlin', 'Mixed'],
+  ['Ace & Sabo & Luffy', 'Mixed']
+].map(([name, gender]) => [normalizeTcgGenderName(name), gender]));
 
 function tcgGender(card) {
   if (card.cardClass !== 'CHARACTER') return 'Unknown';
+  const normalizedName = normalizeTcgGenderName(card.name);
+  if (tcgGenderOverrides.has(normalizedName)) return tcgGenderOverrides.get(normalizedName);
   if (card.name.includes(' & ')) return 'Mixed';
-  if (tcgFemaleNameParts.some(part => card.name.toLowerCase().includes(part.toLowerCase()))) return 'Female';
   return 'Male';
 }
 

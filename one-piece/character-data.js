@@ -22594,6 +22594,7 @@
   },
   {
     "name": "Iceberg",
+    "image": "/images/characters/Iceburg.webp",
     "affiliation": "Galley-La Company",
     "origin": "Grand Line (Water 7)",
     "age": 40,

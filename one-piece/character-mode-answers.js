@@ -3,3 +3,24 @@ const characterModeAnswerNames = new Set(["Charlotte Brulee","Absalom","Aisa","A
 ['Charlotte Angel', 'Charlotte Broyé', 'Charlotte Brûlée', 'Charlotte Cinnamon', 'Charlotte Citron', 'Charlotte Custard', 'Charlotte Praline', 'Charlotte Prim'].forEach(name => characterModeAnswerNames.delete(name));
 characterModeAnswerNames.delete('Charlotte Linlin [Big Mom]');
 characterModeAnswerNames.add('Charlotte Linlin');
+
+[
+  'Avalo Pizarro', 'Bastille', 'Bluejam', 'Braham', 'Brannew', 'Carmel',
+  'Chadros Higelyges [Brownbeard]', 'Charlotte Snack', 'Daruma', 'Duval',
+  'Elizabello II', 'Fukaboshi', 'Guernika', 'Higuma', 'Igaram', 'Ikaros Much',
+  'Ivan X', 'Kamakiri', 'Kentauros', 'Kujaku', 'Kurozumi Higurashi', 'Makino',
+  'Manboshi', 'Manjaro', 'Mashikaku', 'Masira',
+  'Matsuge', 'Momonga', 'Rosward Rosward', 'Saldeath', 'Shachi', 'Sham',
+  'Shimotsuki Kouzaburou', 'Shimotsuki Ushimaru', 'Shuri [Manmayer Gunko]',
+  'Shyarly', 'Spandine', 'Squard', 'Suleiman', 'Uzuki Tempura',
+  'Victoria Cindry', 'Scotch [Yeti Cool Brother]', 'Prince Grus', 'Porchemy',
+  'Nezumi', 'Nero', 'Minister of the Right', 'Minister of the Left',
+  'Kelly Funk', 'Bobby Funk', 'Holedem', 'Genbo', 'Chimney', 'Conis',
+  'Coribou', 'Gotti', 'Hotori', 'Jigoro', 'Kotori', 'Kuroobi', 'Mohji',
+  'Riku Doldo III', 'Ryuboshi'
+].forEach(name => characterModeAnswerNames.delete(name));
+
+[
+  'Wyper', 'Iceberg', 'Paulie', 'Vander Decken', 'Gloriosa', 'Atlas', 'Lilith',
+  'Edison', 'Pythagoras', 'Shaka', 'York'
+].forEach(name => characterModeAnswerNames.add(name));

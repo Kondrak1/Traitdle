@@ -22593,6 +22593,26 @@
     ]
   },
   {
+    "name": "Iceberg",
+    "affiliation": "Galley-La Company",
+    "origin": "Grand Line (Water 7)",
+    "age": 40,
+    "first_appearance_arc": "Chapter 323",
+    "race": "Human",
+    "status": "Alive",
+    "description": "President of the Galley-La Company and mayor of Water 7",
+    "journey": [
+      {"location":"Shipbuilding Island"},
+      {"location":"Enies Lobby"},
+      {"location":"Shipbuilding Island","chapter":"Chapter 435"}
+    ],
+    "relationships": [
+      {"name": "Paulie","relationship": "Vice President"},
+      {"name": "Cutty Flam [Franky]","relationship": "Former Colleague"},
+      {"name": "Monkey D. Luffy","relationship": "Ally"}
+    ]
+  },
+  {
     "name": "Pavlik",
     "image": "/images/characters/Pavlik.webp",
     "affiliation": "Whitebeard Pirates",

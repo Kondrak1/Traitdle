@@ -38,7 +38,7 @@
 
     <section class="poster-clue" aria-labelledby="posterClueTitle">
       <p id="posterClueTitle" class="collection-kicker">Daily wanted poster</p>
-      <img id="posterClueImage" alt="Mystery bounty poster" src="">
+      <img id="posterClueImage" alt="Mystery bounty poster" src="" draggable="false">
     </section>
 
     <section id="posterSuccess" class="mini-success" hidden aria-live="polite" tabindex="-1">
@@ -79,6 +79,8 @@
 
   <script>
     const posterImage = document.querySelector('#posterClueImage');
+    posterImage.draggable = false;
+    posterImage.addEventListener('dragstart', event => event.preventDefault());
     const posterGuess = document.querySelector('#posterGuess');
     const posterSuggestions = document.querySelector('#posterSuggestions');
     const posterSubmit = document.querySelector('#posterSubmit');

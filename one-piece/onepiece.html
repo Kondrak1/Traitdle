@@ -422,7 +422,8 @@
       'Nerona Imu', 'Jaygarcia Saturn', 'Ethanbaron V. Nusjuro', 'Marcus Mars',
       'Topman Warcury', 'Shepherd Ju Peter', 'Wyper', 'Iceberg', 'Paulie',
       'Vander Decken', 'Gloriosa', 'Atlas', 'Lilith', 'Edison', 'Pythagoras',
-      'Shaka', 'York', 'Ripley', 'Figarland Garling', 'Shepherd Sommers'
+      'Shaka', 'York', 'Ripley', 'Figarland Garling', 'Shepherd Sommers',
+      'Rob Lucci', 'Kaku', 'Jabra'
     ].map(normalizeText));
 
     function hasEnoughTraits(character) {
@@ -465,7 +466,11 @@
       guessBtn.disabled = true;
       message.textContent = 'Loading custom character roster...';
       const source = Array.isArray(characterData) ? characterData : fallbackCharacterDatabase;
-      characterDatabase = source.map(mapCharacter).filter(isAllowedCharacter).filter(hasEnoughTraits);
+      characterDatabase = source
+        .filter(character => character.image !== '/images/characters/Kaku_(wano).webp')
+        .map(mapCharacter)
+        .filter(isAllowedCharacter)
+        .filter(hasEnoughTraits);
 
       resetGame();
       guessBtn.disabled = false;

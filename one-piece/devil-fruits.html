@@ -231,7 +231,7 @@
 
     function submitFruitGuess() {
       const query = normalize(fruitGuess.value);
-      const character = characterData.find(item => characterModeAnswerNames.has(item.name) && isAllowedCharacter(item) && normalize(item.name) === query);
+      const character = characterData.find(item => characterModeAnswerNames.has(item.name) && isAllowedCharacter(item) && characterNameMatches(item, query));
       if (!character) { fruitMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
       fruitAttempted.add(query);

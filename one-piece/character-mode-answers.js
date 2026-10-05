@@ -23,5 +23,5 @@ characterModeAnswerNames.add('Charlotte Linlin');
 [
   'Wyper', 'Iceberg', 'Paulie', 'Vander Decken', 'Gloriosa', 'Atlas', 'Lilith',
   'Edison', 'Pythagoras', 'Shaka', 'York', 'Ripley', 'Figarland Garling',
-  'Shepherd Sommers'
+  'Shepherd Sommers', 'Rob Lucci', 'Lucci', 'Kaku ', 'Kaku', 'Jabra'
 ].forEach(name => characterModeAnswerNames.add(name));

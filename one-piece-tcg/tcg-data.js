@@ -1,6 +1,7 @@
 const tcgSetSources = [
   'EB01', 'EB02', 'EB03', 'EB04',
   'OP01', 'OP02', 'OP03', 'OP04', 'OP05', 'OP06', 'OP07', 'OP08', 'OP09', 'OP10', 'OP11', 'OP12', 'OP13', 'OP14', 'OP15', 'OP16', 'OP17',
+  ...Array.from({ length: 36 }, (_, index) => `ST${String(index + 1).padStart(2, '0')}`),
   'PRB01', 'PRB02'
 ];
 
@@ -85,6 +86,12 @@ function tcgGender(card) {
   return 'Male';
 }
 
+function compareSets(left, right) {
+  const leftSet = tcgSetReleaseData[left], rightSet = tcgSetReleaseData[right];
+  if (!leftSet || !rightSet) return String(left).localeCompare(String(right));
+  return leftSet.releaseDate.localeCompare(rightSet.releaseDate) || leftSet.releaseOrder - rightSet.releaseOrder;
+}
+
 async function loadTcgCards() {
   const sets = await Promise.all(tcgSetSources.map(async code => {
     const response = await fetch(`https://raw.githubusercontent.com/hugoprudente/optcgjson/main/output/${code}.json`);
@@ -94,8 +101,12 @@ async function loadTcgCards() {
 
   const cards = sets.flatMap(set => {
     if (['PRB01', 'PRB02'].includes(set.data.code)) return [];
+    const isStarterDeck = set.data.type === 'starter' || /^ST\d+$/.test(set.data.code);
     return set.data.cards
-    .filter(card => ['SR', 'SEC'].includes(card.rarity) && ['2', '3', '4', '5', 'X'].includes(String(card.blockIcon)) && !card.isParallel && !/_r\d+$/i.test(card.id))
+    .filter(card => (isStarterDeck ? card.rarity === 'SR' : ['SR', 'SEC'].includes(card.rarity))
+      && ['1', '2', '3', '4', '5', 'X'].includes(String(card.blockIcon))
+      && !card.isParallel
+      && !/_r\d+$/i.test(card.id))
     .map(card => ({
       id: card.id,
       name: card.name.replace(/\./g, ' '),

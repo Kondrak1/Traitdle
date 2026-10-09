@@ -51,3 +51,7 @@ const personaCharacters = [
   { name: 'Taro Namatame', gender: 'Male', age: 48, bending: 'Hanged Man', faction: 'Inaba City Council', birthplace: 'Persona 4 Golden', arc: 'Hanged Man', image: 'assets/taro-namatame.png' },
   { name: 'Izanami', gender: 'Female', age: 1000, bending: 'World', faction: 'Pursuing Humanity', birthplace: 'Persona 4 Golden', arc: 'World', image: 'assets/izanami.png' }
 ];
+
+personaCharacters.forEach(character => {
+  character.age = Number(character.age) <= 12 ? 'Child' : Number(character.age) <= 19 ? 'Teenager' : 'Adult';
+});

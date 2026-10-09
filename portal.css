@@ -91,9 +91,13 @@ body {
   justify-content: space-between;
   overflow: hidden;
   padding: 22px;
-  border: 1px solid rgb(244 189 79 / 32%);
+  border: 2px solid var(--world-accent, rgb(244 189 79 / 32%));
   border-radius: 10px;
-  background: linear-gradient(145deg, rgb(34 41 71 / 96%), rgb(15 18 35 / 96%));
+  background:
+    linear-gradient(135deg, var(--world-overlay, rgb(12 16 30 / 58%)), rgb(9 12 24 / 94%)),
+    var(--world-banner, linear-gradient(145deg, rgb(34 41 71 / 96%), rgb(15 18 35 / 96%)));
+  background-position: center;
+  background-size: cover;
   color: var(--paper);
   text-decoration: none;
   box-shadow: 0 14px 30px rgb(0 0 0 / 22%);
@@ -102,7 +106,8 @@ body {
 
 .world-card:hover, .world-card:focus-visible {
   transform: translateY(-4px);
-  border-color: var(--gold);
+  border-color: var(--world-accent, var(--gold));
+  box-shadow: 0 18px 36px rgb(0 0 0 / 32%), 0 0 0 2px var(--world-accent, var(--gold));
 }
 
 .world-card::after {
@@ -125,22 +130,43 @@ body {
   height: 54px;
   place-items: center;
   border-radius: 50%;
-  background: var(--gold);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--world-accent, var(--gold));
+  background-image: var(--world-banner, linear-gradient(135deg, var(--gold), #172039));
+  background-position: center;
+  background-size: cover;
   color: var(--night);
   font: 900 1.4rem Georgia, serif;
 }
 
-.world-card:nth-child(2) .world-mark { background: #9a83d5; color: #171129; }
-.world-card:nth-child(3) .world-mark { background: #de604e; }
-.world-card:nth-child(4) .world-mark { background: #70b7d3; }
-.world-card:nth-child(5) .world-mark { background: #dd8c4f; }
-.world-card:nth-child(6) .world-mark { background: #8bc98a; }
+.world-mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(0 0 0 / 12%), rgb(0 0 0 / 48%));
+}
 
-.world-card:nth-child(1) { border-color: rgb(244 189 79 / 42%); background: linear-gradient(145deg, #123b58, #351f2c); }
-.world-card:nth-child(2) { border-color: rgb(231 184 78 / 42%); background: linear-gradient(145deg, #173d59, #542c2c); }
-.world-card:nth-child(3) { border-color: rgb(216 183 255 / 42%); background: linear-gradient(145deg, #372650, #24152e); }
-.world-card:nth-child(4) { border-color: rgb(84 213 223 / 42%); background: linear-gradient(145deg, #102c57, #391522); }
-.world-card:nth-child(5) { border-color: rgb(232 185 79 / 42%); background: linear-gradient(145deg, #1b3a48, #6f432d); }
+.world-mark {
+  text-shadow: 0 2px 5px rgb(0 0 0 / 75%);
+  color: #fff;
+  z-index: 1;
+}
+
+.world-mark > span { position: relative; z-index: 1; }
+
+.world-card:nth-child(1) { --world-accent: #f4bd4f; --world-banner: url('one-piece/assets/grand-line.jpeg'); --world-overlay: rgb(10 32 54 / 70%); }
+.world-card:nth-child(2) { --world-accent: #e7b84e; --world-banner: url('one-piece-tcg/assets/OPTCG-banner.jfif'); --world-overlay: rgb(20 34 56 / 70%); }
+.world-card:nth-child(3) { --world-accent: #d8b7ff; --world-banner: url('jjk/assets/jjk-background.jpg'); --world-overlay: rgb(38 18 52 / 68%); }
+.world-card:nth-child(4) { --world-accent: #54d5df; --world-banner: url('pokemon/assets/pokemon-banner.jpg'); --world-overlay: rgb(10 35 72 / 68%); }
+.world-card:nth-child(5) { --world-accent: #e8b94f; --world-banner: url('avatar/assets/ATLA-banner.jpg'); --world-overlay: rgb(27 53 64 / 66%); }
+.world-card:nth-child(6) { --world-accent: #8bc98a; --world-banner: url('persona/assets/persona-banner.png'); --world-overlay: rgb(24 38 29 / 68%); }
+.world-card:nth-child(7) { --world-accent: #c7a8ff; --world-banner: url('frieren/assets/frieren-banner.png'); --world-overlay: rgb(35 26 65 / 68%); }
+.world-card:nth-child(8) { --world-accent: #e45d4d; --world-banner: url('opm/assets/opm-banner.png'); --world-overlay: rgb(55 20 24 / 70%); }
+.world-card:nth-child(9) { --world-accent: #f04b45; --world-banner: url('chainsaw-man/assets/chainsaw-man-banner.png'); --world-overlay: rgb(34 12 22 / 70%); }
+.world-card:nth-child(10) { --world-accent: #dcb44a; --world-banner: url('https://tse1.mm.bing.net/th?q=JoJo%27s+Bizarre+Adventure+banner'); --world-overlay: rgb(44 17 62 / 68%); }
+.world-card:nth-child(11) { --world-accent: #65c3b6; --world-banner: url('https://tse1.mm.bing.net/th?q=Hunter+x+Hunter+banner'); --world-overlay: rgb(8 40 46 / 68%); }
+.world-card:nth-child(12) { --world-accent: #e0b45b; --world-banner: url('https://tse1.mm.bing.net/th?q=Fullmetal+Alchemist+banner'); --world-overlay: rgb(38 39 43 / 70%); }
 
 .world-card h3 { margin: 22px 0 6px; font: 800 1.45rem Georgia, serif; }
 .world-card p { margin: 0; color: var(--muted); line-height: 1.45; }

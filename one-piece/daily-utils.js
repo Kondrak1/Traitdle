@@ -15,7 +15,13 @@ const traitdleWorldUrls = {
   persona: `${traitdleShareUrl}persona/persona.html`,
   frieren: `${traitdleShareUrl}frieren/frieren.html`,
   opm: `${traitdleShareUrl}opm/opm.html`,
-  chainsawMan: `${traitdleShareUrl}chainsaw-man/chainsaw-man.html`
+  chainsawMan: `${traitdleShareUrl}chainsaw-man/chainsaw-man.html`,
+  jojo: `${traitdleShareUrl}jojo/jojo.html`,
+  hunterXHunter: `${traitdleShareUrl}hunter-x-hunter/hunter-x-hunter.html`,
+  fullmetalAlchemist: `${traitdleShareUrl}fullmetal-alchemist/fullmetal-alchemist.html`,
+  demonSlayer: `${traitdleShareUrl}demon-slayer/demon-slayer.html`,
+  blackClover: `${traitdleShareUrl}black-clover/black-clover.html`,
+  myHeroAcademia: `${traitdleShareUrl}my-hero-academia/my-hero-academia.html`
 };
 const excludedCharacterNames = new Set([
   'Charlotte Angel',
@@ -194,14 +200,15 @@ function readDailyGameState(storageKey, mode) {
     const state = saved.date === date ? saved.modes?.[mode] : null;
     return {
       guesses: Array.isArray(state?.guesses) ? state.guesses : [],
-      over: state?.over === true
+      over: state?.over === true,
+      result: state?.result || null
     };
   } catch (error) {
     return { guesses: [], over: false };
   }
 }
 
-function saveDailyGameState(storageKey, mode, guesses, over) {
+function saveDailyGameState(storageKey, mode, guesses, over, result = null) {
   const date = getMstDateKey();
   let saved = { date, modes: {} };
   try {
@@ -210,7 +217,7 @@ function saveDailyGameState(storageKey, mode, guesses, over) {
   } catch (error) {
     // Start a clean record when local storage contains invalid data.
   }
-  saved.modes[mode] = { guesses: [...guesses], over: Boolean(over) };
+  saved.modes[mode] = { guesses: [...guesses], over: Boolean(over), result };
   localStorage.setItem(storageKey, JSON.stringify(saved));
 }
 

@@ -167,6 +167,9 @@ body {
 .world-card:nth-child(10) { --world-accent: #dcb44a; --world-banner: url('https://tse1.mm.bing.net/th?q=JoJo%27s+Bizarre+Adventure+banner'); --world-overlay: rgb(44 17 62 / 68%); }
 .world-card:nth-child(11) { --world-accent: #65c3b6; --world-banner: url('https://tse1.mm.bing.net/th?q=Hunter+x+Hunter+banner'); --world-overlay: rgb(8 40 46 / 68%); }
 .world-card:nth-child(12) { --world-accent: #e0b45b; --world-banner: url('https://tse1.mm.bing.net/th?q=Fullmetal+Alchemist+banner'); --world-overlay: rgb(38 39 43 / 70%); }
+.world-card:nth-child(13) { --world-accent: #e08a55; --world-banner: url('demon-slayer/assets/demon-slayer-banner.png'); --world-overlay: rgb(56 20 24 / 70%); }
+.world-card:nth-child(14) { --world-accent: #b4d85a; --world-banner: url('https://tse1.mm.bing.net/th?q=Black+Clover+banner'); --world-overlay: rgb(12 53 29 / 70%); }
+.world-card:nth-child(15) { --world-accent: #53c7db; --world-banner: url('https://tse1.mm.bing.net/th?q=My+Hero+Academia+banner'); --world-overlay: rgb(15 48 71 / 70%); }
 
 .world-card h3 { margin: 22px 0 6px; font: 800 1.45rem Georgia, serif; }
 .world-card p { margin: 0; color: var(--muted); line-height: 1.45; }

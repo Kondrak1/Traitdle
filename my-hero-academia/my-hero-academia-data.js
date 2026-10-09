@@ -1,0 +1,77 @@
+var Unknown='Unknown';
+var myHeroCharacters = [
+['Izuku Midoriya','Male',15,'One For All','U.A. High School','Class 1-A','Musutafu','Human'],
+['Katsuki Bakugo','Male',15,'Explosion','U.A. High School','Class 1-A','Musutafu','Human'],
+['Shoto Todoroki','Male',15,'Half-Cold Half-Hot','U.A. High School','Class 1-A','Musutafu','Human'],
+['Ochaco Uraraka','Female',15,'Zero Gravity','U.A. High School','Class 1-A','Musutafu','Human'],
+['Tenya Ida','Male',15,'Engine','U.A. High School','Class 1-A','Musutafu','Human'],
+['Tsuyu Asui','Female',15,'Frog','U.A. High School','Class 1-A','Musutafu','Human'],
+['Eijiro Kirishima','Male',15,'Hardening','U.A. High School','Class 1-A','Musutafu','Human'],
+['Momo Yaoyorozu','Female',15,'Creation','U.A. High School','Class 1-A','Musutafu','Human'],
+['Denki Kaminari','Male',15,'Electrification','U.A. High School','Class 1-A','Musutafu','Human'],
+['Fumikage Tokoyami','Male',15,'Dark Shadow','U.A. High School','Class 1-A','Musutafu','Human'],
+['Mina Ashido','Female',15,'Acid','U.A. High School','Class 1-A','Musutafu','Human'],
+['Yuga Aoyama','Male',15,'Navel Laser','U.A. High School','Class 1-A','Musutafu','Human'],
+['Kyoka Jiro','Female',15,'Earphone Jack','U.A. High School','Class 1-A','Musutafu','Human'],
+['Mashirao Ojiro','Male',15,'Tail','U.A. High School','Class 1-A','Musutafu','Human'],
+['Mezo Shoji','Male',15,'Dupli-Arms','U.A. High School','Class 1-A','Musutafu','Human'],
+['Hanta Sero','Male',15,'Tape','U.A. High School','Class 1-A','Musutafu','Human'],
+['Toru Hagakure','Female',15,'Invisibility','U.A. High School','Class 1-A','Musutafu','Human'],
+['Rikido Sato','Male',15,'Sugar Rush','U.A. High School','Class 1-A','Musutafu','Human'],
+['Koji Koda','Male',15,'Anivoice','U.A. High School','Class 1-A','Musutafu','Human'],
+['Minoru Mineta','Male',15,'Pop Off','U.A. High School','Class 1-A','Musutafu','Human'],
+['Shota Aizawa','Male',31,'Erasure','U.A. High School','Faculty','Musutafu','Human'],
+['All Might','Male',49,'One For All','Pro Hero','Symbol of Peace','America','Human'],
+['Present Mic','Male',30,'Voice','U.A. High School','Faculty','Musutafu','Human'],
+['Cementoss','Male',28,'Cement','U.A. High School','Faculty','Musutafu','Human'],
+['Midnight','Female',31,'Somnambulist','U.A. High School','Faculty','Musutafu','Human'],
+['Nezu','Male',Unknown,'High Spec','U.A. High School','Principal','Unknown','Animal'],
+['Mirio Togata','Male',18,'Permeation','U.A. High School','The Big Three','Musutafu','Human'],
+['Tamaki Amajiki','Male',18,'Manifest','U.A. High School','The Big Three','Musutafu','Human'],
+['Nejire Hado','Female',18,'Wave Motion','U.A. High School','The Big Three','Musutafu','Human'],
+['Hitoshi Shinso','Male',15,'Brainwashing','U.A. High School','General Studies','Musutafu','Human'],
+['Mei Hatsume','Female',16,'Zoom','U.A. High School','Support Course','Musutafu','Human'],
+['Itsuka Kendo','Female',16,'Big Fist','Ketsubutsu Academy','Class 1-B','Musutafu','Human'],
+['Neito Monoma','Male',16,'Copy','U.A. High School','Class 1-B','Musutafu','Human'],
+['Tetsutetsu Tetsutetsu','Male',16,'Steel','U.A. High School','Class 1-B','Musutafu','Human'],
+['Pony Tsunotori','Female',16,'Horn Cannon','U.A. High School','Class 1-B','Musutafu','Human'],
+['Juzo Honenuki','Male',16,'Softening','U.A. High School','Class 1-B','Musutafu','Human'],
+['Fumikage Tokoyami (intern)','Male',15,'Dark Shadow','U.A. High School','Class 1-A','Musutafu','Human'],
+['Endeavor','Male',45,'Hellflame','Pro Hero','No. 1 Hero','Musutafu','Human'],
+['Hawks','Male',22,'Fierce Wings','Pro Hero','No. 2 Hero','Kyushu','Human'],
+['Best Jeanist','Male',36,'Fiber Master','Pro Hero','No. 3 Hero','Musutafu','Human'],
+['Edgeshot','Male',33,'Foldabody','Pro Hero','No. 4 Hero','Musutafu','Human'],
+['Mirko','Female',27,'Rabbit','Pro Hero','No. 5 Hero','Hosu','Human'],
+['Kamui Woods','Male',29,'Arbor','Pro Hero','No. 7 Hero','Musutafu','Human'],
+['Mt. Lady','Female',24,'Gigantification','Pro Hero','No. 23 Hero','Musutafu','Human'],
+['Gang Orca','Male',34,'Orcinus','Pro Hero','Top 10 Hero','Unknown','Human'],
+['Sir Nighteye','Male',38,'Foresight','Pro Hero','Agency Leader','Musutafu','Human'],
+['Gran Torino','Male',70,'Jet','Pro Hero','Retired Hero','Musutafu','Human'],
+['Tomura Shigaraki','Male',20,'Decay','League of Villains','Paranormal Liberation','Musutafu','Human'],
+['All For One','Male',Unknown,'All For One','League of Villains','Paranormal Liberation','Unknown','Human'],
+['Dabi','Male',24,'Blueflame','League of Villains','Paranormal Liberation','Musutafu','Human'],
+['Himiko Toga','Female',17,'Transform','League of Villains','Paranormal Liberation','Musutafu','Human'],
+['Twice','Male',31,'Double','League of Villains','Paranormal Liberation','Unknown','Human'],
+['Spinner','Male',21,'Gecko','League of Villains','Paranormal Liberation','Unknown','Heteromorph'],
+['Mr. Compress','Male',32,'Compress','League of Villains','Paranormal Liberation','Unknown','Human'],
+['Kurogiri','Male',Unknown,'Warp Gate','League of Villains','Paranormal Liberation','Unknown','Nomu'],
+['Stain','Male',31,'Bloodcurdle','Hero Killer','Hero Killer','Musutafu','Human'],
+['Overhaul','Male',28,'Overhaul','Shie Hassaikai','Shie Hassaikai','Musutafu','Human'],
+['Gentle Criminal','Male',32,'Elasticity','Villain','U.A. Festival','Musutafu','Human'],
+['La Brava','Female',21,'Love','Villain','U.A. Festival','Musutafu','Human'],
+['Re-Destro','Male',44,'Stress','Meta Liberation Army','Paranormal Liberation','Deika City','Human'],
+['Lady Nagant','Female',Unknown,'Rifle','Villain','Dark Hero','Musutafu','Human'],
+['Eri','Female',6,'Rewind','U.A. Allies','Shie Hassaikai','Musutafu','Human'],
+['Inko Midoriya','Female',39,'Float','Civilian','Entrance Exam','Musutafu','Human'],
+['Fuyumi Todoroki','Female',22,'Frost','Todoroki Family','Endeavor Agency','Musutafu','Human']
+].map(([name,gender,age,quirk,faction,arc,origin,species])=>({name,gender,age,quirk,faction,arc,origin,species,image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' My Hero Academia')}`})); 
+function myHeroQuirkType(quirk) {
+  const mutantQuirks = ['Frog', 'Engine', 'Tail', 'Dupli-Arms', 'Anivoice', 'Earphone Jack', 'Dark Shadow', 'Rabbit', 'Orcinus', 'Gecko', 'High Spec'];
+  const transformationQuirks = ['Hardening', 'Sugar Rush', 'Gigantification', 'Permeation', 'Foldabody', 'Transform', 'Double', 'Stress', 'Rewind'];
+  if (mutantQuirks.includes(quirk)) return 'Mutant';
+  if (transformationQuirks.includes(quirk)) return 'Transformation';
+  return 'Emitter';
+}
+myHeroCharacters.forEach(character => {
+  character.quirkType = myHeroQuirkType(character.quirk);
+});

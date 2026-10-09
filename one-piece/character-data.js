@@ -296,6 +296,7 @@
     "haki": ["Observation"],
     "height": 140,
     "age": 11,
+    "bounty": 0,
     "first_appearance_arc": "Chapter 249",
     "race": "Moon people - Shandian",
     "status": "Alive",
@@ -11344,6 +11345,7 @@
   ]
   },
   {
+    "bounty": 200000000,
     "name": "Hajrudin",
     "image": "/images/characters/Hajrudin.webp",
     "affiliation": "New Giant Warrior Pirates",
@@ -15833,7 +15835,7 @@
   {
     "name": "Kinemon",
     "gender": "Male",
-    "bounty": 0,
+    "bounty": 100000000,
     "image": "/images/characters/Kinemon.webp",
     "epithet": "Foxfire",
     "affiliation": "Kouzuki Family",
@@ -17164,6 +17166,7 @@
     ]
   },
   {
+    "bounty": 200000000,
     "name": "Kyros",
     "image": "/images/characters/Kyros.webp",
     "affiliation": "Corrida Colosseum (former)",
@@ -17403,6 +17406,7 @@
     ]
   },
   {
+    "bounty": 160000000,
     "name": "Leo",
     "image": "/images/characters/Leo.webp",
     "epithet": "Warrior",
@@ -23992,7 +23996,7 @@
   },
   {
     "name": "Rebecca",
-    "bounty": 0,
+    "bounty": 100000000,
     "image": "/images/characters/Rebecca.webp",
     "epithet": "the Phantom Princess",
     "affiliation": "Dressrosa Kingdom",
@@ -24188,7 +24192,7 @@
   },
   {
     "name": "Riku Doldo III",
-    "bounty": 0,
+    "bounty": 300000000,
     "image": "/images/characters/Riku_Doldo_Iii.webp",
     "epithet": "King of Miracles",
     "affiliation": "Dressrosa Kingdom",
@@ -25082,6 +25086,7 @@
     ]
   },
   {
+    "bounty": 602000000,
     "name": "Sabo",
     "image": "/images/characters/Sabo.webp",
     "epithet": "Flame Emperor",
@@ -30470,7 +30475,7 @@
   },
   {
     "name": "Viola",
-    "bounty": 0,
+    "bounty": 100000000,
     "image": "/images/characters/Viola.webp",
     "affiliation": "Dressrosa Kingdom",
     "devil_fruit": "Giro Giro no Mi",

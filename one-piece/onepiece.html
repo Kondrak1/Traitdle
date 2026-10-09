@@ -569,9 +569,13 @@
       }
 
       if (key === 'bounty') {
-        const bountyNumber = character => Object.hasOwn(character, 'bounty')
-          ? Number(String(character.bounty).replace(/[^0-9]/g, ''))
-          : -1;
+        const bountyNumber = character => {
+          if (!Object.hasOwn(character, 'bounty')) return -1;
+          const raw = String(character.bounty).trim();
+          if (!raw || /^unknown$/i.test(raw)) return -1;
+          const parsed = Number(raw.replace(/[^0-9.-]/g, ''));
+          return Number.isNaN(parsed) ? -1 : parsed;
+        };
         const guessNumber = bountyNumber(guess);
         const targetNumber = bountyNumber(target);
         if (guessNumber === targetNumber) return { status: 'correct', text: guess.bounty };

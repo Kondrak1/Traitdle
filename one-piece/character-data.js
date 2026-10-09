@@ -51,6 +51,7 @@
   },
   {
     "name": "Absalom",
+    "bounty": 0,
     "image": "/images/characters/Absalom.webp",
     "epithet": "of the Graveyard",
     "affiliation": "Thriller Bark Pirates",
@@ -1866,6 +1867,7 @@
   },
   {
     "name": "Bell-mère",
+    "bounty": 0,
     "image": "/images/characters/Bell-mère.webp",
     "affiliation": "Marines (former)",
     "origin": "East Blue (Conomi Islands)",
@@ -2969,6 +2971,7 @@
   },
   {
     "name": "Boodle",
+    "bounty": 0,
     "image": "/images/characters/Boodle.webp",
     "image_pre": "/images/characters/Boodle_Pre.webp",
     "origin": "East Blue (Organ Islands)",
@@ -3701,6 +3704,7 @@
   },
   {
     "name": "Camie",
+    "bounty": 0,
     "image": "/images/characters/Camie.webp",
     "image_pre": "/images/characters/Camie_Pre.webp",
     "affiliation": "Mermaid Café",
@@ -6329,6 +6333,7 @@
   },
   {
     "name": "Chouchou",
+    "bounty": 0,
     "image": "/images/characters/Chouchou.webp",
     "affiliation": "Hocker",
     "origin": "East Blue (Organ Islands)",
@@ -7189,6 +7194,7 @@
   },
   {
     "name": "Dalton",
+    "bounty": 0,
     "image": "/images/characters/Dalton.webp",
     "affiliation": "Sakura Kingdom",
     "devil_fruit": "Ushi Ushi no Mi, Model: Bison",
@@ -8069,6 +8075,7 @@
   },
   {
     "name": "Donquixote Rosinante",
+    "bounty": 0,
     "image": "/images/characters/Donquixote_Rosinante.webp",
     "affiliation": "Marines",
     "devil_fruit": "Nagi Nagi no Mi",
@@ -11564,6 +11571,7 @@
   },
   {
     "name": "Hannyabal",
+    "bounty": 0,
     "image": "/images/characters/Hannyabal.webp",
     "image_pre": "/images/characters/Hannyabal_Pre.webp",
     "affiliation": "Impel Down",
@@ -12146,6 +12154,7 @@
   },
   {
     "name": "Hikoichi",
+    "bounty": 0,
     "image": "/images/characters/Hikoichi.webp",
     "affiliation": "Super Spot-Billed Duck Troops",
     "origin": "Grand Line (Arabasta Kingdom)",
@@ -12527,6 +12536,7 @@
   },
   {
     "name": "Hogback",
+    "bounty": 0,
     "image": "/images/characters/Hogback.webp",
     "affiliation": "Thriller Bark Pirates",
     "epithet": "Genius Surgeon",
@@ -13752,6 +13762,7 @@
   },
   {
     "name": "Jaguar D. Saul",
+    "bounty": 0,
     "image": "/images/characters/Jaguar_D._Saul.webp",
     "affiliation": "Walrus School",
     "haki": ["Armament"],
@@ -15379,6 +15390,7 @@
   },
   {
     "name": "Kaya",
+    "bounty": 0,
     "image": "/images/characters/Kaya.webp",
     "image_pre": "/images/characters/Kaya_Pre.webp",
     "origin": "East Blue (Gecko Islands)",
@@ -16807,6 +16819,7 @@
   },
   {
     "name": "Kureha",
+    "bounty": 0,
     "image": "/images/characters/Kureha.webp",
     "epithet": "Witch",
     "affiliation": "Sakura Kingdom",
@@ -17062,6 +17075,7 @@
   },
   {
     "name": "Kurozumi Tama",
+    "bounty": 0,
     "image": "/images/characters/Kurozumi_Tama.webp",
     "affiliation": "Kurozumi Family",
     "devil_fruit": "Kibi Kibi no Mi",
@@ -17222,6 +17236,7 @@
   },
   {
     "name": "Laboon",
+    "bounty": 0,
     "image": "/images/characters/Laboon.webp",
     "affiliation": "Crocus",
     "origin": "West Blue",
@@ -18043,6 +18058,7 @@
   },
   {
     "name": "Makino",
+    "bounty": 0,
     "image": "/images/characters/Makino.webp",
     "affiliation": "Partys Bar",
     "origin": "East Blue (Foosha Village)",
@@ -18177,6 +18193,7 @@
   },
   {
     "name": "Mansherry",
+    "bounty": 0,
     "image": "/images/characters/Mansherry.webp",
     "affiliation": "Tontatta Kingdom",
     "devil_fruit": "Chiyu Chiyu no Mi",
@@ -21089,6 +21106,7 @@
   },
   {
     "name": "Nefertari Cobra",
+    "bounty": 0,
     "image": "/images/characters/Nefertari_Cobra.webp",
     "image_pre": "/images/characters/Nefertari_Cobra_Pre.webp",
     "affiliation": "Arabasta Kingdom",
@@ -21148,6 +21166,7 @@
   },
   {
     "name": "Nefertari Vivi",
+    "bounty": 0,
     "image": "/images/characters/Nefertari_Vivi.webp",
     "image_pre": "/images/characters/Nefertari_Vivi_Pre.webp",
     "affiliation": "Arabasta Kingdom",
@@ -21296,6 +21315,7 @@
   },
   {
     "name": "Neptune",
+    "bounty": 0,
     "image": "/images/characters/Neptune.webp",
     "epithet": "God of the Sea",
     "affiliation": "Ryugu Kingdom",
@@ -21689,6 +21709,7 @@
   },
   {
     "name": "Nojiko",
+    "bounty": 0,
     "image": "/images/characters/Nojiko.webp",
     "image_pre": "/images/characters/Nojiko_Pre.webp",
     "affiliation": "Nojiko's mikan farm",
@@ -22261,6 +22282,7 @@
   },
   {
     "name": "Otohime",
+    "bounty": 0,
     "image": "/images/characters/Otohime.webp",
     "epithet": "Incarnation of Love",
     "affiliation": "Ryugu Kingdom",
@@ -22788,6 +22810,7 @@
   },
   {
     "name": "Pell",
+    "bounty": 0,
     "image": "/images/characters/Pell.webp",
     "epithet": "the Falcon",
     "affiliation": "Arabasta Kingdom",
@@ -23969,6 +23992,7 @@
   },
   {
     "name": "Rebecca",
+    "bounty": 0,
     "image": "/images/characters/Rebecca.webp",
     "epithet": "the Phantom Princess",
     "affiliation": "Dressrosa Kingdom",
@@ -24164,6 +24188,7 @@
   },
   {
     "name": "Riku Doldo III",
+    "bounty": 0,
     "image": "/images/characters/Riku_Doldo_Iii.webp",
     "epithet": "King of Miracles",
     "affiliation": "Dressrosa Kingdom",
@@ -24799,6 +24824,7 @@
   },
   {
     "name": "Rosward Charlos",
+    "bounty": 0,
     "image": "/images/characters/Charlos.webp",
     "affiliation": "World Government",
     "origin": "Red Line (Mary Geoise)",
@@ -24823,6 +24849,7 @@
   },
   {
     "name": "Rosward Rosward",
+    "bounty": 0,
     "image": "/images/characters/Rosward.webp",
     "affiliation": "World Government",
     "origin": "Red Line (Mary Geoise)",
@@ -24844,6 +24871,7 @@
   },
   {
     "name": "Rosward Shalria",
+    "bounty": 0,
     "image": "/images/characters/Shalria.webp",
     "image_pre": "/images/characters/Shalria_Pre.webp",
     "affiliation": "World Government",
@@ -26542,6 +26570,7 @@
   },
   {
     "name": "Shimotsuki Koushirou",
+    "bounty": 0,
     "image": "/images/characters/Shimotsuki_Koushirou.webp",
     "affiliation": "Shimotsuki Family",
     "origin": "East Blue (Shimotsuki Village)",
@@ -26581,6 +26610,7 @@
   },
   {
     "name": "Shimotsuki Kuina",
+    "bounty": 0,
     "image": "/images/characters/Shimotsuki_Kuina.webp",
     "affiliation": "Shimotsuki Family",
     "origin": "East Blue (Shimotsuki Village)",
@@ -26798,6 +26828,7 @@
   },
   {
     "name": "Shirahoshi",
+    "bounty": 0,
     "image": "/images/characters/Shirahoshi.webp",
     "epithet": "Mermaid Princess",
     "affiliation": "Ryugu Kingdom",
@@ -28777,6 +28808,7 @@
   },
   {
     "name": "Tom",
+    "bounty": 0,
     "image": "/images/characters/Tom.webp",
     "affiliation": "Tom's Workers",
     "origin": "Grand Line (Ryugu Kingdom)",
@@ -30219,6 +30251,7 @@
   },
   {
     "name": "Victoria Cindry",
+    "bounty": 0,
     "image": "/images/characters/Victoria_Cindry.webp",
     "affiliation": "Thriller Bark Pirates",
     "origin": "West Blue",
@@ -30437,6 +30470,7 @@
   },
   {
     "name": "Viola",
+    "bounty": 0,
     "image": "/images/characters/Viola.webp",
     "affiliation": "Dressrosa Kingdom",
     "devil_fruit": "Giro Giro no Mi",
@@ -31098,6 +31132,7 @@
   },
   {
     "name": "Yamato",
+    "bounty": 0,
     "image": "/images/characters/Yamato.webp",
     "epithet": "Oni Princess",
     "affiliation": "Beasts Pirates (Defected)",
@@ -31909,6 +31944,7 @@
   },
   {
     "name": "Yasui",
+    "bounty": 0,
     "image": "/images/characters/Yasui.webp",
     "epithet": "Yasu the Hedgehog",
     "affiliation": "Shimotsuki Family",

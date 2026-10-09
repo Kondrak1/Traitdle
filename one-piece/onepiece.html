@@ -569,8 +569,11 @@
       }
 
       if (key === 'bounty') {
-        const guessNumber = Number(String(guess.bounty).replace(/[^0-9]/g, ''));
-        const targetNumber = Number(String(target.bounty).replace(/[^0-9]/g, ''));
+        const bountyNumber = character => Object.hasOwn(character, 'bounty')
+          ? Number(String(character.bounty).replace(/[^0-9]/g, ''))
+          : -1;
+        const guessNumber = bountyNumber(guess);
+        const targetNumber = bountyNumber(target);
         if (guessNumber === targetNumber) return { status: 'correct', text: guess.bounty };
         return { status: 'absent', text: `${guess.bounty} ${guessNumber < targetNumber ? '↑' : '↓'}` };
       }

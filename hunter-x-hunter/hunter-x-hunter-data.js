@@ -110,5 +110,5 @@ var hunterCharacters = [
   ['Tsezguerra','Male',Unknown,'Unknown','Greed Island','Greed Island','Unknown','Human'],
   ['List','Female',Unknown,'Unknown','Greed Island','Greed Island','Unknown','Human'],
   ['Dwun','Male',Unknown,'Unknown','Greed Island','Greed Island','Unknown','Human']
-].map(([name, gender, age, nenType, faction, arc, birthplace, species]) => ({ name, gender, age, nenType, faction, arc, birthplace, species, image: `https://tse1.mm.bing.net/th?q=${encodeURIComponent(name + ' Hunter x Hunter')}` }));
+].map(([name, gender, age, nenType, faction, arc, birthplace, species]) => ({ name, gender, age, nenType, faction, arc, hairColor: {'Gon Freecss':'Green','Killua Zoldyck':'White','Kurapika':'Blond','Leorio Paradinight':'Brown','Hisoka Morow':'Red','Biscuit Krueger':'Blond','Chrollo Lucilfer':'Black','Machi Komacine':'Purple','Shalnark':'Blond'}[name] || 'Black', species, image: `https://tse1.mm.bing.net/th?q=${encodeURIComponent(name + ' Hunter x Hunter')}` }));
 window.hunterCharacters = hunterCharacters;

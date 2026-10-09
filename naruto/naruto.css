@@ -1,0 +1,9 @@
+:root { --naruto-orange: #e87842; }
+body { background: radial-gradient(circle at 15% 10%, #e87842, transparent 25%), linear-gradient(145deg, #24171a, #51301f 55%, #152a35); }
+.naruto-game { --line: var(--naruto-orange); --gold: #f4c76c; --text: #fff5e8; --muted: #dbc5b6; background: #2b2022; border-color: var(--naruto-orange); }
+.naruto-game header { background: linear-gradient(145deg, #512d22, #b65b32 55%, #1d3037); }
+.naruto-game h1 { color: #fff8e8; text-shadow: 4px 5px 0 #7b3023; }
+.naruto-game .toolbar { background: #47302a; border-color: #e87842; }
+
+#imageClue { display:block; object-position:center center; filter:blur(16px) saturate(.65); transform:scale(1.12); }
+#imageClue.revealed { filter:none; transform:none; }

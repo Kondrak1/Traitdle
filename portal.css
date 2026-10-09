@@ -133,7 +133,7 @@ body {
   position: relative;
   overflow: hidden;
   border: 2px solid var(--world-accent, var(--gold));
-  background-image: var(--world-banner, linear-gradient(135deg, var(--gold), #172039));
+  background-image: var(--world-mark, var(--world-banner, linear-gradient(135deg, var(--gold), #172039)));
   background-position: center;
   background-size: cover;
   color: var(--night);
@@ -170,6 +170,24 @@ body {
 .world-card:nth-child(13) { --world-accent: #e08a55; --world-banner: url('demon-slayer/assets/demon-slayer-banner.png'); --world-overlay: rgb(56 20 24 / 70%); }
 .world-card:nth-child(14) { --world-accent: #b4d85a; --world-banner: url('https://tse1.mm.bing.net/th?q=Black+Clover+banner'); --world-overlay: rgb(12 53 29 / 70%); }
 .world-card:nth-child(15) { --world-accent: #53c7db; --world-banner: url('https://tse1.mm.bing.net/th?q=My+Hero+Academia+banner'); --world-overlay: rgb(15 48 71 / 70%); }
+.world-card:nth-child(1) { --world-mark: url('https://tse1.mm.bing.net/th?q=One+Piece+pirate+compass+icon'); }
+.world-card:nth-child(2) { --world-mark: url('https://tse1.mm.bing.net/th?q=One+Piece+trading+card+icon'); }
+.world-card:nth-child(3) { --world-mark: url('https://tse1.mm.bing.net/th?q=Jujutsu+Kaisen+cursed+seal+icon'); }
+.world-card:nth-child(4) { --world-mark: url('https://tse1.mm.bing.net/th?q=Pokemon+Pokedex+icon'); }
+.world-card:nth-child(5) { --world-mark: url('https://tse1.mm.bing.net/th?q=Avatar+the+last+airbender+four+elements+symbol'); }
+.world-card:nth-child(6) { --world-mark: url('https://tse1.mm.bing.net/th?q=Persona+tarot+arcana+icon'); }
+.world-card:nth-child(7) { --world-mark: url('https://tse1.mm.bing.net/th?q=Frieren+magic+grimoire+icon'); }
+.world-card:nth-child(8) { --world-mark: url('https://tse1.mm.bing.net/th?q=One+Punch+Man+hero+association+logo'); }
+.world-card:nth-child(9) { --world-mark: url('https://tse1.mm.bing.net/th?q=Chainsaw+Man+devil+hunter+icon'); }
+.world-card:nth-child(10) { --world-mark: url('https://tse1.mm.bing.net/th?q=JoJo+Stand+arrow+icon'); }
+.world-card:nth-child(11) { --world-mark: url('https://tse1.mm.bing.net/th?q=Hunter+x+Hunter+Nen+symbol'); }
+.world-card:nth-child(12) { --world-mark: url('https://tse1.mm.bing.net/th?q=Fullmetal+Alchemist+flamel+symbol'); }
+.world-card:nth-child(13) { --world-mark: url('https://tse1.mm.bing.net/th?q=Demon+Slayer+Nichirin+sword+icon'); }
+.world-card:nth-child(14) { --world-mark: url('https://tse1.mm.bing.net/th?q=Black+Clover+grimoire+icon'); }
+.world-card:nth-child(15) { --world-mark: url('https://tse1.mm.bing.net/th?q=My+Hero+Academia+Quirk+icon'); }
+.world-card:nth-child(16) { --world-accent: #f06a9b; --world-banner: url('https://tse1.mm.bing.net/th?q=Bleach+anime+banner'); --world-mark: url('https://tse1.mm.bing.net/th?q=Bleach+zanpakuto+icon'); --world-overlay: rgb(28 19 54 / 70%); }
+.world-card:nth-child(17) { --world-accent: #e87842; --world-banner: url('https://tse1.mm.bing.net/th?q=Naruto+anime+banner'); --world-mark: url('https://tse1.mm.bing.net/th?q=Naruto+hidden+leaf+symbol'); --world-overlay: rgb(57 27 19 / 70%); }
+.world-card:nth-child(18) { --world-accent: #f2c347; --world-banner: url('https://tse1.mm.bing.net/th?q=Dragon+Ball+Z+anime+banner'); --world-mark: url('https://tse1.mm.bing.net/th?q=Dragon+Ball+four+star+dragon+ball+icon'); --world-overlay: rgb(49 29 12 / 70%); }
 
 .world-card h3 { margin: 22px 0 6px; font: 800 1.45rem Georgia, serif; }
 .world-card p { margin: 0; color: var(--muted); line-height: 1.45; }

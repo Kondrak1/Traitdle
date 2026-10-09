@@ -1,0 +1,9 @@
+:root { --dbz-gold: #f2c347; }
+body { background: radial-gradient(circle at 15% 10%, #f2c347, transparent 25%), linear-gradient(145deg, #172d4c, #a64f2b 58%, #241b28); }
+.dbz-game { --line: var(--dbz-gold); --gold: #f7d96f; --text: #fff8e3; --muted: #d9cbb5; background: #202b43; border-color: var(--dbz-gold); }
+.dbz-game header { background: linear-gradient(145deg, #193e6c, #bd5d2f 55%, #30254b); }
+.dbz-game h1 { color: #fff8d7; text-shadow: 4px 5px 0 #8b3829; }
+.dbz-game .toolbar { background: #293957; border-color: #f2c347; }
+
+#imageClue { display:block; object-position:center center; filter:blur(16px) saturate(.65); transform:scale(1.12); }
+#imageClue.revealed { filter:none; transform:none; }

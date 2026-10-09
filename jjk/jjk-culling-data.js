@@ -36,9 +36,14 @@ const jjkCullingGameCharacters = [
   { name: 'Kurourushi', gender: 'Unknown', age: 0, power: 'Cursed Cockroach', type: 'Cursed Spirit', firstArc: 'Culling Game', affiliation: 'Sendai Colony', status: 'Deceased', image: 'assets/characters/kurourushi.jpg' },
   { name: 'Takako Uro', gender: 'Female', age: 400, power: 'Sky Manipulation', type: 'Sorcerer', firstArc: 'Culling Game', affiliation: 'Sendai Colony', status: 'Alive', image: 'assets/characters/takako-uro.jpg' }
 ];
+jjkCullingGameCharacters.forEach(character => { character.hairColor = ({'Yuji Itadori':'Pink','Megumi Fushiguro':'Black','Nobara Kugisaki':'Orange','Satoru Gojo':'White','Maki Zenin':'Green','Toge Inumaki':'White','Panda':'Black','Yuta Okkotsu':'Black','Kento Nanami':'Blond','Aoi Todo':'Black','Mai Zenin':'Black','Noritoshi Kamo':'Black','Kasumi Miwa':'Blue','Momo Nishimiya':'Orange','Mechamaru':'Black','Shoko Ieiri':'Brown','Suguru Geto':'Black','Toji Fushiguro':'Black','Masamichi Yaga':'Black','Utahime Iori':'Black','Choso':'Black and red','Mahito':'Blue-gray','Jogo':'Red','Hanami':'Green','Dagon':'Blue','Ryomen Sukuna':'Pink','Uraume':'White','Kenjaku':'Black','Hajime Kashimo':'White','Kinji Hakari':'Black','Kirara Hoshi':'Pink','Fumihiko Takaba':'Black','Hiromi Higuruma':'Black','Hana Kurusu':'Brown','Yorozu':'Black','Hanyu':'Black','Ranta Zenin':'Black','Manami Suda':'Black','Tengen':'White'}[character.name] || 'Black'); });
 
 jjkCullingGameCharacters.forEach(character => {
   const existing = jjkCharacters.find(entry => entry.name === character.name);
   if (existing) Object.assign(existing, character);
   else jjkCharacters.push(character);
+});
+
+jjkCharacters.forEach(character => {
+  if (!character.hairColor) character.hairColor = 'Black';
 });

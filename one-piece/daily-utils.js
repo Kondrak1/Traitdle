@@ -11,7 +11,8 @@ const traitdleWorldUrls = {
   tcg: `${traitdleShareUrl}one-piece-tcg/tcg.html`,
   jjk: `${traitdleShareUrl}jjk/jjk.html`,
   pokemon: `${traitdleShareUrl}pokemon/pokemon.html`,
-  avatar: `${traitdleShareUrl}avatar/avatar.html`
+  avatar: `${traitdleShareUrl}avatar/avatar.html`,
+  persona: `${traitdleShareUrl}persona/persona.html`
 };
 const excludedCharacterNames = new Set([
   'Charlotte Angel',

@@ -1,0 +1,188 @@
+:root {
+  --persona-black: #08090d;
+  --persona-ink: #11131b;
+  --persona-panel: #171923;
+  --persona-panel-light: #252836;
+  --persona-crimson: #e5233f;
+  --persona-red: #b7132e;
+  --persona-blue: #38a8ff;
+  --persona-ivory: #f6f1e8;
+  --persona-muted: #b8bac7;
+  --persona-shadow: #050509;
+}
+
+body {
+  background:
+    radial-gradient(circle at 14% 12%, rgb(229 35 63 / 26%) 0 2%, transparent 18%),
+    radial-gradient(circle at 90% 86%, rgb(56 168 255 / 20%) 0 2%, transparent 23%),
+    repeating-linear-gradient(135deg, transparent 0 34px, rgb(246 241 232 / 3%) 35px 36px),
+    linear-gradient(145deg, #08090d, #1a1018 48%, #071522);
+}
+
+.persona-game {
+  --bg: var(--persona-black);
+  --panel: var(--persona-panel);
+  --line: var(--persona-blue);
+  --text: var(--persona-ivory);
+  --muted: var(--persona-muted);
+  --gold: var(--persona-crimson);
+  --red: var(--persona-crimson);
+  --shadow: var(--persona-red);
+  border: 3px solid var(--persona-crimson);
+  border-radius: 0;
+  background: linear-gradient(145deg, rgb(17 19 27 / 98%), rgb(8 9 13 / 98%));
+  box-shadow: 14px 14px 0 rgb(229 35 63 / 22%), 0 24px 68px rgb(0 0 0 / 65%);
+}
+
+.persona-game header {
+  min-height: 360px;
+  background:
+    radial-gradient(circle at 72% 22%, rgb(56 168 255 / 38%), transparent 25%),
+    linear-gradient(135deg, #181a25, #390f1c 55%, #071928);
+  border-bottom: 6px solid var(--persona-crimson);
+  transform: skewY(-1deg);
+  transform-origin: top left;
+}
+
+.persona-game header > * {
+  transform: skewY(1deg);
+}
+
+.persona-game .masthead-art {
+  opacity: .62;
+  filter: saturate(1.3) contrast(1.22);
+}
+
+.persona-game .masthead-shade {
+  background:
+    linear-gradient(180deg, rgb(8 9 13 / 20%), rgb(8 9 13 / 64%) 58%, rgb(8 9 13 / 98%) 100%),
+    linear-gradient(105deg, rgb(229 35 63 / 38%), transparent 44%, rgb(56 168 255 / 28%));
+}
+
+.persona-game h1 {
+  color: var(--persona-ivory);
+  font-style: italic;
+  text-shadow: 5px 5px 0 var(--persona-crimson), 0 8px 24px rgb(0 0 0 / 70%);
+}
+
+.persona-game .eyebrow,
+.persona-game .subtitle {
+  color: var(--persona-ivory);
+}
+
+.persona-game .mode-switch {
+  border-color: rgb(229 35 63 / 72%);
+  border-radius: 0;
+  background: rgb(8 9 13 / 72%);
+}
+
+.persona-game .mode-button.active {
+  background: var(--persona-crimson);
+  color: var(--persona-ivory);
+  box-shadow: 4px 4px 0 var(--persona-blue);
+}
+
+.persona-clue {
+  margin: 0 auto 20px;
+  padding: 22px;
+  border: 3px solid var(--persona-ivory);
+  border-radius: 0;
+  background:
+    linear-gradient(135deg, rgb(229 35 63 / 18%), transparent 45%),
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgb(56 168 255 / 7%) 15px 16px),
+    var(--persona-panel);
+  box-shadow: 8px 8px 0 rgb(56 168 255 / 35%);
+  text-align: center;
+}
+
+.persona-clue p {
+  margin: 0;
+  color: var(--persona-crimson);
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.persona-clue h2 {
+  margin: 8px 0 0;
+  color: var(--persona-ivory);
+  font: 800 clamp(1.6rem, 5vw, 3rem) Georgia, serif;
+}
+
+.persona-image-clue {
+  display: block;
+  width: min(300px, 100%);
+  height: 300px;
+  margin: 16px auto 0;
+  border: 6px solid var(--persona-crimson);
+  border-radius: 0;
+  object-fit: cover;
+  filter: blur(16px) saturate(.65);
+  transform: scale(1.12);
+}
+
+.persona-image-clue[hidden] { display: none; }
+.persona-image-clue.revealed { filter: none; transform: none; }
+
+.persona-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+}
+
+.persona-suggestion img {
+  width: 34px;
+  height: 34px;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+.persona-game #board .row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+
+.persona-game .toolbar {
+  background: linear-gradient(90deg, #21131b, #171923 48%, #0c1c2a);
+  border-color: rgb(229 35 63 / 72%);
+}
+
+.persona-game .tile {
+  min-width: 0;
+  height: auto;
+  overflow-wrap: anywhere;
+  background: var(--persona-ivory);
+  color: var(--persona-ink);
+}
+
+.persona-game .tile.correct { background: #25985d; color: #fff; }
+.persona-game .tile.higher { background: var(--persona-blue); color: #071522; }
+.persona-game .tile.lower { background: var(--persona-red); color: #fff; }
+
+.persona-guess {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-left: 5px solid var(--persona-crimson);
+  border-radius: 0;
+  background: var(--persona-panel);
+  color: var(--persona-ivory);
+  font-weight: 800;
+}
+
+.persona-guess.correct { border-left-color: #25985d; }
+.persona-guess b { color: var(--persona-blue); }
+.persona-success-image { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 700px) {
+  .persona-game #board .row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .persona-game #board .row .tile:first-child { grid-column: span 2; }
+}
+
+@media (max-width: 480px) {
+  .persona-game { padding-left: 8px; padding-right: 8px; }
+  .persona-game #board .row { grid-template-columns: 1fr; }
+  .persona-game #board .row .tile:first-child { grid-column: auto; }
+  .persona-game .tile { min-height: 72px; padding: 10px; }
+  .persona-game .trait-value { font-size: .82rem; line-height: 1.3; white-space: normal; }
+}

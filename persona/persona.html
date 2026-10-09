@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Persona Traitdle</title>
+  <link rel="stylesheet" href="../one-piece/file.css">
+  <link rel="stylesheet" href="persona.css">
+  <script src="persona-data.js"></script>
+  <script src="../one-piece/daily-utils.js"></script>
+</head>
+<body>
+  <main class="game persona-game">
+    <header>
+      <a class="home-link" href="../index.html">All worlds</a>
+      <img class="masthead-art" src="assets/persona-banner.png" alt="Persona 5 Royal banner" fetchpriority="high">
+      <div class="masthead-shade"></div>
+      <div class="masthead-content">
+        <div class="eyebrow">TRAITDLE / PERSONA</div>
+        <h1>PERSONA DLE</h1>
+        <p class="subtitle">Read the arcana. Find the Phantom Thief.</p>
+        <div class="mode-switch" role="group" aria-label="Persona game type">
+          <button id="characterMode" class="mode-button active" data-mode="character" aria-pressed="true">Characters</button>
+          <button id="imageMode" class="mode-button" data-mode="image" aria-pressed="false">Blurry images</button>
+        </div>
+        <div class="mode-switch" role="group" aria-label="Game mode">
+          <button id="dailyMode" class="mode-button active" aria-pressed="true">Daily</button>
+          <button id="freeplayMode" class="mode-button" aria-pressed="false">Freeplay</button>
+        </div>
+        <p id="modeNote" class="mode-note">Daily character target</p>
+        <p id="dailyResetTimer" class="daily-reset-timer" aria-live="polite"></p>
+      </div>
+    </header>
+    <section class="persona-clue" aria-labelledby="clueTitle">
+      <p id="clueLabel">Character clue</p>
+      <h2 id="clueTitle">Find the character from the traits below</h2>
+      <img id="imageClue" class="persona-image-clue" alt="Blurred mystery character" draggable="false" hidden>
+    </section>
+    <div class="toolbar">
+      <div class="controls">
+        <div class="guess-count" aria-live="polite">Guesses <b id="guessCount">0</b></div>
+        <div class="autocomplete"><input id="guessInput" placeholder="Type a Persona character..." aria-label="Guess a Persona character" autocomplete="off"><div id="suggestions" class="suggestions"></div></div>
+        <button id="guessBtn">Guess</button><button id="giveUp" class="secondary">Give up</button><button id="newGame" class="secondary" hidden>New game</button>
+      </div>
+      <p id="message" class="hint-message" role="status"></p>
+    </div>
+    <section id="successPanel" class="success-panel" hidden tabindex="-1">
+      <div class="success-art-wrap"><img id="successImage" class="persona-success-image" alt=""></div>
+      <div class="success-copy"><p class="success-kicker">METAVERSE RESTORED</p><h2 id="successTitle"></h2><p id="successDetails" class="success-details"></p><p id="successGuessCount"></p><button id="successContinue">Next Persona mode</button><div id="dailyScore" class="daily-score" hidden><pre id="dailyScoreText"></pre><button id="copyDailyScore" type="button">Copy results</button></div></div>
+    </section>
+    <div id="board" aria-label="Persona character trait board"></div>
+  </main>
+  <script>
+    const categories = [{ key: 'name', label: 'Character' }, { key: 'gender', label: 'Gender' }, { key: 'age', label: 'Age' }, { key: 'bending', label: 'Arcana' }, { key: 'faction', label: 'Affiliation' }, { key: 'birthplace', label: 'Game' }, { key: 'arc', label: 'Arcana order' }];
+    const modes = ['character', 'image']; let mode = 'character', playMode = 'daily', target, guesses = [], over = false;
+    const board = document.querySelector('#board'), input = document.querySelector('#guessInput'), suggestions = document.querySelector('#suggestions'), message = document.querySelector('#message'), imageClue = document.querySelector('#imageClue'), clueTitle = document.querySelector('#clueTitle'), modeNote = document.querySelector('#modeNote'), guessCount = document.querySelector('#guessCount'), guessButton = document.querySelector('#guessBtn'), giveUp = document.querySelector('#giveUp'), newGame = document.querySelector('#newGame'), successPanel = document.querySelector('#successPanel'), successImage = document.querySelector('#successImage'), successTitle = document.querySelector('#successTitle'), successDetails = document.querySelector('#successDetails'), successGuessCount = document.querySelector('#successGuessCount'), dailyScore = document.querySelector('#dailyScore'), dailyScoreText = document.querySelector('#dailyScoreText'), copyDailyScore = document.querySelector('#copyDailyScore');
+    imageClue.draggable = false;
+    imageClue.addEventListener('dragstart', event => event.preventDefault());
+    function normalize(value) { return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+    function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
+    function readPersonaProgress() { const date = getMstDateKey(); try { const saved = JSON.parse(localStorage.getItem('persona-traitdle-daily-progress') || '{}'); return saved.date === date ? saved : { date, character: null, image: null }; } catch (error) { return { date, character: null, image: null }; } }
+    function savePersonaScore(score) { const progress = readPersonaProgress(); progress[mode] = score; localStorage.setItem('persona-traitdle-daily-progress', JSON.stringify(progress)); return progress; }
+    function showPersonaScore(progress) { return ['character', 'image'].every(modeKey => Number.isFinite(progress[modeKey]) || readDailyGameState('persona-traitdle-daily-guesses', modeKey).over); }
+    const arcOrder = { 'Fool': 1, 'Magician': 2, 'Priestess': 3, 'Empress': 4, 'Emperor': 5, 'Hierophant': 6, 'Lovers': 7, 'Chariot': 8, 'Justice': 9, 'Hermit': 10, 'Fortune': 11, 'Strength': 12, 'Hanged Man': 13, 'Death': 14, 'Temperance': 15, 'Devil': 16, 'Tower': 17, 'Star': 18, 'Moon': 19, 'Sun': 20, 'Judgement': 21, 'Faith': 22, 'Councillor': 23, 'Aeon': 24, 'Jester': 25, 'World': 26 };
+    function imageUrl(character) { return `assets/${character.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.png`; }
+    function status(guess, answer, key) { if (guess[key] === answer[key]) return 'correct'; if (key === 'age') return Number(guess.age) < Number(answer.age) ? 'higher' : 'lower'; if (key === 'arc') return arcOrder[guess.arc] < arcOrder[answer.arc] ? 'higher' : 'lower'; return 'absent'; }
+    function value(guess, answer, key) { if (key === 'age' && guess.age !== answer.age) return `${guess.age} ${guess.age < answer.age ? '\u2191' : '\u2193'}`; if (key === 'arc' && guess.arc !== answer.arc) return `${guess.arc} ${arcOrder[guess.arc] < arcOrder[answer.arc] ? '\u2191' : '\u2193'}`; return guess[key]; }
+    function renderSuggestions() { const query = normalize(input.value); suggestions.innerHTML = ''; suggestions.hidden = !query; if (!query) return; personaCharacters.filter(character => !guesses.includes(character.name) && normalize(character.name).includes(query)).forEach(character => { const button = document.createElement('button'); button.type = 'button'; button.className = 'persona-suggestion'; const image = document.createElement('img'); image.src = imageUrl(character); image.alt = ''; const name = document.createElement('span'); name.textContent = character.name; button.append(image, name); button.addEventListener('mousedown', event => event.preventDefault()); button.addEventListener('click', () => { input.value = character.name; suggestions.hidden = true; input.focus(); }); suggestions.append(button); }); suggestions.hidden = !suggestions.children.length; }
+    function renderGuess(guess) { const row = document.createElement('div'); row.className = 'row'; categories.forEach((category, index) => { const tile = document.createElement('div'); tile.className = `tile ${status(guess, target, category.key)} reveal`; tile.style.setProperty('--flip-delay', `${index * 90}ms`); tile.innerHTML = `<span class="trait-label">${category.label}</span><span class="trait-value">${value(guess, target, category.key)}</span>`; row.append(tile); }); board.prepend(row); }
+    function renderImageGuess(guess, correct) { const row = document.createElement('div'); row.className = 'row'; const tile = document.createElement('div'); tile.className = `tile ${correct ? 'correct' : 'absent'} reveal`; tile.innerHTML = `<span class="trait-label">Character</span><span class="trait-value">${guess.name}</span>`; row.append(tile); board.prepend(row); }
+    function resetGame() { const index = playMode === 'daily' ? hash(`${getMstDateKey()}-${mode}`) % personaCharacters.length : Math.floor(Math.random() * personaCharacters.length); target = personaCharacters[index]; const savedState = playMode === 'daily' ? readDailyGameState('persona-traitdle-daily-guesses', mode) : { guesses: [], over: false }; guesses = savedState.guesses; over = savedState.over; board.innerHTML = ''; input.value = ''; suggestions.hidden = true; message.textContent = ''; guessCount.textContent = String(guesses.length); guessButton.disabled = over; giveUp.disabled = over; successPanel.hidden = true; newGame.hidden = playMode === 'daily'; imageClue.hidden = mode !== 'image'; imageClue.classList.remove('revealed'); imageClue.src = mode === 'image' ? imageUrl(target) : ''; clueTitle.textContent = mode === 'character' ? 'Find the character from the traits below' : 'Who is this?'; document.querySelector('#clueLabel').textContent = mode === 'character' ? 'Character clue' : 'Blurry image clue'; document.querySelectorAll('[data-mode]').forEach(button => { const active = button.dataset.mode === mode; button.classList.toggle('active', active); button.setAttribute('aria-pressed', String(active)); }); const daily = playMode === 'daily'; dailyMode.classList.toggle('active', daily); freeplayMode.classList.toggle('active', !daily); modeNote.textContent = `${daily ? 'Daily' : 'Freeplay'} ${mode === 'character' ? 'character' : 'image'} target`; guesses.forEach(name => { const guess = personaCharacters.find(character => character.name === name); if (guess) mode === 'character' ? renderGuess(guess) : renderImageGuess(guess, guess.name === target.name); }); if (over) showSuccess(); }
+    function showSuccess() { const progress = playMode === 'daily' ? savePersonaScore(guesses.length) : readPersonaProgress(); const allModesComplete = showPersonaScore(progress); successImage.src = imageUrl(target); successImage.alt = target.name; successTitle.textContent = target.name; successDetails.textContent = `${target.bending} / ${target.faction}`; successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`; dailyScore.hidden = mode !== 'image' || playMode !== 'daily' || !allModesComplete; if (!dailyScore.hidden) { const scoreText = appendShareLink(`I've completed all modes of #Persona Traitdle today:\nCharacters: ${progress.character ?? '-'}\nBlurry images: ${progress.image ?? '-'}`, traitdleWorldUrls.persona); dailyScoreText.textContent = scoreText; enableCopyButton(copyDailyScore, scoreText); } imageClue.classList.toggle('revealed', mode === 'image'); successPanel.hidden = false; successPanel.focus({ preventScroll: true }); }
+    function submitGuess() { const guess = personaCharacters.find(character => normalize(character.name) === normalize(input.value)); if (!guess) { message.textContent = 'Choose a character from the suggestions.'; return; } if (guesses.includes(guess.name)) return; guesses.push(guess.name); guessCount.textContent = guesses.length; const correct = guess.name === target.name; if (mode === 'character') renderGuess(guess); else renderImageGuess(guess, correct); input.value = ''; suggestions.hidden = true; if (correct) { over = true; guessButton.disabled = true; giveUp.disabled = true; message.textContent = `Correct. ${target.name} was the answer.`; } if (playMode === 'daily') saveDailyGameState('persona-traitdle-daily-guesses', mode, guesses, over); if (correct) showSuccess(); }
+    document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { mode = button.dataset.mode; resetGame(); })); dailyMode.addEventListener('click', () => { playMode = 'daily'; resetGame(); }); freeplayMode.addEventListener('click', () => { playMode = 'freeplay'; resetGame(); }); newGame.addEventListener('click', resetGame); guessButton.addEventListener('click', () => { if (!over) submitGuess(); }); giveUp.addEventListener('click', () => { over = true; guessButton.disabled = true; giveUp.disabled = true; imageClue.classList.toggle('revealed', mode === 'image'); message.textContent = `The hidden character was ${target.name}.`; if (playMode === 'daily') saveDailyGameState('persona-traitdle-daily-guesses', mode, guesses, over); }); input.addEventListener('input', renderSuggestions); input.addEventListener('keydown', event => { if (event.key === 'Enter' && !suggestions.hidden) { event.preventDefault(); suggestions.querySelector('button')?.click(); } else if (event.key === 'Enter' && !over) submitGuess(); }); document.querySelector('#successContinue').addEventListener('click', () => { mode = modes[(modes.indexOf(mode) + 1) % modes.length]; resetGame(); }); startDailyResetTimer(document.querySelector('#dailyResetTimer')); resetGame();
+    giveUp.addEventListener('click', () => {
+      successPanel.querySelector('.success-kicker').textContent = 'ROUND OVER';
+      successTitle.textContent = 'The answer was revealed';
+      successDetails.textContent = `${target.bending} Â· ${target.faction}`;
+      successGuessCount.textContent = `${guesses.length} ${guesses.length === 1 ? 'guess' : 'guesses'}`;
+      if (mode === 'image' && playMode === 'daily') {
+        const progress = readPersonaProgress();
+        progress.image = null;
+        localStorage.setItem('persona-traitdle-daily-progress', JSON.stringify(progress));
+        const allModesComplete = showPersonaScore(progress);
+        const scoreText = appendShareLink(`I've completed all modes of #Persona Traitdle today:\nCharacters: ${progress.character ?? '-'}\nBlurry images: -`, traitdleWorldUrls.persona);
+        dailyScoreText.textContent = scoreText;
+        dailyScore.hidden = !allModesComplete;
+        if (!dailyScore.hidden) enableCopyButton(copyDailyScore, scoreText);
+      } else dailyScore.hidden = true;
+      successImage.src = imageUrl(target);
+      successImage.alt = target.name;
+      imageClue.classList.toggle('revealed', mode === 'image');
+      successPanel.hidden = false;
+      successPanel.focus({ preventScroll: true });
+    });
+  </script>
+</body>
+</html>

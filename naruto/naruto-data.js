@@ -56,3 +56,27 @@ const narutoCharacters = [
 ['Tenten','Female',13,'Weapon mastery','Team Guy','Chunin Exams','Hidden Leaf','Human','Brown'],
 ['Konohamaru Sarutobi','Male',8,'Fire','Team Ebisu','Chunin Exams','Hidden Leaf','Sarutobi','Brown'],
 ].map(([name,gender,age,nature,faction,arc,origin,species,hairColor])=>({name,gender,age,nature,faction,arc,origin,species,hairColor:hairColor||'Black',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Naruto')}`}));
+
+const narutoRanks = {
+  'Naruto Uzumaki':'Hokage','Sasuke Uchiha':'Missing-nin','Sakura Haruno':'Jonin',
+  'Kakashi Hatake':'Hokage','Hinata Hyuga':'Chunin','Shikamaru Nara':'Chunin',
+  'Ino Yamanaka':'Chunin','Choji Akimichi':'Chunin','Rock Lee':'Chunin','Neji Hyuga':'Jonin',
+  'Gaara':'Kazekage','Jiraiya':'Sannin','Tsunade':'Hokage','Orochimaru':'Sannin',
+  'Itachi Uchiha':'Missing-nin','Deidara':'S-rank missing-nin','Sasori':'S-rank missing-nin',
+  'Kisame Hoshigaki':'S-rank missing-nin','Madara Uchiha':'Legendary shinobi',
+  'Obito Uchiha':'Missing-nin','Might Guy':'Jonin','Asuma Sarutobi':'Jonin','Kurenai Yuhi':'Jonin',
+  'Iruka Umino':'Chunin','Hiruzen Sarutobi':'Hokage','Minato Namikaze':'Hokage',
+  'Kushina Uzumaki':'Jonin','Hashirama Senju':'Hokage','Tobirama Senju':'Hokage',
+  'Danzo Shimura':'Jonin','Sai':'Chunin','Yamato':'Jonin','Kabuto Yakushi':'Missing-nin',
+  'Kimimaro':'S-rank missing-nin','Haku':'Missing-nin','Zabuza Momochi':'S-rank missing-nin',
+  'Konan':'S-rank missing-nin','Nagato':'S-rank missing-nin','Yahiko':'Jonin',
+  'Hidan':'S-rank missing-nin','Kakuzu':'S-rank missing-nin','Karin':'Genin',
+  'Suigetsu Hozuki':'Missing-nin','Jugo':'Missing-nin','Killer B':'Jinchuriki',
+  'Darui':'Jonin','Onoki':'Tsuchikage','Mei Terumi':'Mizukage','A':'Raikage',
+  'Temari':'Jonin','Kankuro':'Jonin','Kiba Inuzuka':'Chunin','Shino Aburame':'Chunin',
+  'Tenten':'Chunin','Konohamaru Sarutobi':'Jonin'
+};
+
+narutoCharacters.forEach(character => {
+  character.rank = narutoRanks[character.name] || 'Jonin';
+});

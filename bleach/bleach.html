@@ -9,7 +9,7 @@
 <div id="board" aria-label="Character trait board"></div><div class="legend" aria-label="Legend"><span><i class="dot correct"></i>Exact</span><span><i class="dot absent"></i>Missing</span></div>
 </main><script>
 const data=bleachCharacters;
-const categories=[['name','Character'],['gender','Gender'],['age','Age'],['hairColor','Hair colour'],['zanpakuto','Zanpakuto'],['species','Species'],['faction','Faction'],['arc','First arc']].map(([key,label])=>({key,label})),arcOrder={'Agent of the Shinigami':1,'Soul Society':2,'Arrancar: The Arrival':3,'Thousand-Year Blood War':4,'Backstory':0};
+const categories=[['name','Character'],['gender','Gender'],['age','Age'],['hairColor','Hair colour'],['zanpakuto','Zanpakuto'],['species','Species'],['origin','Birthplace'],['faction','Faction'],['arc','First arc']].map(([key,label])=>({key,label})),arcOrder={'Agent of the Shinigami':1,'Soul Society':2,'Arrancar: The Arrival':3,'Thousand-Year Blood War':4,'Backstory':0};
 const stateKey='bleach-traitdle-daily';
 let mode='character', gameMode='daily', target=null, guesses=[], over=false, suggestionIndex=-1, rounds={};
 const $=id=>document.getElementById(id), board=$('board'), input=$('guessInput'), suggestions=$('suggestions'), count=$('guessCount'), message=$('message'), guessBtn=$('guessBtn'), giveUp=$('giveUp'), newGame=$('newGame'), successPanel=$('successPanel');

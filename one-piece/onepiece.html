@@ -13,7 +13,7 @@
   <main class="game">
     <header>
       <a class="home-link" href="../index.html">All worlds</a>
-      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <img class="masthead-art" src="assets/grand-line.png" alt="One Piece banner" fetchpriority="high">
       <div class="masthead-shade"></div>
       <div class="masthead-content">
         <div class="eyebrow">ONE PIECE / GRAND LINE</div>
@@ -597,7 +597,7 @@
     }
 
     function setSuggestionImage(image, character) {
-      image.src = character.image || 'assets/grand-line.jpeg';
+      image.src = character.image || 'assets/grand-line.png';
     }
 
     function renderSuggestions(value) {
@@ -719,7 +719,7 @@
         enableCopyButton(copyDailyScore, scoreText);
       }
       successImage.alt = character.name;
-      successImage.src = character.image || 'assets/grand-line.jpeg';
+      successImage.src = character.image || 'assets/grand-line.png';
       successPanel.hidden = false;
       document.querySelector('.game').classList.add('success-state');
       confetti.innerHTML = '';
@@ -870,7 +870,7 @@
       dailyScore.hidden = gameMode !== 'daily' || !allModesComplete;
       if (!dailyScore.hidden) enableCopyButton(copyDailyScore, dailyScoreText.textContent);
       successImage.alt = target.name;
-      successImage.src = target.image || 'assets/grand-line.jpeg';
+      successImage.src = target.image || 'assets/grand-line.png';
       successPanel.hidden = false;
       successPanel.focus({ preventScroll: true });
     });

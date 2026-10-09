@@ -1,9 +1,9 @@
 var Unknown='Unknown';
 var blackCloverCharacters = [
-['Asta','Male',15,'Anti-Magic','Black Bulls','Magic Knights Entrance','Hage Village','Human'],
-['Yuno','Male',15,'Wind Magic','Golden Dawn','Magic Knights Entrance','Hage Village','Human'],
-['Noelle Silva','Female',15,'Water Magic','Black Bulls','Magic Knights Entrance','Royal'],
-['Yami Sukehiro','Male',28,'Dark Magic','Black Bulls','Magic Knights Entrance','Foreign Land','Human'],
+['Asta','Male',15,'Anti-Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Human'],
+['Yuno','Male',15,'Wind Magic','Golden Dawn','Magic Knights Entrance','Clover Kingdom','Human'],
+['Noelle Silva','Female',15,'Water Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Royal'],
+['Yami Sukehiro','Male',28,'Dark Magic','Black Bulls','Magic Knights Entrance','Land of the Sun','Human'],
 ['Nacht Faust','Male',29,'Shadow Magic','Black Bulls','Elf Reincarnation','Clover Kingdom','Human'],
 ['Mereoleona Vermillion','Female',32,'Fire Magic','Crimson Lions','Royal Knights','Clover Kingdom','Royal'],
 ['Fuegoleon Vermillion','Male',30,'Fire Magic','Crimson Lions','Magic Knights Entrance','Clover Kingdom','Royal'],
@@ -13,7 +13,7 @@ var blackCloverCharacters = [
 ['Marx Francois','Male',28,'Memory Magic','Clover Kingdom','Magic Knights Entrance','Clover Kingdom','Human'],
 ['Damnatio Kira','Male',28,'Scale Magic','Parliament','Elf Reincarnation','Clover Kingdom','Human'],
 ['Finral Roulacase','Male',21,'Spatial Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Noble'],
-['Vanessa Enoteca','Female',24,'Thread Magic','Black Bulls','Witches Forest','Witches Forest','Human'],
+['Vanessa Enoteca','Female',24,'Thread Magic','Black Bulls','Witches Forest','Clover Kingdom','Human'],
 ['Luck Voltia','Male',18,'Lightning Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Human'],
 ['Magna Swing','Male',18,'Fire Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Human'],
 ['Gauche Adlai','Male',19,'Mirror Magic','Black Bulls','Magic Knights Entrance','Clover Kingdom','Noble'],
@@ -61,5 +61,5 @@ var blackCloverCharacters = [
 ['Zenon Zogratis','Male',25,'Bone Magic','Dark Triad','Spade Kingdom Raid','Spade Kingdom','Human'],
 ['Dante Zogratis','Male',29,'Gravity Magic','Dark Triad','Spade Kingdom Raid','Spade Kingdom','Human'],
 ['Vanica Zogratis','Female',28,'Blood Magic','Dark Triad','Spade Kingdom Raid','Spade Kingdom','Human'],
-['Lucifero','Male',Unknown,'Gravity Magic','Devils','Spade Kingdom Raid','Underworld','Devil']
+['Lucifero','Male',Unknown,'Gravity Magic','Devils','Spade Kingdom Raid','Unknown','Devil']
 ].map(([name,gender,age,magic,faction,arc,origin,species])=>({name,gender,age,hairColor:({'Asta':'Silver','Yuno':'Black','Noelle Silva':'Silver','Yami Sukehiro':'Black','Nacht Faust':'Black','Mereoleona Vermillion':'Red','Fuegoleon Vermillion':'Red','Leopold Vermillion':'Red','William Vangeance':'Blond','Julius Novachrono':'Blond','Finral Roulacase':'Blond','Vanessa Enoteca':'Black','Luck Voltia':'Blond','Magna Swing':'Black','Gauche Adlai':'Blond','Grey':'Gray','Gordon Agrippa':'Black','Charmy Pappitson':'White','Henry Legolant':'Black','Zora Ideale':'Black','Secre Swallowtail':'Black','Mimosa Vermillion':'Blond','Klaus Lunettes':'Blond','Yuno Grinberryall':'Black','Langris Vaude':'Black','Dante Zogratis':'Black','Vanica Zogratis':'Red','Lucifero':'Black'}[name]||'Black'),magic,faction,arc,origin,species,image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Black Clover')}`}));

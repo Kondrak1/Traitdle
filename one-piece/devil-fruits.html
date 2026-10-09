@@ -16,7 +16,7 @@
   <main class="game alternate-game">
     <header>
       <a class="home-link" href="../index.html">All worlds</a>
-      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <img class="masthead-art" src="assets/grand-line.png" alt="One Piece banner" fetchpriority="high">
       <div class="masthead-shade"></div>
       <div class="masthead-content">
         <div class="eyebrow">ONE PIECE / GRAND LINE</div>
@@ -168,11 +168,11 @@
         button.dataset.index = String(index);
         button.dataset.name = character.name;
         const image = document.createElement('img');
-        const localImage = character.image ? `assets/characters/${character.image.split('/').pop()}` : 'assets/grand-line.jpeg';
+        const localImage = character.image ? `assets/characters/${character.image.split('/').pop()}` : 'assets/grand-line.png';
         image.alt = '';
         image.loading = 'lazy';
         image.src = localImage;
-        image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.jpeg'; };
+        image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.png'; };
         const name = document.createElement('span');
         name.textContent = displayCharacterName(character);
         button.append(image, name);
@@ -275,7 +275,7 @@
         fruitDailyScoreText.textContent = scoreText;
         enableCopyButton(fruitCopyDailyScore, scoreText);
       }
-      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
+      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.png';
       fruitSuccessImage.alt = fruitTarget.user.name;
       fruitSuccess.hidden = false;
       fruitConfetti.innerHTML = '';
@@ -350,7 +350,7 @@
       fruitDailyScoreText.textContent = formatDailyScore(progress);
       fruitDailyScore.hidden = fruitGameMode !== 'daily' || !allModesComplete;
       if (!fruitDailyScore.hidden) enableCopyButton(fruitCopyDailyScore, fruitDailyScoreText.textContent);
-      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.jpeg';
+      fruitSuccessImage.src = fruitTarget.user.image || 'assets/grand-line.png';
       fruitSuccessImage.alt = fruitTarget.user.name;
       fruitSuccess.hidden = false;
       fruitSuccess.focus({ preventScroll: true });

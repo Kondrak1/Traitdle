@@ -155,7 +155,7 @@ body {
 
 .world-mark > span { position: relative; z-index: 1; }
 
-.world-card:nth-child(1) { --world-accent: #f4bd4f; --world-banner: url('one-piece/assets/grand-line.jpeg'); --world-overlay: rgb(10 32 54 / 70%); }
+.world-card:nth-child(1) { --world-accent: #f4bd4f; --world-banner: url('one-piece/assets/grand-line.png'); --world-overlay: rgb(10 32 54 / 70%); }
 .world-card:nth-child(2) { --world-accent: #e7b84e; --world-banner: url('one-piece-tcg/assets/OPTCG-banner.jfif'); --world-overlay: rgb(20 34 56 / 70%); }
 .world-card:nth-child(3) { --world-accent: #d8b7ff; --world-banner: url('jjk/assets/jjk-background.jpg'); --world-overlay: rgb(38 18 52 / 68%); }
 .world-card:nth-child(4) { --world-accent: #54d5df; --world-banner: url('pokemon/assets/pokemon-banner.jpg'); --world-overlay: rgb(10 35 72 / 68%); }

@@ -256,7 +256,7 @@ h1 {
   border-radius: 18px;
   background:
     linear-gradient(135deg, rgb(200 61 50 / 92%), rgb(125 36 31 / 96%)),
-    url("assets/grand-line.jpeg") center / cover;
+    url("assets/grand-line.png") center / cover;
   box-shadow: 0 18px 50px rgb(0 0 0 / 35%);
   transform-origin: center;
   animation: success-arrival 700ms cubic-bezier(.2, .8, .2, 1) both;

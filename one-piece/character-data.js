@@ -907,6 +907,8 @@
   },
   {
     "name": "Ashura Doji",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Ashura_Doji.webp",
     "epithet": "Strongest Monster of Kuri",
     "affiliation": "Kouzuki Family",
@@ -7510,6 +7512,8 @@
   },
   {
     "name": "Denjiro",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Denjiro.webp",
     "epithet": "Dozing Kyoshiro",
     "affiliation": "Kouzuki Family",
@@ -11333,22 +11337,6 @@
   ]
   },
   {
-    "name": "Hack",
-    "image": "/images/characters/Hack_(archaeologist).webp",
-    "affiliation": "Ohara Archaeologists",
-    "first_appearance_arc": "Chapter 391",
-    "race": "Human",
-    "status": "Deceased",
-    "description": "Was one of the archaeologists of Ohara",
-    "journey": [
-      {"location":"Ohara","chapter":"Chapter 391"}
-    ],
-    "relationships": [
-      {"name": "Clou D. Clover","relationship": "Director"},
-      {"name": "Nico Robin","relationship": "Friend"}
-  ]
-  },
-  {
     "name": "Hajrudin",
     "image": "/images/characters/Hajrudin.webp",
     "affiliation": "New Giant Warrior Pirates",
@@ -13097,6 +13085,8 @@
   },
   {
     "name": "Igaram",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Igaram.webp",
     "affiliation": "Arabasta Kingdom",
     "origin": "Grand Line (Arabasta Kingdom)",
@@ -15674,6 +15664,8 @@
   },
   {
     "name": "Kikunojo",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Kikunojo.webp",
     "epithet": "of the Lingering Snow",
     "affiliation": "Kouzuki Family",
@@ -15828,6 +15820,8 @@
   },
   {
     "name": "Kinemon",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kinemon.webp",
     "epithet": "Foxfire",
     "affiliation": "Kouzuki Family",
@@ -16354,6 +16348,8 @@
   },
   {
     "name": "Kouzuki Hiyori",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Hiyori.webp",
     "affiliation": "Kouzuki Family",
     "origin": "Grand Line (Moby Dick)",
@@ -16380,6 +16376,8 @@
   },
   {
     "name": "Kouzuki Momonosuke",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Momonosuke.webp",
     "image_pre": "/images/characters/Kouzuki_Momonosuke_Pre.webp",
     "affiliation": "Kouzuki Family",
@@ -16463,6 +16461,8 @@
   },
   {
     "name": "Kouzuki Oden",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Oden.webp",
     "epithet": "Idiot Lord",
     "affiliation": "Kouzuki Family",
@@ -16512,6 +16512,8 @@
   },
   {
     "name": "Kouzuki Sukiyaki",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Sukiyaki.webp",
     "image_pre": "/images/characters/Kouzuki_Sukiyaki_Pre.webp",
     "affiliation": "Kouzuki Family",
@@ -23732,6 +23734,8 @@
   },
   {
     "name": "Raizo",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Raizo.webp",
     "epithet": "of the Mist",
     "affiliation": "Kouzuki Family",
@@ -26715,6 +26719,8 @@
   },
   {
     "name": "Shinobu",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Shinobu.webp",
     "epithet": "Bewitching Kunoichi",
     "affiliation": "Kouzuki Family",
@@ -31843,6 +31849,126 @@
     "description": "Fish-Man who encountered Otohime as a child 16 years ago",
     "journey": [
       {"location":"Fish-Man Island","chapter":"Chapter 621"}
+    ]
+  },
+  {
+    "name": "Kuzan",
+    "image": "/images/characters/Kuzan.webp",
+    "epithet": "Aokiji",
+    "affiliation": "Blackbeard Pirates",
+    "devil_fruit": "Hie Hie no Mi",
+    "haki": ["Observation", "Armament"],
+    "origin": "North Blue",
+    "height": 298,
+    "age": 49,
+    "first_appearance_arc": "Chapter 303",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Former Marine admiral who now travels with the Blackbeard Pirates.",
+    "journey": [
+      {"location":"Ohara"},
+      {"location":"Long Ring Long Land"},
+      {"location":"Marineford"},
+      {"location":"Punk Hazard"},
+      {"location":"Hachinosu","chapter":"Chapter 1081"}
+    ],
+    "relationships": [
+      {"name":"Sakazuki [Akainu]","relationship":"Former Colleague, Defeated by"},
+      {"name":"Marshall D. Teach [Blackbeard]","relationship":"Ally"},
+      {"name":"Monkey D. Garp","relationship":"Former Mentor, Defeated by"},
+      {"name":"Smoker","relationship":"Former Superior"}
+    ]
+  },
+  {
+    "name": "Lucci",
+    "image": "/images/characters/Lucci.webp",
+    "epithet": "Massacre Weapon",
+    "affiliation": "CP0",
+    "devil_fruit": "Neko Neko no Mi, Model: Leopard (Awakened)",
+    "haki": ["Observation", "Armament"],
+    "origin": "Grand Line (Guanhao)",
+    "height": 212,
+    "age": 30,
+    "first_appearance_arc": "Chapter 323",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Masked agent of CP0 and the strongest agent in the history of CP9.",
+    "journey": [
+      {"location":"Guanhao"},
+      {"location":"Shipbuilding Island"},
+      {"location":"Enies Lobby"},
+      {"location":"Dressrosa"},
+      {"location":"Egghead","chapter":"Chapter 1062"}
+    ],
+    "relationships": [
+      {"name":"Kaku","relationship":"Coworker"},
+      {"name":"Blueno","relationship":"Coworker"},
+      {"name":"Monkey D. Luffy","relationship":"Enemy, Defeated by"},
+      {"name":"Nico Robin","relationship":"Kidnapped"}
+    ]
+  },
+  {
+    "name": "Yasui",
+    "image": "/images/characters/Yasui.webp",
+    "epithet": "Yasu the Hedgehog",
+    "affiliation": "Shimotsuki Family",
+    "height": 155,
+    "age": 71,
+    "first_appearance_arc": "Chapter 929",
+    "race": "Human",
+    "status": "Deceased",
+    "description": "Taikomochi who lived in Ebisu Town and the adoptive father of Toko.",
+    "journey": [
+      {"location":"Wano Country's Island","chapter":"Chapter 929"}
+    ],
+    "relationships": [
+      {"name":"Toko","relationship":"Adopted Daughter"},
+      {"name":"Kaidou","relationship":"Enemy"},
+      {"name":"Kurozumi Orochi","relationship":"Enemy"},
+      {"name":"Kinemon","relationship":"Ally"}
+    ]
+  },
+  {
+    "name": "Sommers",
+    "image": "/images/characters/Sommers.webp",
+    "affiliation": "Knights of God",
+    "devil_fruit": "Iba Iba no Mi",
+    "first_appearance_arc": "Chapter 1140",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Member of the Knights of God and World Noble.",
+    "journey": [
+      {"location":"God Valley"},
+      {"location":"Mary Geoise"},
+      {"location":"Elbaph Island","chapter":"Chapter 1140"}
+    ],
+    "relationships": [
+      {"name":"Figarland Shamrock","relationship":"Leader"},
+      {"name":"Figarland Garling","relationship":"Former Leader"},
+      {"name":"Nerona Imu","relationship":"Supreme Ruler"},
+      {"name":"Shuri [Manmayer Gunko]","relationship":"Colleague"}
+    ]
+  },
+  {
+    "name": "Ganfall",
+    "image": "/images/characters/Ganfall.webp",
+    "epithet": "Knight of the Sky",
+    "affiliation": "Skypiea",
+    "origin": "Grand Line (Skypiea)",
+    "height": 180,
+    "age": 68,
+    "first_appearance_arc": "Chapter 237",
+    "race": "Moon people - Skypiean",
+    "status": "Alive",
+    "description": "Current, two-time God of Skypiea, having been usurped once by Enel.",
+    "journey": [
+      {"location":"Skypiea","chapter":"Chapter 237"}
+    ],
+    "relationships": [
+      {"name":"Enel","relationship":"Enemy, God Successor and Predecessor"},
+      {"name":"Monkey D. Luffy","relationship":"Ally"},
+      {"name":"Wyper","relationship":"Ally"},
+      {"name":"Pierre","relationship":"Pet"}
     ]
   }
 ];

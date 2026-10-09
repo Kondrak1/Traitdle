@@ -261,7 +261,7 @@
     function formatBounty(value) {
       if (value === undefined || value === null || String(value).trim() === '') return 'Unknown';
       const numeric = Number(String(value).replace(/[^0-9.-]/g, ''));
-      if (Number.isNaN(numeric) || numeric <= 0) return 'Unknown';
+      if (Number.isNaN(numeric) || numeric < 0) return 'Unknown';
       return new Intl.NumberFormat('en-US').format(numeric);
     }
 
@@ -423,7 +423,11 @@
       'Topman Warcury', 'Shepherd Ju Peter', 'Wyper', 'Iceberg', 'Paulie',
       'Vander Decken', 'Gloriosa', 'Atlas', 'Lilith', 'Edison', 'Pythagoras',
       'Shaka', 'York', 'Ripley', 'Figarland Garling', 'Shepherd Sommers',
-      'Rob Lucci', 'Kaku', 'Jabra'
+      'Rob Lucci', 'Kaku', 'Jabra', 'Blueno', 'Hack', 'Uta', 'Sanjuan Wolf',
+      'Baby 5', 'Igaram', 'Sugar', 'Hogback', 'Leo', 'Carrot', 'Wanda',
+      'Porche', 'Gerd', 'Ganfall', 'Magellan', 'Kouzuki Hiyori',
+      'Kouzuki Momonosuke', 'Kouzuki Oden', 'Kouzuki Sukiyaki', 'Shinobu',
+      'Raizo', 'Kinemon', 'Kikunojo', 'Denjiro', 'Ashura Doji'
     ].map(normalizeText));
 
     function hasEnoughTraits(character) {

@@ -12,7 +12,10 @@ const traitdleWorldUrls = {
   jjk: `${traitdleShareUrl}jjk/jjk.html`,
   pokemon: `${traitdleShareUrl}pokemon/pokemon.html`,
   avatar: `${traitdleShareUrl}avatar/avatar.html`,
-  persona: `${traitdleShareUrl}persona/persona.html`
+  persona: `${traitdleShareUrl}persona/persona.html`,
+  frieren: `${traitdleShareUrl}frieren/frieren.html`,
+  opm: `${traitdleShareUrl}opm/opm.html`,
+  chainsawMan: `${traitdleShareUrl}chainsaw-man/chainsaw-man.html`
 };
 const excludedCharacterNames = new Set([
   'Charlotte Angel',

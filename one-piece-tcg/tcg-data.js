@@ -62,6 +62,7 @@ const tcgGenderOverrides = new Map([
   ['Shirahoshi', 'Female'],
   ['S Snake', 'Female'],
   ['Stussy', 'Female'],
+  ['Sugar', 'Female'],
   ['Tashigi', 'Female'],
   ['Ulti', 'Female'],
   ['Uta', 'Female'],

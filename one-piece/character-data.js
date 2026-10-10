@@ -12545,6 +12545,7 @@
     "origin": "West Blue",
     "height": 223,
     "age": 47,
+    "gender": "Male",
     "first_appearance_arc": "Chapter 446",
     "race": "Human",
     "status": "Alive",

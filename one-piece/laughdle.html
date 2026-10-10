@@ -175,7 +175,22 @@
     function setLaughPortrait(image, laugh) { image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.png'; }; image.src = portraitFor(laugh); }
     function hash(value) { let result = 2166136261; for (const character of value) { result ^= character.charCodeAt(0); result = Math.imul(result, 16777619); } return Math.abs(result); }
     function cardFor(name) { return onePieceLaughs.find(laugh => normalize(laugh.name) === normalize(name)); }
-    function chooseTarget() { const index = gameMode === 'daily' ? hash(`${getMstDateKey()}-one-piece-laughdle`) % onePieceLaughs.length : Math.floor(Math.random() * onePieceLaughs.length); return onePieceLaughs[index]; }
+    function chooseTarget() {
+      if (gameMode !== 'daily') return onePieceLaughs[Math.floor(Math.random() * onePieceLaughs.length)];
+      const dateKey = getMstDateKey();
+      const seed = `${dateKey}-one-piece-laughdle`;
+      let index = hash(seed) % onePieceLaughs.length;
+      try {
+        const previous = JSON.parse(localStorage.getItem('one-piece-laughdle-last-target') || '{}');
+        if (previous && previous.date && previous.date !== dateKey && previous.name === onePieceLaughs[index].name) {
+          index = (index + 1) % onePieceLaughs.length;
+        }
+      } catch (error) {
+        // Ignore malformed cached targets and fall back to the date-based result.
+      }
+      localStorage.setItem('one-piece-laughdle-last-target', JSON.stringify({ date: dateKey, name: onePieceLaughs[index].name }));
+      return onePieceLaughs[index];
+    }
     function updateMode() { const daily = gameMode === 'daily'; dailyMode.classList.toggle('active', daily); freeplayMode.classList.toggle('active', !daily); dailyMode.setAttribute('aria-pressed', String(daily)); freeplayMode.setAttribute('aria-pressed', String(!daily)); modeNote.textContent = `${daily ? 'Daily' : 'Freeplay'} laugh target`; newGameButton.hidden = daily; }
     function displayLaughCharacterName(character) { return displayCharacterName(character); }
     function renderSuggestions() { const query = normalize(input.value); suggestions.innerHTML = ''; suggestions.hidden = !query; if (!query) return; const matches = characterData.filter(character => characterModeAnswerNames.has(character.name) && !guesses.some(guess => characterNameMatches(character, guess)) && characterNameMatches(character, query)); matches.forEach(character => { const option = document.createElement('button'); option.type = 'button'; option.className = 'suggestion'; const image = document.createElement('img'); image.alt = ''; image.src = characterPortrait(character); image.onerror = () => { image.onerror = null; image.src = 'assets/grand-line.png'; }; const name = document.createElement('span'); name.textContent = displayLaughCharacterName(character); option.append(image, name); option.addEventListener('mousedown', event => event.preventDefault()); option.addEventListener('click', () => { input.value = displayLaughCharacterName(character); suggestions.hidden = true; input.focus(); }); suggestions.append(option); }); suggestions.hidden = !matches.length; }

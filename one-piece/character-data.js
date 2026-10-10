@@ -30103,6 +30103,7 @@
     "origin": "South Blue",
     "height": 573,
     "age": 38,
+    "gender": "Male",
     "first_appearance_arc": "Chapter 575",
     "race": "Human",
     "status": "Alive",

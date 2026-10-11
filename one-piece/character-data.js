@@ -16658,6 +16658,7 @@
   },
   {
     "name": "Kujaku",
+    "gender": "Female",
     "image": "/images/characters/Kujaku.webp",
     "affiliation": "Marines (SWORD)",
     "devil_fruit": "Muchi Muchi no Mi",

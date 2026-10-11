@@ -50,7 +50,6 @@ const excludedCharacterNames = new Set([
   'Ivan X',
   'Kamakiri',
   'Kentauros',
-  'Kujaku',
   'Kurozumi Higurashi',
   'Makino',
   'Manboshi',

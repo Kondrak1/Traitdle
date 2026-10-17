@@ -54,4 +54,4 @@ const bleachCharacters = [
 ['Coyote Starrk','Male','Unknown','Los Lobos','Espada','Arrancar: The Arrival','Hueco Mundo','Arrancar','Black'],
 ['Nnoitra Gilga','Male','Unknown','Santa Teresa','Espada','Arrancar: The Arrival','Hueco Mundo','Arrancar','Black'],
 ['Tier Harribel','Female','Unknown','Tiburon','Espada','Arrancar: The Arrival','Hueco Mundo','Arrancar','Blond'],
-].map(([name,gender,age,zanpakuto,faction,arc,origin,species,hairColor])=>({name,gender,age,zanpakuto,faction,arc,origin,species,hairColor:hairColor||'Black',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Bleach')}`}));
+].map(([name,gender,age,zanpakuto,faction,arc,origin,species,hairColor])=>({name,gender,age,zanpakuto,faction,arc,origin,species,hairColor:hairColor||'Unknown',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Bleach')}`}));

@@ -55,7 +55,7 @@ const narutoCharacters = [
 ['Shino Aburame','Male',12,'Insects','Team 8','Academy Entrance','Hidden Leaf','Aburame','Black'],
 ['Tenten','Female',13,'Weapon mastery','Team Guy','Chunin Exams','Hidden Leaf','Human','Brown'],
 ['Konohamaru Sarutobi','Male',8,'Fire','Team Ebisu','Chunin Exams','Hidden Leaf','Sarutobi','Brown'],
-].map(([name,gender,age,nature,faction,arc,origin,species,hairColor])=>({name,gender,age,nature,faction,arc,origin,species,hairColor:hairColor||'Black',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Naruto')}`}));
+].map(([name,gender,age,nature,faction,arc,origin,species,hairColor])=>({name,gender,age,nature,faction,arc,origin,species,hairColor:hairColor||'Unknown',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Naruto')}`}));
 
 const narutoRanks = {
   'Naruto Uzumaki':'Hokage','Sasuke Uchiha':'Missing-nin','Sakura Haruno':'Jonin',

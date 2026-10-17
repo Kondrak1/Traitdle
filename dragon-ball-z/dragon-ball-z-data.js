@@ -55,4 +55,4 @@ const dragonBallZCharacters = [
 ['Puar','Unknown','Unknown','Shape-shifting','Z Fighters','Saiyan Saga','Earth','Animal','Blue'],
 ['Ox-King','Male','Unknown','Axe','Ox-King family','Backstory','Fire Mountain','Human','Black'],
 ['Grandpa Gohan','Male','Unknown','Martial arts','Turtle School','Backstory','Mount Paozu','Human','White'],
-].map(([name,gender,age,technique,faction,arc,origin,species,hairColor])=>({name,gender,age,technique,faction,arc,origin,species,hairColor:hairColor||'Black',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Dragon Ball Z')}`}));
+].map(([name,gender,age,technique,faction,arc,origin,species,hairColor])=>({name,gender,age,technique,faction,arc,origin,species,hairColor:hairColor||'Unknown',image:`https://tse1.mm.bing.net/th?q=${encodeURIComponent(name+' Dragon Ball Z')}`}));

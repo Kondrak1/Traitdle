@@ -5,7 +5,7 @@
   'kaido', 'big mom', 'buggy', 'dracule mihawk', 'boa hancock', 'silvers rayleigh',
   'gol d roger', 'rocks d xebec', 'donquixote rosinante', 'donquixote doflamingo', 'trafalgar d water law', 'eustass kid',
   'killer', 'x drake', 'scratchmen apoo', 'basil hawkins', 'capone bege', 'jewelry bonney',
-  'uroge', 'bartolomeo', 'cavendish', 'boichi', 'yamato', 'momotaro',
+  'urouge', 'bartolomeo', 'cavendish', 'boichi', 'yamato', 'momotaro',
   'kozuki momonosuke', 'kozuki oden', 'kin emon', 'raizo', 'kiku', 'ashura doji',
   'nekomamushi', 'inuarashi', 'marco', 'jozu', 'vista', 'izou',
   'thatch', 'denjiro', 'katakuri', 'smoothie', 'cracker', 'perospero',

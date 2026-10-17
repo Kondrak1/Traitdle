@@ -161,7 +161,7 @@
       fruitSuggestionIndex = -1;
       fruitSuggestions.hidden = !query;
       if (!query) return;
-      const matches = characterData.filter(character => characterModeAnswerNames.has(character.name) && isAllowedCharacter(character) && !fruitAttempted.has(normalize(character.name)) && characterNameMatches(character, query));
+      const matches = characterData.filter(character => isFruitGuessableCharacter(character) && !fruitAttempted.has(normalize(character.name)) && characterNameMatches(character, query));
       matches.forEach((character, index) => {
         const button = document.createElement('button');
         button.type = 'button';
@@ -181,6 +181,12 @@
         fruitSuggestions.append(button);
       });
       fruitSuggestions.hidden = matches.length === 0;
+    }
+
+    function isFruitGuessableCharacter(character) {
+      return isAllowedCharacter(character)
+        && (characterModeAnswerNames.has(character.name)
+          || fruitTargets.some(target => characterIdentitiesMatch(character.name, target.user.name)));
     }
 
     function selectFruitSuggestion(index) {
@@ -231,7 +237,7 @@
 
     function submitFruitGuess() {
       const query = normalize(fruitGuess.value);
-      const character = characterData.find(item => characterModeAnswerNames.has(item.name) && isAllowedCharacter(item) && characterNameMatches(item, query));
+      const character = characterData.find(item => isFruitGuessableCharacter(item) && characterNameMatches(item, query));
       if (!character) { fruitMessage.textContent = 'Choose a character from the suggestions.'; return; }
       if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
       fruitAttempted.add(query);

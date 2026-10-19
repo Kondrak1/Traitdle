@@ -50,6 +50,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Absalom",
     "bounty": 0,
     "image": "/images/characters/Absalom.webp",
@@ -501,6 +502,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Alvida",
     "image": "/images/characters/Alvida.webp",
     "image_pre": "/images/characters/Alvida_Pre.webp",
@@ -723,6 +725,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Aramaki [Ryokugyu]",
     "image": "/images/characters/Aramaki.webp",
     "affiliation": "Marines",
@@ -1590,6 +1593,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Bartolomeo",
     "image": "/images/characters/Bartolomeo.webp",
     "epithet": "the Cannibal",
@@ -1696,6 +1700,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Bastille",
     "image": "/images/characters/Bastille.webp",
     "epithet": "Shark Cutter",
@@ -1955,6 +1960,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Belo Betty",
     "image": "/images/characters/Belo_Betty.webp",
     "affiliation": "Revolutionary Army",
@@ -2624,6 +2630,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Bluejam",
     "image": "/images/characters/Bluejam.webp",
     "affiliation": "Bluejam Pirates",
@@ -2702,6 +2709,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Hancock",
     "image": "/images/characters/Boa_Hancock.webp",
     "epithet": "Pirate Empress",
@@ -2743,6 +2751,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Marigold",
     "image": "/images/characters/Boa_Marigold.webp",
     "affiliation": "Kuja",
@@ -2770,6 +2779,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Sandersonia",
     "image": "/images/characters/Boa_Sandersonia.webp",
     "affiliation": "Kuja",
@@ -3014,6 +3024,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Borsalino [Kizaru]",
     "image": "/images/characters/Borsalino.webp",
     "affiliation": "Marines",
@@ -3116,6 +3127,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brannew",
     "image": "/images/characters/Brannew.webp",
     "affiliation": "Marines",
@@ -3181,6 +3193,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brogy",
     "image": "/images/characters/Brogy.webp",
     "epithet": "the Red Ogre",
@@ -3229,6 +3242,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brook",
     "image": "/images/characters/Brook.webp",
     "image_pre": "/images/characters/Brook_Pre.webp",
@@ -3315,6 +3329,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Buchi",
     "image": "/images/characters/Buchi.webp",
     "epithet": "Nyaban Brothers",
@@ -3397,6 +3412,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Buggy",
     "image": "/images/characters/Buggy.webp",
     "image_pre": "/images/characters/Buggy_Pre.webp",
@@ -3632,6 +3648,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Caesar Clown",
     "image": "/images/characters/Caesar_Clown.webp",
     "epithet": "Master",
@@ -5128,6 +5145,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Charlotte Linlin",
     "image": "/images/characters/Charlotte_Linlin.webp",
     "epithet": "Evil Spirit",
@@ -5742,6 +5760,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Charlotte Perospero",
     "image": "/images/characters/Charlotte_Perospero.webp",
     "affiliation": "Big Mom Pirates",
@@ -6058,6 +6077,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Chew",
     "image": "/images/characters/Chew.webp",
     "affiliation": "Arlong Pirates",
@@ -6169,6 +6189,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Chinjao",
     "image": "/images/characters/Chinjao.webp",
     "epithet": "the Drill",
@@ -6811,6 +6832,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Crocodile",
     "image": "/images/characters/Crocodile.webp",
     "epithet": "Sir Crocodile",
@@ -7337,6 +7359,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Daz Bonez [Mr. 1]",
     "image": "/images/characters/Daz_Bonez.webp",
     "epithet": "the Killer",
@@ -7458,6 +7481,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Demalo Black",
     "image": "/images/characters/Demalo_Black.webp",
     "epithet": "Three Tongued",
@@ -7574,6 +7598,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Diamante",
     "image": "/images/characters/Diamante.webp",
     "epithet": "Hero of the Colosseum",
@@ -7789,6 +7814,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Doc Q",
     "image": "/images/characters/Doc_Q.webp",
     "epithet": "Death God",
@@ -8160,6 +8186,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Dorry",
     "image": "/images/characters/Dorry.webp",
     "epithet": "the Blue Ogre",
@@ -8255,6 +8282,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Dracule Mihawk",
     "image": "/images/characters/Dracule_Mihawk.webp",
     "epithet": "Strongest Swordsman in the World",
@@ -8808,6 +8836,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Enel",
     "image": "/images/characters/Enel.webp",
     "epithet": "God",
@@ -9045,6 +9074,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Eustass Kid",
     "image": "/images/characters/Eustass_Kid.webp",
     "image_pre": "/images/characters/Eustass_Kid_Pre.webp",
@@ -9412,6 +9442,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Foxy",
     "image": "/images/characters/Foxy.webp",
     "image_pre": "/images/characters/Foxy_Pre.webp",
@@ -9465,6 +9496,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Cutty Flam [Franky]",
     "image": "/images/characters/Franky.webp",
     "image_pre": "/images/characters/Franky_Pre.webp",
@@ -9712,6 +9744,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Fullbody",
     "image": "/images/characters/Fullbody.webp",
     "image_pre": "/images/characters/Fullbody_Pre.webp",
@@ -9904,6 +9937,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Galdino [Mr. 3]",
     "image": "/images/characters/Galdino.webp",
     "epithet": "Loan Shark",
@@ -10258,6 +10292,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gem [Mr. 5]",
     "image": "/images/characters/Gem.webp",
     "epithet": "of the Border",
@@ -10710,6 +10745,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Gladius",
     "image": "/images/characters/Gladius.webp",
     "affiliation": "Donquixote Pirates",
@@ -11046,6 +11082,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gotti",
     "image": "/images/characters/Gotti.webp",
     "affiliation": "Fire Tank Pirates",
@@ -12067,6 +12104,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Hibari",
     "image": "/images/characters/Hibari.webp",
     "affiliation": "Marines (SWORD)",
@@ -12109,6 +12147,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Higuma",
     "image": "/images/characters/Higuma.webp",
     "affiliation": "Higuma Bandits",
@@ -12235,6 +12274,7 @@
   ]
   },
   {
+    "gender": "Female",
     "name": "Hina",
     "image": "/images/characters/Hina.webp",
     "epithet": "Black Cage",
@@ -13187,6 +13227,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Inazuma",
     "image": "/images/characters/Inazuma.webp",
     "affiliation": "Revolutionary Army",
@@ -13479,6 +13520,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Issho [Fujitora]",
     "image": "/images/characters/Issho.webp",
     "affiliation": "Marines",
@@ -13689,6 +13731,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Jack",
     "image": "/images/characters/Jack.webp",
     "epithet": "the Drought",
@@ -13850,6 +13893,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jango",
     "image": "/images/characters/Jango.webp",
     "image_pre": "/images/characters/Jango_Pre.webp",
@@ -14088,6 +14132,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jesus Burgess",
     "image": "/images/characters/Jesus_Burgess.webp",
     "image_pre": "/images/characters/Jesus_Burgess_Pre.webp",
@@ -14132,6 +14177,7 @@
     "description": "Made an entry in their logbook about Mock Town, calling it the Town of Mockery. Mentioned only character"
   },
   {
+    "gender": "Female",
     "name": "Jewelry Bonney",
     "image": "/images/characters/Jewelry_Bonney.webp",
     "image_pre": "/images/characters/Jewelry_Bonney_Pre.webp",
@@ -14257,6 +14303,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jinbe",
     "image": "/images/characters/Jinbe.webp",
     "epithet": "Knight of the Sea",
@@ -14743,6 +14790,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Kaidou",
     "image": "/images/characters/Kaidou.webp",
     "epithet": "the Strongest Creature",
@@ -15129,6 +15177,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Karasu",
     "image": "/images/characters/Karasu.webp",
     "affiliation": "Revolutionary Army",
@@ -15746,6 +15795,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Killer",
     "image": "/images/characters/Killer.webp",
     "image_pre": "/images/characters/Killer_Pre.webp",
@@ -16088,6 +16138,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Koby",
     "image": "/images/characters/Koby.webp",
     "image_pre": "/images/characters/Koby_Pre.webp",
@@ -16451,6 +16502,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gecko Moria [Kouzuki Moria]",
     "image": "/images/characters/Gecko_Moria.webp",
     "affiliation": "Thriller Bark Pirates",
@@ -16645,6 +16697,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Krieg",
     "image": "/images/characters/Krieg.webp",
     "image_pre": "/images/characters/Krieg_Pre.webp",
@@ -16864,6 +16917,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuro",
     "image": "/images/characters/Kuro.webp",
     "epithet": "of a Hundred Plans",
@@ -16925,6 +16979,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuroobi",
     "image": "/images/characters/Kuroobi.webp",
     "affiliation": "Arlong Pirates",
@@ -17121,6 +17176,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuzan [Aokiji]",
     "image": "/images/characters/Kuzan.webp",
     "image_pre": "/images/characters/Kuzan_Pre.webp",
@@ -17353,6 +17409,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Lao G",
     "image": "/images/characters/Lao_G.webp",
     "affiliation": "Donquixote Pirates",
@@ -17635,6 +17692,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Little Oars Jr.",
     "image": "/images/characters/Little_Oars_Jr..webp",
     "affiliation": "Little Pirates",
@@ -17784,6 +17842,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Lucky Roux",
     "image": "/images/characters/Lucky_Roux.webp",
     "affiliation": "Red Hair Pirates",
@@ -17838,6 +17897,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Machvise",
     "image": "/images/characters/Machvise.webp",
     "affiliation": "Donquixote Pirates",
@@ -18331,6 +18391,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Marianne [Miss Goldenweek]",
     "image": "/images/characters/Marianne.webp",
     "image_pre": "/images/characters/Marianne_Pre.webp",
@@ -19663,6 +19724,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Momonga",
     "image": "/images/characters/Momonga.webp",
     "affiliation": "Marines",
@@ -19825,6 +19887,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Monkey D. Garp",
     "image": "/images/characters/Monkey_D._Garp.webp",
     "epithet": "Hero of the Marines",
@@ -19884,6 +19947,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Monkey D. Luffy",
     "image": "/images/characters/Monkey_D._Luffy.webp",
     "epithet": "Straw Hat",
@@ -20098,6 +20162,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Mont Blanc Cricket",
     "image": "/images/characters/Mont_Blanc_Cricket.webp",
     "image_pre": "/images/characters/Mont_Blanc_Cricket_Pre.webp",
@@ -20916,6 +20981,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Nami",
     "image": "/images/characters/Nami.webp",
     "image_pre": "/images/characters/Nami_Pre.webp",
@@ -21498,6 +21564,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Nico Robin",
     "image": "/images/characters/Nico_Robin.webp",
     "image_pre": "/images/characters/Nico_Robin_Pre.webp",
@@ -22259,6 +22326,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Orlumbus",
     "image": "/images/characters/Orlumbus.webp",
     "epithet": "Massacre Ruler",
@@ -22409,7 +22477,7 @@
   {
     "name": "Page One",
     "image": "/images/characters/Page_One.webp",
-    "affiliation": "Yamato",
+    "affiliation": "Beasts Pirates (Tobiroppo)",
     "devil_fruit": "Ryu Ryu no Mi, Model: Spinosaurus",
     "haki": ["Observation","Armament"],
     "bounty": 290000000,
@@ -22919,6 +22987,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Perona",
     "image": "/images/characters/Perona.webp",
     "image_pre": "/images/characters/Perona_Pre.webp",
@@ -22987,6 +23056,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Pica",
     "image": "/images/characters/Pica.webp",
     "affiliation": "Donquixote Pirates",
@@ -23356,6 +23426,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Portgas D. Ace",
     "image": "/images/characters/Portgas_D._Ace.webp",
     "epithet": "Fire Fist",
@@ -23501,6 +23572,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Prince Grus",
     "image": "/images/characters/Prince_Grus.webp",
     "affiliation": "Marines (SWORD)",
@@ -24722,6 +24794,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Roronoa Zoro",
     "image": "/images/characters/Roronoa_Zoro.webp",
     "image_pre": "/images/characters/Roronoa_Zoro_Pre.webp",
@@ -25107,6 +25180,7 @@
     ]
   },
   {
+    "gender": "Male",
     "bounty": 602000000,
     "name": "Sabo",
     "image": "/images/characters/Sabo.webp",
@@ -25390,6 +25464,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sanji",
     "image": "/images/characters/Sanji.webp",
     "image_pre": "/images/characters/Sanji_Pre.webp",
@@ -25594,6 +25669,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sarquiss",
     "image": "/images/characters/Sarquiss.webp",
     "epithet": "Big Knife",
@@ -25652,6 +25728,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Sasaki",
     "image": "/images/characters/Sasaki.webp",
     "epithet": "Overflowing",
@@ -25797,6 +25874,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Scien [Queen]",
     "image": "/images/characters/Queen.webp",
     "epithet": "the Plague",
@@ -25947,6 +26025,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Scratchmen Apoo",
     "image": "/images/characters/Scratchmen_Apoo.webp",
     "image_pre": "/images/characters/Scratchmen_Apoo_Pre.webp",
@@ -26290,6 +26369,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sham",
     "image": "/images/characters/Sham.webp",
     "epithet": "Nyaban Brothers",
@@ -26343,6 +26423,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Shanks",
     "image": "/images/characters/Shanks.webp",
     "epithet": "Red-Haired",
@@ -27250,6 +27331,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Smoker",
     "image": "/images/characters/Smoker.webp",
     "image_pre": "/images/characters/Smoker_Pre.webp",
@@ -27662,6 +27744,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Squard",
     "image": "/images/characters/Squard.webp",
     "epithet": "Maelstrom Spider",
@@ -28084,6 +28167,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Suleiman",
     "image": "/images/characters/Suleiman.webp",
     "epithet": "the Beheader",
@@ -28496,6 +28580,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Tashigi",
     "image": "/images/characters/Tashigi.webp",
     "image_pre": "/images/characters/Tashigi_Pre.webp",
@@ -28934,6 +29019,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Tony Tony Chopper",
     "image": "/images/characters/Tony_Tony_Chopper.webp",
     "image_pre": "/images/characters/Tony_Tony_Chopper_Pre.webp",
@@ -29149,6 +29235,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Trafalgar D. Water Law",
     "image": "/images/characters/Trafalgar_D._Water_Law.webp",
     "image_pre": "/images/characters/Trafalgar_D._Water_Law_Pre.webp",
@@ -29225,6 +29312,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Trebol",
     "image": "/images/characters/Trebol.webp",
     "affiliation": "Donquixote Pirates",
@@ -29390,6 +29478,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Tsuru",
     "image": "/images/characters/Tsuru.webp",
     "epithet": "Great Staff Officer",
@@ -29603,7 +29692,7 @@
   {
     "name": "Ulti",
     "image": "/images/characters/Ulti.webp",
-    "affiliation": "Yamato",
+    "affiliation": "Beasts Pirates (Tobiroppo)",
     "devil_fruit": "Ryu Ryu no Mi, Model: Pachycephalosaurus",
     "haki": ["Observation","Armament"],
     "bounty": 400000000,
@@ -29851,6 +29940,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Usopp",
     "image": "/images/characters/Usopp.webp",
     "image_pre": "/images/characters/Usopp_Pre.webp",
@@ -30037,6 +30127,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Van Augur",
     "image": "/images/characters/Van_Augur.webp",
     "image_pre": "/images/characters/Van_Augur_Pre.webp",
@@ -30529,6 +30620,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Vista",
     "image": "/images/characters/Vista.webp",
     "epithet": "of the Flower Swords",
@@ -30568,6 +30660,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Vito",
     "image": "/images/characters/Vito.webp",
     "epithet": "Monster Gun",
@@ -31163,11 +31256,13 @@
     ]
   },
   {
+    "origin": "Wano Country",
+    "gender": "Female",
     "name": "Yamato",
     "bounty": 0,
     "image": "/images/characters/Yamato.webp",
     "epithet": "Oni Princess",
-    "affiliation": "Beasts Pirates (Defected)",
+    "affiliation": "Wano Country / Independent",
     "devil_fruit": "Inu Inu no Mi, Model: Okuchi no Makami",
     "haki": ["Conquerors","Observation","Armament"],
     "height": 263,
@@ -31647,6 +31742,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Zala [Miss Doublefinger]",
     "image": "/images/characters/Zala.webp",
     "epithet": "Poison Spider",

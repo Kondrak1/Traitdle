@@ -140,122 +140,6 @@
     let gameMode = 'daily';
     let suggestionIndex = -1;
 
-    const genderOverrides = {
-      absalom: 'Male',
-      'monkey d. luffy': 'Male',
-      'roronoa zoro': 'Male',
-      nami: 'Female',
-      sanji: 'Male',
-      usopp: 'Male',
-      'nico robin': 'Female',
-      franky: 'Male',
-      brook: 'Male',
-      jinbe: 'Male',
-      kaido: 'Male',
-      shanks: 'Male',
-      perona: 'Female',
-      'boa hancock': 'Female',
-      crocodile: 'Male',
-      'jewelry bonney': 'Female',
-      'portgas d. ace': 'Male',
-      sabo: 'Male',
-      'trafalgar law': 'Male',
-      smoker: 'Male',
-      buggy: 'Male',
-      mihawk: 'Male',
-      'dracule mihawk': 'Male',
-      'monkey d. garp': 'Male',
-      koby: 'Male',
-      kuzan: 'Male',
-      aokiji: 'Male',
-      kizaru: 'Male',
-      borsalino: 'Male',
-      fujitora: 'Male',
-      enel: 'Male',
-      moria: 'Male',
-      'gecko moria': 'Male',
-      killer: 'Male',
-      'big mom': 'Female',
-      'charlotte linlin': 'Female',
-      'boa sandersonia': 'Female',
-      'boa marigold': 'Female',
-      yamato: 'Female',
-      kuro: 'Male',
-      vista: 'Male',
-      'scien [queen]': 'Male',
-      alvida: 'Female',
-      'aramaki [ryokugyu]': 'Male',
-      bartolomeo: 'Male',
-      bastille: 'Male',
-      'belo betty': 'Female',
-      bluejam: 'Male',
-      'borsalino [kizaru]': 'Male',
-      brannew: 'Male',
-      brogy: 'Male',
-      buchi: 'Male',
-      'caesar clown': 'Male',
-      'charlotte perospero': 'Male',
-      chew: 'Male',
-      chinjao: 'Male',
-      'daz bonez [mr. 1]': 'Male',
-      'demalo black': 'Male',
-      diamante: 'Male',
-      'doc q': 'Male',
-      dorry: 'Male',
-      'eustass kid': 'Male',
-      foxy: 'Male',
-      fullbody: 'Male',
-      'galdino [mr. 3]': 'Male',
-      'gem [mr. 5]': 'Male',
-      gladiuss: 'Male',
-      gladius: 'Male',
-      gotti: 'Male',
-      hibari: 'Female',
-      higuma: 'Male',
-      hina: 'Female',
-      inazuma: 'Male',
-      'issho [fujitora]': 'Male',
-      jack: 'Male',
-      jango: 'Male',
-      'jesus burgess': 'Male',
-      karasu: 'Male',
-      krieg: 'Male',
-      kujaku: 'Female',
-      kuroobi: 'Male',
-      'lao g': 'Male',
-      'little oars jr.': 'Male',
-      machvise: 'Male',
-      'marianne [miss goldenweek]': 'Female',
-      momonga: 'Male',
-      'mont blanc cricket': 'Male',
-      orlumbus: 'Male',
-      pica: 'Male',
-      'prince grus': 'Male',
-      sarquiss: 'Male',
-      sasaki: 'Male',
-      'scratchmen apoo': 'Male',
-      sham: 'Male',
-      squard: 'Male',
-      suleiman: 'Male',
-      tashigi: 'Female',
-      'tony tony chopper': 'Male',
-      trebol: 'Male',
-      tsuru: 'Female',
-      'van augur': 'Male',
-      vito: 'Male',
-      'zala [miss doublefinger]': 'Female'
-    };
-
-    const birthplaceOverrides = {
-      yamato: 'Wano Country'
-    };
-
-    const affiliationOverrides = {
-      yamato: 'Wano Country / Independent',
-      ulti: 'Beasts Pirates (Tobiroppo)',
-      'page one': 'Beasts Pirates (Tobiroppo)'
-    };
-
     function normalizeText(value) {
       return (value || '').trim().toLowerCase().replace(/\s+/g, ' ');
     }
@@ -280,8 +164,6 @@
     function inferGender(character) {
       if (character.gender && !/^unknown$/i.test(String(character.gender))) return character.gender;
       const normalizedName = normalizeText(character.name);
-      const override = genderOverrides[normalizedName];
-      if (override) return override;
       if (/\bmiss\b|\bwoman\b|\bgirl\b|\blady\b|\bqueen\b|\bprincess\b/.test(normalizedName)) return 'Female';
       if (/\bmr\.?\b|\bman\b|\bboy\b|\bking\b|\bprince\b/.test(normalizedName)) return 'Male';
       const text = [character.epithet, character.description, character.affiliation].join(' ').toLowerCase();
@@ -387,8 +269,7 @@
         ? Number(rawAge)
         : 'Unknown';
       const chapterMatch = String(character.first_appearance_arc || '').match(/Chapter\s+(\d+)/i);
-      const normalizedName = normalizeText(character.name);
-      const resolvedAffiliation = affiliationOverrides[normalizedName] || formatText(character.affiliation);
+      const resolvedAffiliation = formatText(character.affiliation);
 
       return {
         name: String(character.name).trim(),
@@ -402,7 +283,7 @@
         firstArc: getStoryArcFromChapter(character.first_appearance_arc),
         firstArcOrder: chapterMatch ? Number(chapterMatch[1]) : null,
         firstAppearanceChapter: chapterMatch ? Number(chapterMatch[1]) : null,
-        birthplace: birthplaceOverrides[normalizedName] || extractBirthplace(character.origin),
+        birthplace: extractBirthplace(character.origin),
         affiliation: resolvedAffiliation,
         unknownTraitCount: 0
       };

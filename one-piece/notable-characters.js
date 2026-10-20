@@ -2,7 +2,7 @@
   'monkey d luffy', 'roronoa zoro', 'nami', 'usopp', 'sanji', 'tony tony chopper', 'charlotte brulee',
   'nico robin', 'franky', 'brook', 'jinbe', 'nefertari vivi', 'karoo',
   'portgas d ace', 'sabo', 'shanks', 'marshall d teach', 'edward newgate', 'charlotte linlin',
-  'kaido', 'big mom', 'buggy', 'dracule mihawk', 'boa hancock', 'silvers rayleigh',
+  'kaido', 'big mom', 'buggy', 'kurozumi orochi', 'dracule mihawk', 'boa hancock', 'silvers rayleigh',
   'gol d roger', 'rocks d xebec', 'donquixote rosinante', 'donquixote doflamingo', 'trafalgar d water law', 'eustass kid',
   'killer', 'x drake', 'scratchmen apoo', 'basil hawkins', 'capone bege', 'jewelry bonney',
   'urouge', 'bartolomeo', 'cavendish', 'boichi', 'yamato', 'momotaro',

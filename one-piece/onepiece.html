@@ -13,7 +13,7 @@
   <main class="game">
     <header>
       <a class="home-link" href="../index.html">All worlds</a>
-      <img class="masthead-art" src="assets/grand-line.jpeg" alt="Grand Line map" fetchpriority="high">
+      <img class="masthead-art" src="assets/grand-line.png" alt="One Piece banner" fetchpriority="high">
       <div class="masthead-shade"></div>
       <div class="masthead-content">
         <div class="eyebrow">ONE PIECE / GRAND LINE</div>
@@ -140,120 +140,6 @@
     let gameMode = 'daily';
     let suggestionIndex = -1;
 
-    const genderOverrides = {
-      absalom: 'Male',
-      'monkey d. luffy': 'Male',
-      'roronoa zoro': 'Male',
-      nami: 'Female',
-      sanji: 'Male',
-      usopp: 'Male',
-      'nico robin': 'Female',
-      franky: 'Male',
-      brook: 'Male',
-      jinbe: 'Male',
-      kaido: 'Male',
-      shanks: 'Male',
-      perona: 'Female',
-      'boa hancock': 'Female',
-      crocodile: 'Male',
-      'jewelry bonney': 'Female',
-      'portgas d. ace': 'Male',
-      sabo: 'Male',
-      'trafalgar law': 'Male',
-      smoker: 'Male',
-      buggy: 'Male',
-      mihawk: 'Male',
-      'dracule mihawk': 'Male',
-      'monkey d. garp': 'Male',
-      koby: 'Male',
-      kuzan: 'Male',
-      aokiji: 'Male',
-      kizaru: 'Male',
-      borsalino: 'Male',
-      fujitora: 'Male',
-      enel: 'Male',
-      moria: 'Male',
-      'gecko moria': 'Male',
-      killer: 'Male',
-      'big mom': 'Female',
-      'charlotte linlin': 'Female',
-      'boa sandersonia': 'Female',
-      'boa marigold': 'Female',
-      yamato: 'Female',
-      'scien [queen]': 'Male',
-      alvida: 'Female',
-      'aramaki [ryokugyu]': 'Male',
-      bartolomeo: 'Male',
-      bastille: 'Male',
-      'belo betty': 'Female',
-      bluejam: 'Male',
-      'borsalino [kizaru]': 'Male',
-      brannew: 'Male',
-      brogy: 'Male',
-      buchi: 'Male',
-      'caesar clown': 'Male',
-      'charlotte perospero': 'Male',
-      chew: 'Male',
-      chinjao: 'Male',
-      'daz bonez [mr. 1]': 'Male',
-      'demalo black': 'Male',
-      diamante: 'Male',
-      'doc q': 'Male',
-      dorry: 'Male',
-      'eustass kid': 'Male',
-      foxy: 'Male',
-      fullbody: 'Male',
-      'galdino [mr. 3]': 'Male',
-      'gem [mr. 5]': 'Male',
-      gladiuss: 'Male',
-      gladius: 'Male',
-      gotti: 'Male',
-      hibari: 'Female',
-      higuma: 'Male',
-      hina: 'Female',
-      inazuma: 'Male',
-      'issho [fujitora]': 'Male',
-      jack: 'Male',
-      jango: 'Male',
-      'jesus burgess': 'Male',
-      karasu: 'Male',
-      krieg: 'Male',
-      kujaku: 'Female',
-      kuroobi: 'Male',
-      'lao g': 'Male',
-      'little oars jr.': 'Male',
-      machvise: 'Male',
-      'marianne [miss goldenweek]': 'Female',
-      momonga: 'Male',
-      'mont blanc cricket': 'Male',
-      orlumbus: 'Male',
-      pica: 'Male',
-      'prince grus': 'Male',
-      sarquiss: 'Male',
-      sasaki: 'Male',
-      'scratchmen apoo': 'Male',
-      sham: 'Male',
-      squard: 'Male',
-      suleiman: 'Male',
-      tashigi: 'Female',
-      'tony tony chopper': 'Male',
-      trebol: 'Male',
-      tsuru: 'Female',
-      'van augur': 'Male',
-      vito: 'Male',
-      'zala [miss doublefinger]': 'Female'
-    };
-
-    const birthplaceOverrides = {
-      yamato: 'Wano Country'
-    };
-
-    const affiliationOverrides = {
-      yamato: 'Wano Country / Independent',
-      ulti: 'Beasts Pirates (Tobiroppo)',
-      'page one': 'Beasts Pirates (Tobiroppo)'
-    };
-
     function normalizeText(value) {
       return (value || '').trim().toLowerCase().replace(/\s+/g, ' ');
     }
@@ -261,7 +147,7 @@
     function formatBounty(value) {
       if (value === undefined || value === null || String(value).trim() === '') return 'Unknown';
       const numeric = Number(String(value).replace(/[^0-9.-]/g, ''));
-      if (Number.isNaN(numeric) || numeric <= 0) return 'Unknown';
+      if (Number.isNaN(numeric) || numeric < 0) return 'Unknown';
       return new Intl.NumberFormat('en-US').format(numeric);
     }
 
@@ -278,8 +164,6 @@
     function inferGender(character) {
       if (character.gender && !/^unknown$/i.test(String(character.gender))) return character.gender;
       const normalizedName = normalizeText(character.name);
-      const override = genderOverrides[normalizedName];
-      if (override) return override;
       if (/\bmiss\b|\bwoman\b|\bgirl\b|\blady\b|\bqueen\b|\bprincess\b/.test(normalizedName)) return 'Female';
       if (/\bmr\.?\b|\bman\b|\bboy\b|\bking\b|\bprince\b/.test(normalizedName)) return 'Male';
       const text = [character.epithet, character.description, character.affiliation].join(' ').toLowerCase();
@@ -385,8 +269,7 @@
         ? Number(rawAge)
         : 'Unknown';
       const chapterMatch = String(character.first_appearance_arc || '').match(/Chapter\s+(\d+)/i);
-      const normalizedName = normalizeText(character.name);
-      const resolvedAffiliation = affiliationOverrides[normalizedName] || formatText(character.affiliation);
+      const resolvedAffiliation = formatText(character.affiliation);
 
       return {
         name: String(character.name).trim(),
@@ -400,7 +283,7 @@
         firstArc: getStoryArcFromChapter(character.first_appearance_arc),
         firstArcOrder: chapterMatch ? Number(chapterMatch[1]) : null,
         firstAppearanceChapter: chapterMatch ? Number(chapterMatch[1]) : null,
-        birthplace: birthplaceOverrides[normalizedName] || extractBirthplace(character.origin),
+        birthplace: extractBirthplace(character.origin),
         affiliation: resolvedAffiliation,
         unknownTraitCount: 0
       };
@@ -423,7 +306,11 @@
       'Topman Warcury', 'Shepherd Ju Peter', 'Wyper', 'Iceberg', 'Paulie',
       'Vander Decken', 'Gloriosa', 'Atlas', 'Lilith', 'Edison', 'Pythagoras',
       'Shaka', 'York', 'Ripley', 'Figarland Garling', 'Shepherd Sommers',
-      'Rob Lucci', 'Kaku', 'Jabra'
+      'Rob Lucci', 'Kaku', 'Jabra', 'Blueno', 'Hack', 'Uta', 'Urouge', 'Sanjuan Wolf',
+      'Baby 5', 'Igaram', 'Sugar', 'Hogback', 'Leo', 'Carrot', 'Wanda',
+      'Porche', 'Gerd', 'Ganfall', 'Magellan', 'Kouzuki Hiyori',
+      'Kouzuki Momonosuke', 'Kouzuki Oden', 'Kouzuki Sukiyaki', 'Shinobu',
+      'Raizo', 'Kinemon', 'Kikunojo', 'Denjiro', 'Ashura Doji', 'Kujaku'
     ].map(normalizeText));
 
     function hasEnoughTraits(character) {
@@ -565,8 +452,15 @@
       }
 
       if (key === 'bounty') {
-        const guessNumber = Number(String(guess.bounty).replace(/[^0-9]/g, ''));
-        const targetNumber = Number(String(target.bounty).replace(/[^0-9]/g, ''));
+        const bountyNumber = character => {
+          if (!Object.hasOwn(character, 'bounty')) return -1;
+          const raw = String(character.bounty).trim();
+          if (!raw || /^unknown$/i.test(raw)) return -1;
+          const parsed = Number(raw.replace(/[^0-9.-]/g, ''));
+          return Number.isNaN(parsed) ? -1 : parsed;
+        };
+        const guessNumber = bountyNumber(guess);
+        const targetNumber = bountyNumber(target);
         if (guessNumber === targetNumber) return { status: 'correct', text: guess.bounty };
         return { status: 'absent', text: `${guess.bounty} ${guessNumber < targetNumber ? '↑' : '↓'}` };
       }
@@ -597,7 +491,7 @@
     }
 
     function setSuggestionImage(image, character) {
-      image.src = character.image || 'assets/grand-line.jpeg';
+      image.src = character.image || 'assets/grand-line.png';
     }
 
     function renderSuggestions(value) {
@@ -719,7 +613,7 @@
         enableCopyButton(copyDailyScore, scoreText);
       }
       successImage.alt = character.name;
-      successImage.src = character.image || 'assets/grand-line.jpeg';
+      successImage.src = character.image || 'assets/grand-line.png';
       successPanel.hidden = false;
       document.querySelector('.game').classList.add('success-state');
       confetti.innerHTML = '';
@@ -870,7 +764,7 @@
       dailyScore.hidden = gameMode !== 'daily' || !allModesComplete;
       if (!dailyScore.hidden) enableCopyButton(copyDailyScore, dailyScoreText.textContent);
       successImage.alt = target.name;
-      successImage.src = target.image || 'assets/grand-line.jpeg';
+      successImage.src = target.image || 'assets/grand-line.png';
       successPanel.hidden = false;
       successPanel.focus({ preventScroll: true });
     });

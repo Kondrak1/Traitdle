@@ -1,0 +1,9 @@
+:root { --bleach-pink: #f06a9b; --bleach-ink: #171329; }
+body { background: radial-gradient(circle at 15% 10%, #f06a9b, transparent 25%), linear-gradient(145deg, #171329, #38204f 55%, #10131f); }
+.bleach-game { --line: var(--bleach-pink); --gold: #f4c7dc; --text: #f8edf4; --muted: #d7b9cb; background: #1b1730; border-color: var(--bleach-pink); }
+.bleach-game header { background: linear-gradient(145deg, #171329, #5a275d 55%, #171329); }
+.bleach-game h1 { color: #fff; text-shadow: 4px 5px 0 #8c2b63; }
+.bleach-game .toolbar { background: #291d42; border-color: #f06a9b; }
+
+#imageClue { display:block; object-position:center center; filter:blur(16px) saturate(.65); transform:scale(1.12); }
+#imageClue.revealed { filter:none; transform:none; }

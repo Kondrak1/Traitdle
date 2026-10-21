@@ -50,7 +50,9 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Absalom",
+    "bounty": 0,
     "image": "/images/characters/Absalom.webp",
     "epithet": "of the Graveyard",
     "affiliation": "Thriller Bark Pirates",
@@ -295,6 +297,7 @@
     "haki": ["Observation"],
     "height": 140,
     "age": 11,
+    "bounty": 0,
     "first_appearance_arc": "Chapter 249",
     "race": "Moon people - Shandian",
     "status": "Alive",
@@ -449,6 +452,7 @@
     "name": "Alpha",
     "image": "/images/characters/Alpha.webp",
     "affiliation": "CP8",
+    "bounty": 0,
     "age": "Under 27",
     "first_appearance_arc": "Chapter 1100",
     "race": "Human",
@@ -498,6 +502,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Alvida",
     "image": "/images/characters/Alvida.webp",
     "image_pre": "/images/characters/Alvida_Pre.webp",
@@ -720,6 +725,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Aramaki [Ryokugyu]",
     "image": "/images/characters/Aramaki.webp",
     "affiliation": "Marines",
@@ -907,6 +913,8 @@
   },
   {
     "name": "Ashura Doji",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Ashura_Doji.webp",
     "epithet": "Strongest Monster of Kuri",
     "affiliation": "Kouzuki Family",
@@ -1585,6 +1593,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Bartolomeo",
     "image": "/images/characters/Bartolomeo.webp",
     "epithet": "the Cannibal",
@@ -1691,6 +1700,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Bastille",
     "image": "/images/characters/Bastille.webp",
     "epithet": "Shark Cutter",
@@ -1864,6 +1874,7 @@
   },
   {
     "name": "Bell-mère",
+    "bounty": 0,
     "image": "/images/characters/Bell-mère.webp",
     "affiliation": "Marines (former)",
     "origin": "East Blue (Conomi Islands)",
@@ -1949,6 +1960,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Belo Betty",
     "image": "/images/characters/Belo_Betty.webp",
     "affiliation": "Revolutionary Army",
@@ -2618,6 +2630,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Bluejam",
     "image": "/images/characters/Bluejam.webp",
     "affiliation": "Bluejam Pirates",
@@ -2645,6 +2658,7 @@
     "image": "/images/characters/Blueno.webp",
     "image_pre": "/images/characters/Blueno_Pre.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "devil_fruit": "Doa Doa no Mi",
     "haki": ["Observation","Armament"],
     "origin": "North Blue",
@@ -2695,6 +2709,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Hancock",
     "image": "/images/characters/Boa_Hancock.webp",
     "epithet": "Pirate Empress",
@@ -2736,6 +2751,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Marigold",
     "image": "/images/characters/Boa_Marigold.webp",
     "affiliation": "Kuja",
@@ -2763,6 +2779,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Boa Sandersonia",
     "image": "/images/characters/Boa_Sandersonia.webp",
     "affiliation": "Kuja",
@@ -2967,6 +2984,7 @@
   },
   {
     "name": "Boodle",
+    "bounty": 0,
     "image": "/images/characters/Boodle.webp",
     "image_pre": "/images/characters/Boodle_Pre.webp",
     "origin": "East Blue (Organ Islands)",
@@ -3006,6 +3024,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Borsalino [Kizaru]",
     "image": "/images/characters/Borsalino.webp",
     "affiliation": "Marines",
@@ -3108,6 +3127,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brannew",
     "image": "/images/characters/Brannew.webp",
     "affiliation": "Marines",
@@ -3173,6 +3193,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brogy",
     "image": "/images/characters/Brogy.webp",
     "epithet": "the Red Ogre",
@@ -3221,6 +3242,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Brook",
     "image": "/images/characters/Brook.webp",
     "image_pre": "/images/characters/Brook_Pre.webp",
@@ -3307,6 +3329,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Buchi",
     "image": "/images/characters/Buchi.webp",
     "epithet": "Nyaban Brothers",
@@ -3389,6 +3412,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Buggy",
     "image": "/images/characters/Buggy.webp",
     "image_pre": "/images/characters/Buggy_Pre.webp",
@@ -3624,6 +3648,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Caesar Clown",
     "image": "/images/characters/Caesar_Clown.webp",
     "epithet": "Master",
@@ -3699,6 +3724,7 @@
   },
   {
     "name": "Camie",
+    "bounty": 0,
     "image": "/images/characters/Camie.webp",
     "image_pre": "/images/characters/Camie_Pre.webp",
     "affiliation": "Mermaid Café",
@@ -5119,6 +5145,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Charlotte Linlin",
     "image": "/images/characters/Charlotte_Linlin.webp",
     "epithet": "Evil Spirit",
@@ -5733,6 +5760,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Charlotte Perospero",
     "image": "/images/characters/Charlotte_Perospero.webp",
     "affiliation": "Big Mom Pirates",
@@ -6049,6 +6077,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Chew",
     "image": "/images/characters/Chew.webp",
     "affiliation": "Arlong Pirates",
@@ -6160,6 +6189,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Chinjao",
     "image": "/images/characters/Chinjao.webp",
     "epithet": "the Drill",
@@ -6327,6 +6357,7 @@
   },
   {
     "name": "Chouchou",
+    "bounty": 0,
     "image": "/images/characters/Chouchou.webp",
     "affiliation": "Hocker",
     "origin": "East Blue (Organ Islands)",
@@ -6801,6 +6832,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Crocodile",
     "image": "/images/characters/Crocodile.webp",
     "epithet": "Sir Crocodile",
@@ -7187,6 +7219,7 @@
   },
   {
     "name": "Dalton",
+    "bounty": 0,
     "image": "/images/characters/Dalton.webp",
     "affiliation": "Sakura Kingdom",
     "devil_fruit": "Ushi Ushi no Mi, Model: Bison",
@@ -7326,6 +7359,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Daz Bonez [Mr. 1]",
     "image": "/images/characters/Daz_Bonez.webp",
     "epithet": "the Killer",
@@ -7447,6 +7481,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Demalo Black",
     "image": "/images/characters/Demalo_Black.webp",
     "epithet": "Three Tongued",
@@ -7510,6 +7545,8 @@
   },
   {
     "name": "Denjiro",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Denjiro.webp",
     "epithet": "Dozing Kyoshiro",
     "affiliation": "Kouzuki Family",
@@ -7561,6 +7598,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Diamante",
     "image": "/images/characters/Diamante.webp",
     "epithet": "Hero of the Colosseum",
@@ -7776,6 +7814,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Doc Q",
     "image": "/images/characters/Doc_Q.webp",
     "epithet": "Death God",
@@ -8065,6 +8104,7 @@
   },
   {
     "name": "Donquixote Rosinante",
+    "bounty": 0,
     "image": "/images/characters/Donquixote_Rosinante.webp",
     "affiliation": "Marines",
     "devil_fruit": "Nagi Nagi no Mi",
@@ -8146,6 +8186,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Dorry",
     "image": "/images/characters/Dorry.webp",
     "epithet": "the Blue Ogre",
@@ -8241,6 +8282,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Dracule Mihawk",
     "image": "/images/characters/Dracule_Mihawk.webp",
     "epithet": "Strongest Swordsman in the World",
@@ -8794,6 +8836,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Enel",
     "image": "/images/characters/Enel.webp",
     "epithet": "God",
@@ -9031,6 +9074,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Eustass Kid",
     "image": "/images/characters/Eustass_Kid.webp",
     "image_pre": "/images/characters/Eustass_Kid_Pre.webp",
@@ -9398,6 +9442,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Foxy",
     "image": "/images/characters/Foxy.webp",
     "image_pre": "/images/characters/Foxy_Pre.webp",
@@ -9451,6 +9496,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Cutty Flam [Franky]",
     "image": "/images/characters/Franky.webp",
     "image_pre": "/images/characters/Franky_Pre.webp",
@@ -9672,6 +9718,7 @@
     "haki": ["Observation", "Armament"],
     "epithet": "the Silent",
     "affiliation": "CP0",
+    "bounty": 0,
     "origin": "Grand Line",
     "height": 331,
     "age": 31,
@@ -9697,6 +9744,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Fullbody",
     "image": "/images/characters/Fullbody.webp",
     "image_pre": "/images/characters/Fullbody_Pre.webp",
@@ -9732,6 +9780,7 @@
     "image": "/images/characters/Funkfreed.webp",
     "epithet": "Elephant Sword",
     "affiliation": "CP0",
+    "bounty": 0,
     "devil_fruit": "Zou Zou no Mi",
     "first_appearance_arc": "Chapter 365",
     "race": "Object",
@@ -9888,6 +9937,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Galdino [Mr. 3]",
     "image": "/images/characters/Galdino.webp",
     "epithet": "Loan Shark",
@@ -10242,6 +10292,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gem [Mr. 5]",
     "image": "/images/characters/Gem.webp",
     "epithet": "of the Border",
@@ -10668,6 +10719,7 @@
     "name": "Gismonda",
     "image": "/images/characters/Gismonda.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 705",
     "race": "Human",
     "status": "Alive",
@@ -10693,6 +10745,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Gladius",
     "image": "/images/characters/Gladius.webp",
     "affiliation": "Donquixote Pirates",
@@ -11029,6 +11082,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gotti",
     "image": "/images/characters/Gotti.webp",
     "affiliation": "Fire Tank Pirates",
@@ -11104,6 +11158,7 @@
     "name": "Guernika",
     "image": "/images/characters/Guernika.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "haki": ["Observation","Armament"],
     "origin": "West Blue",
     "height": 243,
@@ -11333,22 +11388,7 @@
   ]
   },
   {
-    "name": "Hack",
-    "image": "/images/characters/Hack_(archaeologist).webp",
-    "affiliation": "Ohara Archaeologists",
-    "first_appearance_arc": "Chapter 391",
-    "race": "Human",
-    "status": "Deceased",
-    "description": "Was one of the archaeologists of Ohara",
-    "journey": [
-      {"location":"Ohara","chapter":"Chapter 391"}
-    ],
-    "relationships": [
-      {"name": "Clou D. Clover","relationship": "Director"},
-      {"name": "Nico Robin","relationship": "Friend"}
-  ]
-  },
-  {
+    "bounty": 200000000,
     "name": "Hajrudin",
     "image": "/images/characters/Hajrudin.webp",
     "affiliation": "New Giant Warrior Pirates",
@@ -11576,6 +11616,7 @@
   },
   {
     "name": "Hannyabal",
+    "bounty": 0,
     "image": "/images/characters/Hannyabal.webp",
     "image_pre": "/images/characters/Hannyabal_Pre.webp",
     "affiliation": "Impel Down",
@@ -11855,6 +11896,7 @@
     "image": "/images/characters/Hattori.webp",
     "image_pre": "/images/characters/Hattori_Pre.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "height": 25,
     "age": 20,
     "first_appearance_arc": "Chapter 323",
@@ -12062,6 +12104,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Hibari",
     "image": "/images/characters/Hibari.webp",
     "affiliation": "Marines (SWORD)",
@@ -12104,6 +12147,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Higuma",
     "image": "/images/characters/Higuma.webp",
     "affiliation": "Higuma Bandits",
@@ -12158,6 +12202,7 @@
   },
   {
     "name": "Hikoichi",
+    "bounty": 0,
     "image": "/images/characters/Hikoichi.webp",
     "affiliation": "Super Spot-Billed Duck Troops",
     "origin": "Grand Line (Arabasta Kingdom)",
@@ -12229,6 +12274,7 @@
   ]
   },
   {
+    "gender": "Female",
     "name": "Hina",
     "image": "/images/characters/Hina.webp",
     "epithet": "Black Cage",
@@ -12539,12 +12585,14 @@
   },
   {
     "name": "Hogback",
+    "bounty": 0,
     "image": "/images/characters/Hogback.webp",
     "affiliation": "Thriller Bark Pirates",
     "epithet": "Genius Surgeon",
     "origin": "West Blue",
     "height": 223,
     "age": 47,
+    "gender": "Male",
     "first_appearance_arc": "Chapter 446",
     "race": "Human",
     "status": "Alive",
@@ -13097,6 +13145,8 @@
   },
   {
     "name": "Igaram",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Igaram.webp",
     "affiliation": "Arabasta Kingdom",
     "origin": "Grand Line (Arabasta Kingdom)",
@@ -13177,6 +13227,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Inazuma",
     "image": "/images/characters/Inazuma.webp",
     "affiliation": "Revolutionary Army",
@@ -13469,6 +13520,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Issho [Fujitora]",
     "image": "/images/characters/Issho.webp",
     "affiliation": "Marines",
@@ -13633,6 +13685,7 @@
     "name": "Jabari",
     "image": "/images/characters/Jabari.webp",
     "affiliation": "CP6",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 956",
     "race": "Human",
     "status": "Alive",
@@ -13649,6 +13702,7 @@
     "image": "/images/characters/Jabra.webp",
     "image_pre": "/images/characters/Jabra_Pre.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "devil_fruit": "Inu Inu no Mi, Model: Wolf",
     "haki": ["Observation","Armament"],
     "origin": "North Blue",
@@ -13677,6 +13731,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Jack",
     "image": "/images/characters/Jack.webp",
     "epithet": "the Drought",
@@ -13762,6 +13817,7 @@
   },
   {
     "name": "Jaguar D. Saul",
+    "bounty": 0,
     "image": "/images/characters/Jaguar_D._Saul.webp",
     "affiliation": "Walrus School",
     "haki": ["Armament"],
@@ -13837,6 +13893,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jango",
     "image": "/images/characters/Jango.webp",
     "image_pre": "/images/characters/Jango_Pre.webp",
@@ -14061,6 +14118,7 @@
     "name": "Jerry",
     "image": "/images/characters/Jerry.webp",
     "affiliation": "CP6",
+    "bounty": 0,
     "origin": "South Blue (Karate Island)",
     "height": 676,
     "age": 46,
@@ -14074,6 +14132,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jesus Burgess",
     "image": "/images/characters/Jesus_Burgess.webp",
     "image_pre": "/images/characters/Jesus_Burgess_Pre.webp",
@@ -14118,6 +14177,7 @@
     "description": "Made an entry in their logbook about Mock Town, calling it the Town of Mockery. Mentioned only character"
   },
   {
+    "gender": "Female",
     "name": "Jewelry Bonney",
     "image": "/images/characters/Jewelry_Bonney.webp",
     "image_pre": "/images/characters/Jewelry_Bonney_Pre.webp",
@@ -14243,6 +14303,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Jinbe",
     "image": "/images/characters/Jinbe.webp",
     "epithet": "Knight of the Sea",
@@ -14475,6 +14536,7 @@
     "name": "Joseph",
     "image": "/images/characters/Joseph.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 705",
     "race": "Longarm",
     "status": "Alive",
@@ -14728,6 +14790,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Kaidou",
     "image": "/images/characters/Kaidou.webp",
     "epithet": "the Strongest Creature",
@@ -14852,6 +14915,8 @@
     "image_pre": "/images/characters/Kaku_Pre.webp",
     "epithet": "Mountain Wind",
     "affiliation": "CP0",
+    "bounty": 0,
+    "gender": "Male",
     "devil_fruit": "Ushi Ushi no Mi, Model: Giraffe (Awakened)",
     "haki": ["Observation","Armament"],
     "origin": "East Blue",
@@ -14959,6 +15024,7 @@
     "image": "/images/characters/Kalifa.webp",
     "image_pre": "/images/characters/Kalifa_Pre.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "devil_fruit": "Awa Awa no Mi",
     "haki": ["Observation","Armament"],
     "origin": "Grand Line",
@@ -15111,6 +15177,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Karasu",
     "image": "/images/characters/Karasu.webp",
     "affiliation": "Revolutionary Army",
@@ -15389,6 +15456,7 @@
   },
   {
     "name": "Kaya",
+    "bounty": 0,
     "image": "/images/characters/Kaya.webp",
     "image_pre": "/images/characters/Kaya_Pre.webp",
     "origin": "East Blue (Gecko Islands)",
@@ -15674,6 +15742,8 @@
   },
   {
     "name": "Kikunojo",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Kikunojo.webp",
     "epithet": "of the Lingering Snow",
     "affiliation": "Kouzuki Family",
@@ -15725,6 +15795,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Killer",
     "image": "/images/characters/Killer.webp",
     "image_pre": "/images/characters/Killer_Pre.webp",
@@ -15828,6 +15899,8 @@
   },
   {
     "name": "Kinemon",
+    "gender": "Male",
+    "bounty": 100000000,
     "image": "/images/characters/Kinemon.webp",
     "epithet": "Foxfire",
     "affiliation": "Kouzuki Family",
@@ -16065,6 +16138,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Koby",
     "image": "/images/characters/Koby.webp",
     "image_pre": "/images/characters/Koby_Pre.webp",
@@ -16354,6 +16428,8 @@
   },
   {
     "name": "Kouzuki Hiyori",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Hiyori.webp",
     "affiliation": "Kouzuki Family",
     "origin": "Grand Line (Moby Dick)",
@@ -16380,6 +16456,8 @@
   },
   {
     "name": "Kouzuki Momonosuke",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Momonosuke.webp",
     "image_pre": "/images/characters/Kouzuki_Momonosuke_Pre.webp",
     "affiliation": "Kouzuki Family",
@@ -16424,6 +16502,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Gecko Moria [Kouzuki Moria]",
     "image": "/images/characters/Gecko_Moria.webp",
     "affiliation": "Thriller Bark Pirates",
@@ -16463,6 +16542,8 @@
   },
   {
     "name": "Kouzuki Oden",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Oden.webp",
     "epithet": "Idiot Lord",
     "affiliation": "Kouzuki Family",
@@ -16512,6 +16593,8 @@
   },
   {
     "name": "Kouzuki Sukiyaki",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Kouzuki_Sukiyaki.webp",
     "image_pre": "/images/characters/Kouzuki_Sukiyaki_Pre.webp",
     "affiliation": "Kouzuki Family",
@@ -16614,6 +16697,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Krieg",
     "image": "/images/characters/Krieg.webp",
     "image_pre": "/images/characters/Krieg_Pre.webp",
@@ -16641,6 +16725,7 @@
   },
   {
     "name": "Kujaku",
+    "gender": "Female",
     "image": "/images/characters/Kujaku.webp",
     "affiliation": "Marines (SWORD)",
     "devil_fruit": "Muchi Muchi no Mi",
@@ -16691,6 +16776,7 @@
     "image": "/images/characters/Kumadori.webp",
     "image_pre": "/images/characters/Kumadori_Pre.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "haki": ["Observation","Armament"],
     "origin": "South Blue",
     "height": 338,
@@ -16805,6 +16891,7 @@
   },
   {
     "name": "Kureha",
+    "bounty": 0,
     "image": "/images/characters/Kureha.webp",
     "epithet": "Witch",
     "affiliation": "Sakura Kingdom",
@@ -16830,6 +16917,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuro",
     "image": "/images/characters/Kuro.webp",
     "epithet": "of a Hundred Plans",
@@ -16891,6 +16979,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuroobi",
     "image": "/images/characters/Kuroobi.webp",
     "affiliation": "Arlong Pirates",
@@ -17060,6 +17149,7 @@
   },
   {
     "name": "Kurozumi Tama",
+    "bounty": 0,
     "image": "/images/characters/Kurozumi_Tama.webp",
     "affiliation": "Kurozumi Family",
     "devil_fruit": "Kibi Kibi no Mi",
@@ -17086,6 +17176,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Kuzan [Aokiji]",
     "image": "/images/characters/Kuzan.webp",
     "image_pre": "/images/characters/Kuzan_Pre.webp",
@@ -17148,6 +17239,7 @@
     ]
   },
   {
+    "bounty": 200000000,
     "name": "Kyros",
     "image": "/images/characters/Kyros.webp",
     "affiliation": "Corrida Colosseum (former)",
@@ -17220,6 +17312,7 @@
   },
   {
     "name": "Laboon",
+    "bounty": 0,
     "image": "/images/characters/Laboon.webp",
     "affiliation": "Crocus",
     "origin": "West Blue",
@@ -17316,6 +17409,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Lao G",
     "image": "/images/characters/Lao_G.webp",
     "affiliation": "Donquixote Pirates",
@@ -17341,6 +17435,7 @@
     "name": "Laskey",
     "image": "/images/characters/Laskey.webp",
     "affiliation": "CP9 (former)",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 392",
     "race": "Human",
     "status": "Unknown",
@@ -17386,6 +17481,7 @@
     ]
   },
   {
+    "bounty": 160000000,
     "name": "Leo",
     "image": "/images/characters/Leo.webp",
     "epithet": "Warrior",
@@ -17596,6 +17692,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Little Oars Jr.",
     "image": "/images/characters/Little_Oars_Jr..webp",
     "affiliation": "Little Pirates",
@@ -17745,6 +17842,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Lucky Roux",
     "image": "/images/characters/Lucky_Roux.webp",
     "affiliation": "Red Hair Pirates",
@@ -17799,6 +17897,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Machvise",
     "image": "/images/characters/Machvise.webp",
     "affiliation": "Donquixote Pirates",
@@ -17984,6 +18083,7 @@
     "name": "Maha",
     "image": "/images/characters/Maha.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 929",
     "race": "Human",
     "status": "Unknown",
@@ -18041,6 +18141,7 @@
   },
   {
     "name": "Makino",
+    "bounty": 0,
     "image": "/images/characters/Makino.webp",
     "affiliation": "Partys Bar",
     "origin": "East Blue (Foosha Village)",
@@ -18175,6 +18276,7 @@
   },
   {
     "name": "Mansherry",
+    "bounty": 0,
     "image": "/images/characters/Mansherry.webp",
     "affiliation": "Tontatta Kingdom",
     "devil_fruit": "Chiyu Chiyu no Mi",
@@ -18289,6 +18391,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Marianne [Miss Goldenweek]",
     "image": "/images/characters/Marianne.webp",
     "image_pre": "/images/characters/Marianne_Pre.webp",
@@ -19621,6 +19724,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Momonga",
     "image": "/images/characters/Momonga.webp",
     "affiliation": "Marines",
@@ -19783,6 +19887,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Monkey D. Garp",
     "image": "/images/characters/Monkey_D._Garp.webp",
     "epithet": "Hero of the Marines",
@@ -19842,6 +19947,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Monkey D. Luffy",
     "image": "/images/characters/Monkey_D._Luffy.webp",
     "epithet": "Straw Hat",
@@ -20056,6 +20162,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Mont Blanc Cricket",
     "image": "/images/characters/Mont_Blanc_Cricket.webp",
     "image_pre": "/images/characters/Mont_Blanc_Cricket_Pre.webp",
@@ -20874,6 +20981,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Nami",
     "image": "/images/characters/Nami.webp",
     "image_pre": "/images/characters/Nami_Pre.webp",
@@ -21087,6 +21195,7 @@
   },
   {
     "name": "Nefertari Cobra",
+    "bounty": 0,
     "image": "/images/characters/Nefertari_Cobra.webp",
     "image_pre": "/images/characters/Nefertari_Cobra_Pre.webp",
     "affiliation": "Arabasta Kingdom",
@@ -21146,6 +21255,7 @@
   },
   {
     "name": "Nefertari Vivi",
+    "bounty": 0,
     "image": "/images/characters/Nefertari_Vivi.webp",
     "image_pre": "/images/characters/Nefertari_Vivi_Pre.webp",
     "affiliation": "Arabasta Kingdom",
@@ -21294,6 +21404,7 @@
   },
   {
     "name": "Neptune",
+    "bounty": 0,
     "image": "/images/characters/Neptune.webp",
     "epithet": "God of the Sea",
     "affiliation": "Ryugu Kingdom",
@@ -21350,6 +21461,7 @@
     "image": "/images/characters/Nero.webp",
     "epithet": "the Sea Weasel",
     "affiliation": "CP9 (former)",
+    "bounty": 0,
     "origin": "West Blue",
     "height": 202,
     "age": 22,
@@ -21452,6 +21564,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Nico Robin",
     "image": "/images/characters/Nico_Robin.webp",
     "image_pre": "/images/characters/Nico_Robin_Pre.webp",
@@ -21687,6 +21800,7 @@
   },
   {
     "name": "Nojiko",
+    "bounty": 0,
     "image": "/images/characters/Nojiko.webp",
     "image_pre": "/images/characters/Nojiko_Pre.webp",
     "affiliation": "Nojiko's mikan farm",
@@ -22212,6 +22326,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Orlumbus",
     "image": "/images/characters/Orlumbus.webp",
     "epithet": "Massacre Ruler",
@@ -22259,6 +22374,7 @@
   },
   {
     "name": "Otohime",
+    "bounty": 0,
     "image": "/images/characters/Otohime.webp",
     "epithet": "Incarnation of Love",
     "affiliation": "Ryugu Kingdom",
@@ -22361,7 +22477,7 @@
   {
     "name": "Page One",
     "image": "/images/characters/Page_One.webp",
-    "affiliation": "Yamato",
+    "affiliation": "Beasts Pirates (Tobiroppo)",
     "devil_fruit": "Ryu Ryu no Mi, Model: Spinosaurus",
     "haki": ["Observation","Armament"],
     "bounty": 290000000,
@@ -22786,6 +22902,7 @@
   },
   {
     "name": "Pell",
+    "bounty": 0,
     "image": "/images/characters/Pell.webp",
     "epithet": "the Falcon",
     "affiliation": "Arabasta Kingdom",
@@ -22870,6 +22987,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Perona",
     "image": "/images/characters/Perona.webp",
     "image_pre": "/images/characters/Perona_Pre.webp",
@@ -22938,6 +23056,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Pica",
     "image": "/images/characters/Pica.webp",
     "affiliation": "Donquixote Pirates",
@@ -23307,6 +23426,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Portgas D. Ace",
     "image": "/images/characters/Portgas_D._Ace.webp",
     "epithet": "Fire Fist",
@@ -23452,6 +23572,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Prince Grus",
     "image": "/images/characters/Prince_Grus.webp",
     "affiliation": "Marines (SWORD)",
@@ -23732,6 +23853,8 @@
   },
   {
     "name": "Raizo",
+    "gender": "Male",
+    "bounty": 0,
     "image": "/images/characters/Raizo.webp",
     "epithet": "of the Mist",
     "affiliation": "Kouzuki Family",
@@ -23965,6 +24088,7 @@
   },
   {
     "name": "Rebecca",
+    "bounty": 100000000,
     "image": "/images/characters/Rebecca.webp",
     "epithet": "the Phantom Princess",
     "affiliation": "Dressrosa Kingdom",
@@ -24160,6 +24284,7 @@
   },
   {
     "name": "Riku Doldo III",
+    "bounty": 300000000,
     "image": "/images/characters/Riku_Doldo_Iii.webp",
     "epithet": "King of Miracles",
     "affiliation": "Dressrosa Kingdom",
@@ -24384,6 +24509,7 @@
     "image_pre": "/images/characters/Rob_Lucci_Pre.webp",
     "epithet": "Massacre Weapon",
     "affiliation": "CP0",
+    "bounty": 0,
     "devil_fruit": "Neko Neko no Mi, Model: Leopard (Awakened)",
     "haki": ["Observation","Armament"],
     "origin": "Grand Line (Guanhao)",
@@ -24668,6 +24794,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Roronoa Zoro",
     "image": "/images/characters/Roronoa_Zoro.webp",
     "image_pre": "/images/characters/Roronoa_Zoro_Pre.webp",
@@ -24795,6 +24922,7 @@
   },
   {
     "name": "Rosward Charlos",
+    "bounty": 0,
     "image": "/images/characters/Charlos.webp",
     "affiliation": "World Government",
     "origin": "Red Line (Mary Geoise)",
@@ -24819,6 +24947,7 @@
   },
   {
     "name": "Rosward Rosward",
+    "bounty": 0,
     "image": "/images/characters/Rosward.webp",
     "affiliation": "World Government",
     "origin": "Red Line (Mary Geoise)",
@@ -24840,6 +24969,7 @@
   },
   {
     "name": "Rosward Shalria",
+    "bounty": 0,
     "image": "/images/characters/Shalria.webp",
     "image_pre": "/images/characters/Shalria_Pre.webp",
     "affiliation": "World Government",
@@ -25050,6 +25180,8 @@
     ]
   },
   {
+    "gender": "Male",
+    "bounty": 602000000,
     "name": "Sabo",
     "image": "/images/characters/Sabo.webp",
     "epithet": "Flame Emperor",
@@ -25332,6 +25464,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sanji",
     "image": "/images/characters/Sanji.webp",
     "image_pre": "/images/characters/Sanji_Pre.webp",
@@ -25536,6 +25669,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sarquiss",
     "image": "/images/characters/Sarquiss.webp",
     "epithet": "Big Knife",
@@ -25594,6 +25728,7 @@
   ]
   },
   {
+    "gender": "Male",
     "name": "Sasaki",
     "image": "/images/characters/Sasaki.webp",
     "epithet": "Overflowing",
@@ -25739,6 +25874,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Scien [Queen]",
     "image": "/images/characters/Queen.webp",
     "epithet": "the Plague",
@@ -25889,6 +26025,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Scratchmen Apoo",
     "image": "/images/characters/Scratchmen_Apoo.webp",
     "image_pre": "/images/characters/Scratchmen_Apoo_Pre.webp",
@@ -26232,6 +26369,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Sham",
     "image": "/images/characters/Sham.webp",
     "epithet": "Nyaban Brothers",
@@ -26285,6 +26423,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Shanks",
     "image": "/images/characters/Shanks.webp",
     "epithet": "Red-Haired",
@@ -26538,6 +26677,7 @@
   },
   {
     "name": "Shimotsuki Koushirou",
+    "bounty": 0,
     "image": "/images/characters/Shimotsuki_Koushirou.webp",
     "affiliation": "Shimotsuki Family",
     "origin": "East Blue (Shimotsuki Village)",
@@ -26577,6 +26717,7 @@
   },
   {
     "name": "Shimotsuki Kuina",
+    "bounty": 0,
     "image": "/images/characters/Shimotsuki_Kuina.webp",
     "affiliation": "Shimotsuki Family",
     "origin": "East Blue (Shimotsuki Village)",
@@ -26715,6 +26856,8 @@
   },
   {
     "name": "Shinobu",
+    "gender": "Female",
+    "bounty": 0,
     "image": "/images/characters/Shinobu.webp",
     "epithet": "Bewitching Kunoichi",
     "affiliation": "Kouzuki Family",
@@ -26792,6 +26935,7 @@
   },
   {
     "name": "Shirahoshi",
+    "bounty": 0,
     "image": "/images/characters/Shirahoshi.webp",
     "epithet": "Mermaid Princess",
     "affiliation": "Ryugu Kingdom",
@@ -27187,6 +27331,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Smoker",
     "image": "/images/characters/Smoker.webp",
     "image_pre": "/images/characters/Smoker_Pre.webp",
@@ -27400,6 +27545,7 @@
     "name": "Spandam",
     "image": "/images/characters/Spandam.webp",
     "affiliation": "CP0",
+    "bounty": 0,
     "origin": "Grand Line",
     "height": 192,
     "age": 41,
@@ -27439,6 +27585,7 @@
     "name": "Spandine",
     "image": "/images/characters/Spandine.webp",
     "affiliation": "CP9 (former)",
+    "bounty": 0,
     "origin": "Grand Line",
     "height": 275,
     "age": 66,
@@ -27597,6 +27744,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Squard",
     "image": "/images/characters/Squard.webp",
     "epithet": "Maelstrom Spider",
@@ -28019,6 +28167,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Suleiman",
     "image": "/images/characters/Suleiman.webp",
     "epithet": "the Beheader",
@@ -28431,6 +28580,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Tashigi",
     "image": "/images/characters/Tashigi.webp",
     "image_pre": "/images/characters/Tashigi_Pre.webp",
@@ -28771,6 +28921,7 @@
   },
   {
     "name": "Tom",
+    "bounty": 0,
     "image": "/images/characters/Tom.webp",
     "affiliation": "Tom's Workers",
     "origin": "Grand Line (Ryugu Kingdom)",
@@ -28868,6 +29019,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Tony Tony Chopper",
     "image": "/images/characters/Tony_Tony_Chopper.webp",
     "image_pre": "/images/characters/Tony_Tony_Chopper_Pre.webp",
@@ -29083,6 +29235,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Trafalgar D. Water Law",
     "image": "/images/characters/Trafalgar_D._Water_Law.webp",
     "image_pre": "/images/characters/Trafalgar_D._Water_Law_Pre.webp",
@@ -29159,6 +29312,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Trebol",
     "image": "/images/characters/Trebol.webp",
     "affiliation": "Donquixote Pirates",
@@ -29278,6 +29432,7 @@
     "name": "Tsumonsieur Kamaya",
     "image": "/images/characters/Tsumonsieur_Kamaya.webp",
     "affiliation": "CP9 (former)",
+    "bounty": 0,
     "first_appearance_arc": "Chapter 392",
     "race": "Human",
     "status": "Unknown",
@@ -29323,6 +29478,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Tsuru",
     "image": "/images/characters/Tsuru.webp",
     "epithet": "Great Staff Officer",
@@ -29536,7 +29692,7 @@
   {
     "name": "Ulti",
     "image": "/images/characters/Ulti.webp",
-    "affiliation": "Yamato",
+    "affiliation": "Beasts Pirates (Tobiroppo)",
     "devil_fruit": "Ryu Ryu no Mi, Model: Pachycephalosaurus",
     "haki": ["Observation","Armament"],
     "bounty": 400000000,
@@ -29713,7 +29869,8 @@
     "image": "/images/characters/Urouge.webp",
     "epithet": "Mad Monk",
     "affiliation": "Fallen Monk Pirates",
-    "devil_fruit": "Unnamed Paramecia",
+    "gender": "Male",
+    "devil_fruit": "Paramecia",
     "bounty": 108000000,
     "origin": "Sky Islands",
     "height": 388,
@@ -29783,6 +29940,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Usopp",
     "image": "/images/characters/Usopp.webp",
     "image_pre": "/images/characters/Usopp_Pre.webp",
@@ -29969,6 +30127,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Van Augur",
     "image": "/images/characters/Van_Augur.webp",
     "image_pre": "/images/characters/Van_Augur_Pre.webp",
@@ -30059,6 +30218,7 @@
     "origin": "South Blue",
     "height": 573,
     "age": 38,
+    "gender": "Male",
     "first_appearance_arc": "Chapter 575",
     "race": "Human",
     "status": "Alive",
@@ -30213,6 +30373,7 @@
   },
   {
     "name": "Victoria Cindry",
+    "bounty": 0,
     "image": "/images/characters/Victoria_Cindry.webp",
     "affiliation": "Thriller Bark Pirates",
     "origin": "West Blue",
@@ -30431,6 +30592,7 @@
   },
   {
     "name": "Viola",
+    "bounty": 100000000,
     "image": "/images/characters/Viola.webp",
     "affiliation": "Dressrosa Kingdom",
     "devil_fruit": "Giro Giro no Mi",
@@ -30458,6 +30620,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Vista",
     "image": "/images/characters/Vista.webp",
     "epithet": "of the Flower Swords",
@@ -30497,6 +30660,7 @@
     ]
   },
   {
+    "gender": "Male",
     "name": "Vito",
     "image": "/images/characters/Vito.webp",
     "epithet": "Monster Gun",
@@ -30676,6 +30840,7 @@
     "image": "/images/characters/Wanze.webp",
     "epithet": "Mad",
     "affiliation": "CP7",
+    "bounty": 0,
     "origin": "West Blue",
     "height": 173,
     "age": 28,
@@ -31091,10 +31256,13 @@
     ]
   },
   {
+    "origin": "Wano Country",
+    "gender": "Female",
     "name": "Yamato",
+    "bounty": 0,
     "image": "/images/characters/Yamato.webp",
     "epithet": "Oni Princess",
-    "affiliation": "Beasts Pirates (Defected)",
+    "affiliation": "Wano Country / Independent",
     "devil_fruit": "Inu Inu no Mi, Model: Okuchi no Makami",
     "haki": ["Conquerors","Observation","Armament"],
     "height": 263,
@@ -31574,6 +31742,7 @@
     ]
   },
   {
+    "gender": "Female",
     "name": "Zala [Miss Doublefinger]",
     "image": "/images/characters/Zala.webp",
     "epithet": "Poison Spider",
@@ -31843,6 +32012,128 @@
     "description": "Fish-Man who encountered Otohime as a child 16 years ago",
     "journey": [
       {"location":"Fish-Man Island","chapter":"Chapter 621"}
+    ]
+  },
+  {
+    "name": "Kuzan",
+    "image": "/images/characters/Kuzan.webp",
+    "epithet": "Aokiji",
+    "affiliation": "Blackbeard Pirates",
+    "devil_fruit": "Hie Hie no Mi",
+    "haki": ["Observation", "Armament"],
+    "origin": "North Blue",
+    "height": 298,
+    "age": 49,
+    "first_appearance_arc": "Chapter 303",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Former Marine admiral who now travels with the Blackbeard Pirates.",
+    "journey": [
+      {"location":"Ohara"},
+      {"location":"Long Ring Long Land"},
+      {"location":"Marineford"},
+      {"location":"Punk Hazard"},
+      {"location":"Hachinosu","chapter":"Chapter 1081"}
+    ],
+    "relationships": [
+      {"name":"Sakazuki [Akainu]","relationship":"Former Colleague, Defeated by"},
+      {"name":"Marshall D. Teach [Blackbeard]","relationship":"Ally"},
+      {"name":"Monkey D. Garp","relationship":"Former Mentor, Defeated by"},
+      {"name":"Smoker","relationship":"Former Superior"}
+    ]
+  },
+  {
+    "name": "Lucci",
+    "image": "/images/characters/Lucci.webp",
+    "epithet": "Massacre Weapon",
+    "affiliation": "CP0",
+    "bounty": 0,
+    "devil_fruit": "Neko Neko no Mi, Model: Leopard (Awakened)",
+    "haki": ["Observation", "Armament"],
+    "origin": "Grand Line (Guanhao)",
+    "height": 212,
+    "age": 30,
+    "first_appearance_arc": "Chapter 323",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Masked agent of CP0 and the strongest agent in the history of CP9.",
+    "journey": [
+      {"location":"Guanhao"},
+      {"location":"Shipbuilding Island"},
+      {"location":"Enies Lobby"},
+      {"location":"Dressrosa"},
+      {"location":"Egghead","chapter":"Chapter 1062"}
+    ],
+    "relationships": [
+      {"name":"Kaku","relationship":"Coworker"},
+      {"name":"Blueno","relationship":"Coworker"},
+      {"name":"Monkey D. Luffy","relationship":"Enemy, Defeated by"},
+      {"name":"Nico Robin","relationship":"Kidnapped"}
+    ]
+  },
+  {
+    "name": "Yasui",
+    "bounty": 0,
+    "image": "/images/characters/Yasui.webp",
+    "epithet": "Yasu the Hedgehog",
+    "affiliation": "Shimotsuki Family",
+    "height": 155,
+    "age": 71,
+    "first_appearance_arc": "Chapter 929",
+    "race": "Human",
+    "status": "Deceased",
+    "description": "Taikomochi who lived in Ebisu Town and the adoptive father of Toko.",
+    "journey": [
+      {"location":"Wano Country's Island","chapter":"Chapter 929"}
+    ],
+    "relationships": [
+      {"name":"Toko","relationship":"Adopted Daughter"},
+      {"name":"Kaidou","relationship":"Enemy"},
+      {"name":"Kurozumi Orochi","relationship":"Enemy"},
+      {"name":"Kinemon","relationship":"Ally"}
+    ]
+  },
+  {
+    "name": "Sommers",
+    "image": "/images/characters/Sommers.webp",
+    "affiliation": "Knights of God",
+    "devil_fruit": "Iba Iba no Mi",
+    "first_appearance_arc": "Chapter 1140",
+    "race": "Human",
+    "status": "Alive",
+    "description": "Member of the Knights of God and World Noble.",
+    "journey": [
+      {"location":"God Valley"},
+      {"location":"Mary Geoise"},
+      {"location":"Elbaph Island","chapter":"Chapter 1140"}
+    ],
+    "relationships": [
+      {"name":"Figarland Shamrock","relationship":"Leader"},
+      {"name":"Figarland Garling","relationship":"Former Leader"},
+      {"name":"Nerona Imu","relationship":"Supreme Ruler"},
+      {"name":"Shuri [Manmayer Gunko]","relationship":"Colleague"}
+    ]
+  },
+  {
+    "name": "Ganfall",
+    "image": "/images/characters/Ganfall.webp",
+    "epithet": "Knight of the Sky",
+    "affiliation": "Skypiea",
+    "origin": "Grand Line (Skypiea)",
+    "height": 180,
+    "age": 68,
+    "first_appearance_arc": "Chapter 237",
+    "race": "Moon people - Skypiean",
+    "status": "Alive",
+    "description": "Current, two-time God of Skypiea, having been usurped once by Enel.",
+    "journey": [
+      {"location":"Skypiea","chapter":"Chapter 237"}
+    ],
+    "relationships": [
+      {"name":"Enel","relationship":"Enemy, God Successor and Predecessor"},
+      {"name":"Monkey D. Luffy","relationship":"Ally"},
+      {"name":"Wyper","relationship":"Ally"},
+      {"name":"Pierre","relationship":"Pet"}
     ]
   }
 ];

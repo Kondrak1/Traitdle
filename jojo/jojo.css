@@ -1,0 +1,20 @@
+body { background: radial-gradient(circle at 20% 10%, #4b1f5c, transparent 35%), linear-gradient(135deg, #100c22, #321528 55%, #0d2541); }
+.jojo-game { --gold: #dcb44a; --red: #8b305f; --shadow: #34184f; border-color: #dcb44a; background: rgb(19 12 35 / 94%); }
+.jojo-game header { min-height: 390px; background: linear-gradient(135deg, #24103c, #6b1f51 52%, #10294c); border-bottom-color: #dcb44a; }
+.jojo-game h1 { font-style: italic; text-shadow: 5px 5px 0 #8b305f, 0 8px 24px rgb(0 0 0 / 60%); }
+.jojo-game .mode-button.active { background: #dcb44a; color: #1b1230; }
+.jojo-clue { margin: 0 auto 20px; padding: 22px; border: 2px solid #dcb44a; border-radius: 8px; background: linear-gradient(135deg, rgb(139 48 95 / 28%), transparent 55%), #211537; text-align: center; }
+.jojo-clue p { margin: 0; color: #dcb44a; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.jojo-clue h2 { margin: 8px 0 0; font: 800 clamp(1.6rem, 5vw, 3rem) Georgia, serif; }
+.jojo-image-clue { display: block; width: min(300px, 100%); height: 300px; margin: 16px auto 0; object-fit: cover; filter: blur(16px); }
+.jojo-image-clue[hidden] { display: none; }
+.jojo-game .success-art-wrap img,
+.jojo-game .guess-image { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+.jojo-game .success-art-wrap { overflow: hidden; }
+.jojo-game #board .row { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+.jojo-game .tile { min-width: 0; height: auto; overflow-wrap: anywhere; }
+.jojo-game .tile.correct { background: #3d9b68; color: #fff; }
+.jojo-game .tile.higher { background: #dcb44a; color: #1b1230; }
+.jojo-game .tile.lower { background: #8b305f; color: #fff; }
+@media (max-width: 700px) { .jojo-game #board .row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .jojo-game #board .row .tile:first-child { grid-column: span 2; } }
+@media (max-width: 480px) { .jojo-game #board .row { grid-template-columns: 1fr; } .jojo-game #board .row .tile:first-child { grid-column: auto; } }

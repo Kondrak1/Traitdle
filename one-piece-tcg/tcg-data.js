@@ -101,9 +101,8 @@ async function loadTcgCards() {
 
   const cards = sets.flatMap(set => {
     if (['PRB01', 'PRB02'].includes(set.data.code)) return [];
-    const isStarterDeck = set.data.type === 'starter' || /^ST\d+$/.test(set.data.code);
     return set.data.cards
-    .filter(card => (isStarterDeck ? card.rarity === 'SR' : ['SR', 'SEC'].includes(card.rarity))
+    .filter(card => ['SR', 'SEC'].includes(card.rarity)
       && ['1', '2', '3', '4', '5', 'X'].includes(String(card.blockIcon))
       && !card.isParallel
       && !/_r\d+$/i.test(card.id))

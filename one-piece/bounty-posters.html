@@ -78,9 +78,12 @@
   </main>
 
   <script>
+    const posterClue = document.querySelector('.poster-clue');
     const posterImage = document.querySelector('#posterClueImage');
     posterImage.draggable = false;
     posterImage.addEventListener('dragstart', event => event.preventDefault());
+    posterClue.addEventListener('selectstart', event => event.preventDefault());
+    posterClue.addEventListener('contextmenu', event => event.preventDefault());
     const posterGuess = document.querySelector('#posterGuess');
     const posterSuggestions = document.querySelector('#posterSuggestions');
     const posterSubmit = document.querySelector('#posterSubmit');

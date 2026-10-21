@@ -274,6 +274,11 @@ body {
   filter: blur(15px) sepia(0.35) contrast(1.08);
   transform: scale(1.28);
   background: #c8ad6f;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .guess-panel label {

@@ -229,7 +229,7 @@
       fruitSubmit.disabled = false;
       fruitGiveUp.disabled = false;
       fruitClue.textContent = fruitTarget.fruit.name;
-      fruitType.textContent = fruitTarget.fruit.type || 'Devil Fruit';
+      updateFruitType();
       fruitAttempted.forEach(name => { const character = characterData.find(item => normalize(item.name) === name); if (character) renderFruitGuess(character, normalize(character.name) === normalize(fruitTarget.user.name)); });
       if (savedState.over) { fruitSubmit.disabled = true; fruitGiveUp.disabled = true; showFruitVictory(); }
       fruitGuess.focus();
@@ -242,6 +242,7 @@
       if (fruitAttempted.has(query)) { fruitMessage.textContent = 'You already tried that character.'; return; }
       fruitAttempted.add(query);
       if (fruitGameMode === 'daily') saveDailyGameState('one-piece-traitdle-daily-guesses', 'fruit', [...fruitAttempted], false);
+      updateFruitType();
       updateFruitHintButtons();
       const correct = characterIdentitiesMatch(character.name, fruitTarget.user.name);
       renderFruitGuess(character, correct);
@@ -268,6 +269,10 @@
     function updateFruitHintButtons() {
       fruitAppearanceHintButton.hidden = fruitAttempted.size < 5 || fruitAppearanceHintButton.disabled;
       fruitAffiliationHintButton.hidden = fruitAttempted.size < 9 || fruitAffiliationHintButton.disabled;
+    }
+
+    function updateFruitType() {
+      fruitType.textContent = fruitAttempted.size >= 5 ? (fruitTarget.fruit.type || 'Devil Fruit') : '';
     }
 
     function showFruitVictory() {

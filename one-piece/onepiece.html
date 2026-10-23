@@ -477,6 +477,9 @@
       const search = normalizeText(input);
       if (!search) return null;
 
+      const exactNameMatch = characterDatabase.find(character => normalizeText(character.name) === search);
+      if (exactNameMatch) return exactNameMatch;
+
       return characterDatabase.find(character => characterNameMatches(character, search)
         || (character.aliases || []).some(alias => normalizeText(alias) === search || normalizeText(alias).includes(search))) || null;
     }

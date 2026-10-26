@@ -7314,7 +7314,7 @@
     "affiliation": "Rocks Pirates",
     "age": 43,
     "origin": "West Blue (God Valley)",
-    "haki": ["Conquerors","Armament"],
+    "haki": ["Conquerors","Observation","Armament"],
     "first_appearance_arc": "Chapter 957",
     "race": "Human",
     "status": "Deceased",

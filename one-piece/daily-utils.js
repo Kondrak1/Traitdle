@@ -32,7 +32,6 @@ const excludedCharacterNames = new Set([
   'Charlotte Custard',
   'Charlotte Praline',
   'Charlotte Prim',
-  'Avalo Pizarro',
   'Bastille',
   'Bluejam',
   'Braham',

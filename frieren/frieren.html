@@ -61,7 +61,7 @@
     function readWorldProgress() { const date = getMstDateKey(); try { const saved = JSON.parse(localStorage.getItem('frieren-daily-progress') || '{}'); return saved.date === date ? saved : { date, character: null, image: null }; } catch (error) { return { date, character: null, image: null }; } }
     function saveWorldScore(score) { const progress = readWorldProgress(); progress[mode] = score; localStorage.setItem('frieren-daily-progress', JSON.stringify(progress)); return progress; }
     function showWorldScore(progress) { return ['character', 'image'].every(modeKey => Number.isFinite(progress[modeKey]) || readDailyGameState('frieren-daily-guesses', modeKey).over); }
-    const arcOrder = { 'Journey': 1, 'Ancient Era': 2, 'First-Class Mage Exam': 3, 'Northern Plateau': 4, 'Golden Land': 5, 'Demon King': 6 };
+    const arcOrder = { 'Demon King': 1, 'Journey': 2, 'Ancient Era': 3, 'First-Class Mage Exam': 4, 'Northern Plateau': 5, 'Golden Land': 6 };
     const mageRankOrder = { 'Not a mage': 0, 'Third-Class': 1, 'Second-Class': 2, 'First-Class': 3 };
     function imageUrl(character) { return character.image; }
     function status(guess, answer, key) { if (guess[key] === answer[key]) return 'correct'; if (key === 'age') return Number(guess.age) < Number(answer.age) ? 'higher' : 'lower'; if (key === 'arc') return arcOrder[guess.arc] < arcOrder[answer.arc] ? 'higher' : 'lower'; if (key === 'mageRank') return mageRankOrder[guess.mageRank] < mageRankOrder[answer.mageRank] ? 'higher' : 'lower'; return 'absent'; }
@@ -97,7 +97,6 @@
   </script>
 </body>
 </html>
-
 
 
 

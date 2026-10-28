@@ -3731,6 +3731,7 @@
     "origin": "Grand Line (Ryugu Kingdom)",
     "height": 197,
     "age": 18,
+    "gender": "Female",
     "first_appearance_arc": "Chapter 195 (cover)",
     "race": "Merfolk",
     "status": "Alive",
@@ -14954,23 +14955,6 @@
         {"name": "Nico Robin","relationship": "Kidnapped"},
         {"name": "Iceburg","relationship": "Enemy, Former Boss"}
     ]
-  },
-  {
-    "name": "Kaku",
-    "image": "/images/characters/Kaku_(wano).webp",
-    "affiliation": "Kyoshiro Family",
-    "first_appearance_arc": "Chapter 927",
-    "race": "Human",
-    "status": "Alive",
-    "description": "Gangster who is a member of the Kyoshiro Family in Wano",
-    "journey": [
-      {"location":"Wano Country's Island","chapter":"Chapter 927"}
-    ],
-    "relationships": [
-      {"name": "Denjiro","relationship": "Former Boss"},
-      {"name": "Suke","relationship": "Partner"},
-      {"name": "Kuni","relationship": "Partner"}
-  ]
   },
   {
     "name": "Kakukaku",

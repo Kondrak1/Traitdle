@@ -27030,7 +27030,6 @@
     "name": "Shu",
     "image": "/images/characters/Shu.webp",
     "affiliation": "Marines",
-    "devil_fruit": "Sabi Sabi no Mi",
     "bounty": 100000000,
     "first_appearance_arc": "Chapter 426",
     "race": "Human",

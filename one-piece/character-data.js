@@ -18009,6 +18009,7 @@
     "image": "/images/characters/Magellan.webp",
     "image_pre": "/images/characters/Magellan_Pre.webp",
     "affiliation": "Impel Down",
+    "gender": "Male",
     "devil_fruit": "Doku Doku no Mi",
     "origin": "Grand Line",
     "height": 491,
